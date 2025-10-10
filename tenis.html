@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TÊNIS</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+<!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1LBQRDMS4');
+  </script>
+<style>
+@keyframes bgAnimation {
+    0% { background-color: #0d0d1a; }
+    50% { background-color: #000033; }
+    100% { background-color: #0d0d1a; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d0d1a, #000033);
+    animation: bgAnimation 15s infinite alternate;
+    transition: background 0.5s ease;
+}
+
+/* Menu azul neon */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00FFFF;
+    border: 2px solid #00FFFF;
+    border-radius: 20px;
+    background: linear-gradient(#000033, #000055);
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+    transform: translateY(-2px);
+}
+
+/* Botão voltar */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FF3300;
+    border: 2px solid #FF3300;
+    border-radius: 20px;
+    background: linear-gradient(#330000, #550000);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    box-shadow: 0 0 15px #FF3300, 0 0 30px #FF3300;
+    transform: translateY(-2px);
+}
+
+/* Iframe acima da grade */
+#iframeContainer {
+    width: 100%;
+    max-width: 1200px;
+    height: 1000px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#iframeContainer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Aviso de horário */
+.time-notice {
+    background: linear-gradient(135deg, #001144, #003366);
+    border: 2px solid #00FFFF;
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #00FFFF;
+    text-align: center;
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    max-width: 1200px;
+}
+
+.support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+</style>
+</head>
+<body>
+
+<!-- Menu -->
+<div class="menu">
+    <a href="index.html">Início</a>
+    <a href="futebol.html">Futebol</a>
+    <a href="f1.html">F1</a>
+    <a href="nfl.html">NFL</a>
+    <a href="nba.html">NBA</a>
+    <a href="ufc.html">UFC</a>
+    <a href="wwe.html">WWE - AEW</a>
+    <a href="mrolympia.html">MR OLYMPIA</a>
+    <a href="multistream.html">Multi Stream</a>
+</div>
+
+<div class="time-notice">
+    ⚠️ Os horários dos jogos seguem o fuso do site externo.<br>
+    Eles estão <strong>4 horas à frente do horário BR</strong>.<br>
+    ⏰ Hora atual em Brasília: <span id="br-time"></span><br>
+    ⏰ Hora do site externo: <span id="site-time"></span>
+</div>
+
+<!-- Botão voltar -->
+<a href="tenis.html" class="back-btn">⬅ Voltar à lista de jogos</a>
+
+<!-- Iframe -->
+<div id="iframeContainer">
+    <iframe src="https://www.viprow.nu/sports-tennis-online"
+        sandbox="allow-same-origin allow-scripts allow-forms"
+        allow="encrypted-media"
+        allowfullscreen>
+    </iframe>
+</div>
+
+<div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+<script>
+function updateTimes() {
+    // Hora de Brasília
+    const brasiliaTime = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+    const brHours = String(brasiliaTime.getHours()).padStart(2, "0");
+    const brMinutes = String(brasiliaTime.getMinutes()).padStart(2, "0");
+    const brSeconds = String(brasiliaTime.getSeconds()).padStart(2, "0");
+    document.getElementById("br-time").textContent = `${brHours}:${brMinutes}:${brSeconds}`;
+
+    // Hora do site externo (+4 horas)
+    const siteTime = new Date(brasiliaTime.getTime() + 4 * 60 * 60 * 1000); // adiciona 4h em ms
+    const siteHours = String(siteTime.getHours()).padStart(2, "0");
+    const siteMinutes = String(siteTime.getMinutes()).padStart(2, "0");
+    const siteSeconds = String(siteTime.getSeconds()).padStart(2, "0");
+    document.getElementById("site-time").textContent = `${siteHours}:${siteMinutes}:${siteSeconds}`;
+}
+
+// Atualiza a cada segundo
+setInterval(updateTimes, 1000);
+updateTimes();
+
+
+let jaDesceu = false; // flag para controlar
+
+document.querySelector("#iframeContainer iframe").addEventListener("load", function() {
+    if (!jaDesceu) {
+        window.scrollBy({
+            top: 100, // ajuste a altura
+            behavior: "smooth"
+        });
+        jaDesceu = true; // depois da primeira vez, nunca mais
+    }
+});
+</script>
+
+</body>
+</html>

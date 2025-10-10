@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>LEAO LIVES</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1LBQRDMS4');
+  </script>
+  <style>
+    
+    /* Animação suave do background */
+    @keyframes bgAnimation {
+      0% { background-color: #0d0d1a; }
+      50% { background-color: #000033; }
+      100% { background-color: #0d0d1a; }
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, #0d0d1a, #000033);
+      animation: bgAnimation 15s infinite alternate;
+      transition: background 0.5s ease;
+    }
+
+    img.logo {
+      width: 200px;
+      margin-bottom: 10px;
+    }
+
+    .creator {
+      margin-bottom: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    /* Menu de esportes no estilo neon azul */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .menu a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 15px;
+      border: 2px solid #00FFFF;
+      color: #00FFFF;
+      background: linear-gradient(#000033, #000055);
+      transition: all 0.3s ease;
+    }
+
+    .menu a:hover {
+      box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+      transform: translateY(-3px);
+    }
+
+    /* Ajuste das imagens para altura uniforme */
+    .menu a img {
+      width: 100px;
+      max-height: 80px;
+      object-fit: contain;
+      margin-bottom: 0;
+    }
+
+    .support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+  </style>
+</head>
+<body>
+
+  <img class="logo" src="https://i.imgur.com/DHzY9U6.png" alt="Logo LL">
+  <div class="creator">Criado por Leão Lives</div>
+
+  <div class="menu">
+    <a href="futebol.html">
+      <img src="https://images.vexels.com/media/users/3/320306/isolated/preview/01adb8fcdea1009c64532efad2fa3c10-logotipo-simbolico-do-futebol-da-copa-do-mundo.png" alt="Futebol Logo">
+    </a>
+
+    <a href="f1.html">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png" alt="F1 Logo">
+    </a>
+
+    <a href="nba.html">
+      <img src="https://cdn.freebiesupply.com/images/large/2x/nba-logo-transparent.png" alt="Basquete Logo">
+    </a>
+
+    <a href="nfl.html">
+      <img src="https://logodownload.org/wp-content/uploads/2018/06/nfl-logo.png" alt="NFL Logo">
+    </a>
+
+    <a href="ufc.html">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/2560px-UFC_Logo.svg.png" alt="UFC Logo">
+    </a>
+
+    <a href="tenis.html">
+      <img src="https://static.vecteezy.com/system/resources/previews/028/210/875/non_2x/sport-equipment-blue-tennis-racket-and-yellow-tennis-ball-sports-equipment-isolated-on-white-background-file-png.png" alt="Tênis Logo">
+    </a>
+    
+    <a href="wwe.html">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/WWE_Logo.svg/2243px-WWE_Logo.svg.png" alt="WWE/AEW Logo">
+    </a>
+
+    <a href="multistream.html">
+      <img src="https://i.imgur.com/45lKOXE.png" alt="Multi Stream Logo">
+    </a>
+
+    <a href="mais-esportes.html">
+      <span style="font-size: 40px; font-weight: bold; color: #00FFFF;">+</span>
+    </a>
+  </div>
+
+  <div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+</body>
+</html>

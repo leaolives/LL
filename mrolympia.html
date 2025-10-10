@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mr. Olympia 2025</title>
+<link rel="icon" href="https://i.imgur.com/w4sYwYH.png">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E1LBQRDMS4');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+<style>
+  body { margin:0; font-family:Poppins, sans-serif; background: radial-gradient(circle at top,#001030 0%,#000814 100%); color:#f5f5f5; text-align:center; }
+  .menu{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;padding:15px;background:#00142a;border-bottom:2px solid gold;position:sticky;top:0;z-index:100}
+  .menu a{color:gold;text-decoration:none;padding:8px 18px;border-radius:25px}
+  header{padding:25px 10px;background:#000c1f;border-bottom:2px solid gold}
+  h1{color:gold;margin:0}
+  .player-container{max-width:1000px;margin:40px auto;border-radius:15px;overflow:hidden;box-shadow:0 0 25px rgba(255,215,0,0.2);background:#000}
+  #playerHost{width:100%;height:550px;border:0}
+  .btns{margin:20px auto;display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+  button{background:#00142a;border:1px solid gold;color:gold;padding:10px 25px;border-radius:25px;cursor:pointer}
+  button.active, button:hover{background:gold;color:#00142a}
+  @media (max-width:700px){ #playerHost{height:300px} h1{font-size:1.5rem} }
+</style>
+</head>
+<body>
+
+<div class="menu">
+  <a href="index.html">Início</a>
+  <a href="futebol.html">Futebol</a>
+  <a href="f1.html">F1</a>
+  <a href="nfl.html">NFL</a>
+  <a href="nba.html">NBA</a>
+  <a href="ufc.html">UFC</a>
+  <a href="wwe.html">WWE - AEW</a>
+  <a href="multistream.html">Multi Stream</a>
+</div>
+
+<header><h1>🏆 Mr. Olympia 2025</h1></header>
+
+<div class="btns">
+  <button class="active" onclick="trocarPlayer(1)">Player 1</button>
+  <button onclick="trocarPlayer(2)">Player 2</button>
+  <button onclick="trocarPlayer(3)">Player 3</button>
+</div>
+
+<div class="player-container" id="playerContainer">
+  <!-- conteúdo é gerado dinamicamente -->
+</div>
+
+<script>
+  const sources = {
+    1: { type: 'm3u8', src: 'https://saz.blitzen.store/olympia.m3u8' },
+    2: { type: 'embed', src: 'https://justembeds.cfd/embed/2e4c4b883021b9c4c5f9164871287b91' },
+    3: { type: 'embed', src: 'https://player.twitch.tv/?channel=china_slayer&parent=leaolives2.pages.dev' }
+  };
+
+  const host = document.getElementById('playerContainer');
+  const buttons = document.querySelectorAll('.btns button');
+  let clapprInstance = null;
+
+  function clearHost() {
+    // destrói Clappr se existir
+    if (clapprInstance && typeof clapprInstance.destroy === 'function') {
+      clapprInstance.destroy();
+      clapprInstance = null;
+    }
+    host.innerHTML = ''; // remove qualquer iframe anterior
+  }
+
+  function loadClappr(src) {
+    host.innerHTML = '<div id="clapprPlayer" style="width:100%;height:550px"></div>';
+    clapprInstance = new Clappr.Player({
+      source: src,
+      parentId: '#clapprPlayer',
+      autoPlay: true,
+      width: '100%',
+      height: '100%',
+      mediacontrol: { seekbar: '#FFD700', buttons: '#FFD700' }
+    });
+  }
+
+  function loadSandboxedIframe(src) {
+    // cria iframe com SANDBOX — **NÃO** incluir allow-popups nem allow-top-navigation
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.id = 'playerHost';
+    // permissões: scripts e formulários OK; **popups bloqueados**
+    iframe.setAttribute('sandbox', 'allow-scripts allow-forms'); 
+    // permissões extras úteis (sem popups)
+    iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media; picture-in-picture');
+    iframe.setAttribute('referrerpolicy', 'no-referrer');
+    iframe.style.border = '0';
+    host.appendChild(iframe);
+  }
+
+  function trocarPlayer(n) {
+    buttons.forEach(b => b.classList.remove('active'));
+    buttons[n-1].classList.add('active');
+
+    clearHost();
+    const s = sources[n];
+
+    if (s.type === 'm3u8') {
+      loadClappr(s.src);
+    } else {
+      loadSandboxedIframe(s.src);
+    }
+  }
+
+  // inicia com Player 1
+  trocarPlayer(1);
+</script>
+
+</body>
+</html>

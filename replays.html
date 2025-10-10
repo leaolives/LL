@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Corridas Gravadas — F1</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1LBQRDMS4');
+  </script>
+  <style>
+    /* Background animado */
+    @keyframes bgAnimation {
+      0% { background-color: #0d0d1a; }
+      50% { background-color: #1a0000; }
+      100% { background-color: #0d0d1a; }
+    }
+
+    :root{
+      --bg: #0d0d1a;
+      --accent: #ff2e2e; /* neon vermelho */
+      --card-bg: #111;
+      --text: #ff2e2e;
+      --muted: #bdbdbd;
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background: var(--bg);
+      color:var(--text);
+      text-align:center;
+      animation: bgAnimation 12s ease-in-out infinite;
+    }
+
+    header{
+      padding:80px 16px 28px; /* espaço para o botão Voltar */
+      position: relative;
+    }
+    header h1{
+      margin:0;
+      color:white;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+    }
+
+    .container{max-width:1100px;margin:0 auto;padding:18px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:60px;}
+
+    .card{
+      background:var(--card-bg);
+      border-radius:10px;
+      overflow:hidden;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+      border:2px solid transparent;
+      box-shadow: 0 0 8px rgba(255, 46, 46, 0.3);
+    }
+    .card:focus{outline:none;}
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 0 20px rgba(255,46,46,0.6);
+    }
+    .card.active{
+      box-shadow:0 0 25px 8px rgba(255,46,46,0.6);
+      border-color:var(--accent);
+    }
+
+    .thumb{
+      height:200px;
+      background:var(--bg);
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      box-shadow: 0 0 15px var(--accent);
+      transition: box-shadow .3s, transform .3s;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      border-radius: 6px;
+      transition: transform .3s;
+    }
+    .thumb:hover img{
+      transform: scale(1.05);
+    }
+
+    .caption{
+      height:25px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 10px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.1));
+      font-weight:700;
+      text-transform:uppercase;
+      font-size:13px;
+      color:var(--text);
+      text-shadow: 0 0 8px var(--accent);
+    }
+    .caption .title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;}
+
+    .modal{
+      position:fixed;inset:0;display:none;
+      align-items:center;justify-content:center;
+      background:rgba(0,0,0,0.85);z-index:999
+    }
+    .modal.open{display:flex;}
+    .player{
+      width:100%;max-width:1000px;
+      background:var(--bg);
+      border-radius:10px;
+      border:3px solid var(--accent);
+      overflow:hidden;
+      padding:10px;
+      position:relative;
+      box-shadow: 0 0 30px rgba(255,46,46,0.6);
+    }
+    .player iframe{
+      width:100%;height:500px;
+      border:0;display:block;border-radius:6px;
+    }
+    .close{
+      position:absolute;right:14px;top:12px;
+      background:var(--card-bg);
+      color:var(--text);
+      border:2px solid var(--accent);
+      border-radius:6px;
+      padding:6px 8px;
+      cursor:pointer;
+      font-weight:700;
+      text-shadow: 0 0 6px var(--accent);
+      transition:.2s;
+    }
+    .close:hover{background:var(--accent);color:#111;}
+
+    #langInfo{
+      margin: 10px 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent), 0 0 12px var(--accent);
+    }
+
+    #videoButtons{margin-top:12px;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;}
+    #videoButtons button{
+      padding:6px 12px;
+      cursor:pointer;
+      border:2px solid var(--accent);
+      border-radius:6px;
+      background:var(--card-bg);
+      color:var(--text);
+      font-weight:700;
+      transition:.2s;
+      text-shadow: 0 0 6px var(--accent);
+    }
+    #videoButtons button.active{
+      background:var(--accent);
+      color:var(--card-bg);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    #backToMenu {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      text-decoration: none;
+      text-shadow: 0 0 8px var(--accent);
+      transition:.2s;
+    }
+    #backToMenu:hover{
+      background: var(--accent);
+      color: #111;
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    @media(max-width:100%){
+      .thumb{height:400px}
+      .player iframe{height:400px}
+    }
+
+    .support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+  </style>
+</head>
+<body>
+  <a id="backToMenu" href="f1.html">⬅ Voltar</a>
+
+  <header>
+    <h1>Replays F1 2025</h1>
+  </header>
+
+  <div class="container">
+    <main>
+      <section class="grid" id="races-grid" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="player" id="playerWrap">
+      <button class="close" id="closeBtn" aria-label="Fechar">✕</button>
+      <iframe id="raceIframe" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen title="Player"></iframe>
+      <div id="videoButtons"></div>
+    </div>
+  </div>
+
+  <div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+  <script>
+    const races = [
+      {id:18,title:'GP De Singapura',thumb:'https://obrasildecima.com.br/wp-content/uploads/2025/10/1-5-1.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/hls_race_18/1080.html'},{label:'Qualificação',src:'https://hakunamatata5.org/hls_qualifying_18/720.html'}]},
+      {id:17,title:'GP Do Azerbaijão',thumb:'https://speedcafe.com/wp-content/uploads/2025/09/XPB_1305917_HiRes.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/hls_race_17/1080.html'},{label:'Qualificação',src:'https://hakunamatata5.org/hls_qualifying_17/1080.html'}]},
+      {id:16,title:'GP De Monza',thumb:'https://images.ps-aws.com/c?url=https%3A%2F%2Fd3cm515ijfiu6w.cloudfront.net%2Fwp-content%2Fuploads%2F2025%2F09%2F07144708%2Fitalian-grand-prix-results-1320x742.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/HNIjhURzATJeVSrmMvEncyXgO.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/AbdIQTrWyVKNoHRPnBJLSGYzF.html'}]},
+      {id:15,title:'GP Da Holanda',thumb:'https://cdn.racingnews365.com/2025/Piastri/_1092x683_crop_center-center_85_none/XPB_1368602_HiRes.jpg?v=1756651371',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/HjrYxNCuKBhMFpcTvfQlnPmJE.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/ZmoMEpfFXjRicPhxyQVWCnrGs.html'}]},
+      {id:14,title:'GP Da Hungria',thumb:'https://d2n9h2wits23hf.cloudfront.net/image/v1/static/6057949432001/3e949076-2bd2-4030-aa0c-7b7b5ce4f0e6/917f681c-277c-47e1-b4ef-1398f437c8a9/864x486/match/image.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/HGXnlQshOwvrKJMzFpkyYLgtT.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/PjWAQtkuhJODGxvSYowpsiMbg.html'}]},
+      {id:13,title:'GP Da Bélgica',thumb:'https://media.formula1.com/image/upload/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Belgium.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/eIDvfpngsztJmYyMFriXabxEk.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/VJhsUtDyCRKFQNbqLvicowWMS.html'},{label:'Sprint Race',src:'https://hakunamatata5.org/replays2/NpjyCsnguIqJfctTLVQehMGkB.html'}]},
+      {id:12,title:'GP De Silverstone',thumb:'https://www.racefans.net/wp-content/uploads/2024/07/racefansdotnet-7439980_HiRes.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/IWqHxLVXnbjURdcwpEeZTYfya.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/cpdtCINYhLeZqBAQnEaoTbOKU.html'}]},
+      {id:11,title:'GP Da Austria',thumb:'https://images.ps-aws.com/c?url=https%3A%2F%2Fd3cm515ijfiu6w.cloudfront.net%2Fwp-content%2Fuploads%2F2025%2F06%2F29155701%2Faustria-gp-results-1320x742.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/cmqhNWtjiMnOoGpxykYwfPFVr.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/SgHrZpAQRUiWtGDlfuevCbdxz.html'}]},
+      {id:10,title:'GP Do Canada',thumb:'https://d3cm515ijfiu6w.cloudfront.net/wp-content/uploads/2025/06/15200601/2025-canadian-grand-prix-race-start.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/VOJYaHtTczQXspFmMhuAWqDBn.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/QlGVHiTCUMtFwgdEmeWBuISxK.html'}]},
+      {id:9,title:'GP Da Espanha',thumb:'https://www.motorsportweek.com/wp-content/uploads/2025/06/Spanish-GP-2025-F1.webp',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/tJoKPGcfeDOrkydZRxzQnujgY.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/kUzWBltvhNVMAajgZImyKLwso.html'}]},
+      {id:8,title:'GP De Monaco',thumb:'https://www.motorsportweek.com/wp-content/uploads/2025/05/Monaco-GP-2025-F1.webp',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/pjcZaDWkelbwnGBRMCdYhuEoA.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/wHQGLMiYmjqIyKRVxfDoFXbnW.html'}]},
+      {id:7,title:'GP De Imola',thumb:'https://www.f1-fansite.com/wp-content/uploads/2025/05/SI202505180192-Aangepast.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/emQPnEZovHAbDYONuyFJWCIdV.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/NZuiCeSdjtlmEGAoBgbDpwOPV.html'}]},
+      {id:6,title:'GP De Miami',thumb:'https://media.formula1.com/image/upload/f_auto/q_auto/v1677245019/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Miami.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/FrymPGUNYKQqVwaZJvDCuOofk.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/mlyKocQgACdIYZXNbUztHniqw.html'},{label:'Sprint Race',src:'https://hakunamatata5.org/replays2/qTsabpxktVrczRJnlXdgIDHfU.html'}]},
+      {id:5,title:'GP Da Arabia Saudita',thumb:'https://www.f1-fansite.com/wp-content/uploads/2025/04/1-sunday-jeddah-2025-Custom.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/aQXDRxGoIudfOWrglZMVTicbj.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/QkGHreJpMwTDmAcfXtxlyjquU.html'}]},
+      {id:4,title:'GP Do Bahrein',thumb:'https://www.tomadadetempo.com.br/wp-content/uploads/2025/04/capaResultadoF1.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/ZRiCGUmbSPvlhjXoeKIdksQBa.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/UJjwFDZaEWSGbQHnzYVoXgrIO.html'}]},
+      {id:3,title:'GP Do Japão',thumb:'https://www.tomadadetempo.com.br/wp-content/uploads/2025/04/capResultado.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/OJUrRDhsyqMjtGWbuoYLkzvcf.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/GubSenVHjWRYUpsMZTLzCDXgc.html'}]},
+      {id:2,title:'GP Da China',thumb:'https://d3cm515ijfiu6w.cloudfront.net/wp-content/uploads/2025/03/23081714/2025-chinese-grand-prix-race-start-2.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/MonYLtEPBJxCZfWHchOzjNrip.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/NZLCUloeWYJIuwXAgzdfqhpak.html'},{label:'Sprint Race',src:'https://hakunamatata5.org/replays2/dzrtSTVeRhYZBGNAMqfEuHKxs.html'}]},
+      {id:1,title:'GP Da Austrália',thumb:'https://www.total-motorsport.com/wp-content/uploads/2025/03/SI202503160083-scaled.jpg',videos:[{label:'Corrida Principal',src:'https://hakunamatata5.org/replays2/etQzcpbOoCLmMPiahVWYHwufy.html'},{label:'Qualificação',src:'https://hakunamatata5.org/replays2/viEuypJnLYbAdeqsgUDGoNVZF.html'}]}
+    ];
+
+    const grid = document.getElementById('races-grid');
+    const modal = document.getElementById('modal');
+    const raceIframe = document.getElementById('raceIframe');
+    const closeBtn = document.getElementById('closeBtn');
+    const videoButtons = document.getElementById('videoButtons');
+
+    races.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <div class="thumb"><img src="${r.thumb}" alt="${r.title}"></div>
+        <div class="caption"><div class="title">${r.title}</div></div>
+      `;
+
+      function open(){
+        document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+        card.classList.add('active');
+
+        videoButtons.innerHTML='';
+
+        r.videos.forEach((v,i)=>{
+          const btn = document.createElement('button');
+          btn.textContent=v.label;
+          btn.addEventListener('click', ()=>{
+            videoButtons.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            raceIframe.src = v.src;
+          });
+          videoButtons.appendChild(btn);
+        });
+
+        if(r.videos.length>0){
+          raceIframe.src = r.videos[0].src;
+          videoButtons.querySelectorAll('button')[0].classList.add('active');
+        }
+
+        modal.classList.add('open');
+        closeBtn.focus();
+      }
+
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault(); open();}});
+      grid.appendChild(card);
+    });
+
+    closeBtn.addEventListener('click', ()=>{
+      modal.classList.remove('open');
+      raceIframe.src='';
+      videoButtons.innerHTML='';
+      document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+    });
+
+    document.addEventListener('keydown',e=>{if(e.key==='Escape' && modal.classList.contains('open')) closeBtn.click();});
+  </script>
+</body>
+</html>

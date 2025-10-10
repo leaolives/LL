@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi Stream</title>
+<!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1LBQRDMS4');
+  </script>
+<style>
+@keyframes bgAnimation {
+    0% { background-color: #0d0d1a; }
+    50% { background-color: #000033; }
+    100% { background-color: #0d0d1a; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d0d1a, #000033);
+    animation: bgAnimation 15s infinite alternate;
+    transition: background 0.5s ease;
+}
+
+/* Menu azul neon */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00FFFF;
+    border: 2px solid #00FFFF;
+    border-radius: 20px;
+    background: linear-gradient(#000033, #000055);
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+    transform: translateY(-2px);
+}
+
+/* Botão voltar */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FF3300;
+    border: 2px solid #FF3300;
+    border-radius: 20px;
+    background: linear-gradient(#330000, #550000);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    box-shadow: 0 0 15px #FF3300, 0 0 30px #FF3300;
+    transform: translateY(-2px);
+}
+
+/* Texto acima do iframe */
+#iframeText {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #FF3300;
+}
+
+/* Iframe acima da grade */
+#iframeContainer {
+    width: 100%;
+    max-width: 1600px;
+    height: 1000px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#iframeContainer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Mensagem para dispositivos móveis */
+#mobileMessage {
+    display: none;
+    font-size: 20px;
+    color: #FF3300;
+    font-weight: bold;
+}
+
+/* CSS responsivo: oculta iframe e mostra mensagem no celular/tablet */
+@media (max-width: 1024px) {
+    #iframeContainer {
+        display: none;
+    }
+    #iframeText {
+        display: none;
+    }
+    #mobileMessage {
+        display: block;
+        margin-top: 50px;
+    }
+}
+
+.support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+</style>
+</head>
+<body>
+
+<!-- Menu -->
+<div class="menu">
+    <a href="index.html">Início</a>
+    <a href="futebol.html">Futebol</a>
+    <a href="f1.html">F1</a>
+    <a href="nfl.html">NFL</a>
+    <a href="ufc.html">UFC</a>
+    <a href="tenis.html">TÊNIS</a>
+    <a href="mrolympia.html">MR OLYMPIA</a>
+    <a href="wwe.html">WWE - AEW</a>
+</div>
+
+<!-- Texto acima do iframe -->
+<div id="iframeText">
+    VÁ EM AVAILABLE STREAMS, E ESCOLHA ATÉ QUATRO TRANSMISSÕES. APÓS ISSO CLIQUE EM <| PARA OCULTAR O MENU👍
+</div>
+
+<!-- Iframe -->
+<div id="iframeContainer">
+    <iframe src="https://streamfree.to/multi-stream"
+        sandbox="allow-same-origin allow-scripts allow-forms"
+        allow="encrypted-media"
+        allowfullscreen>
+    </iframe>
+</div>
+
+<div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+<!-- Mensagem para celular/tablet -->
+<div id="mobileMessage">
+    Multi Stream disponível apenas em Computador/Notebook. 💻
+</div>
+
+<script>
+let jaDesceu = false; // flag para controlar scroll
+
+document.querySelector("#iframeContainer iframe").addEventListener("load", function() {
+    if (!jaDesceu) {
+        window.scrollBy({
+            top: 300, // ajuste a altura se necessário
+            behavior: "smooth"
+        });
+        jaDesceu = true;
+    }
+});
+
+// JavaScript extra para detectar mobile (opcional)
+if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    console.log("Usuário em dispositivo móvel: Multi Stream não disponível");
+}
+</script>
+
+</body>
+</html>

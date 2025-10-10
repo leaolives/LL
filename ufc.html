@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UFC</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E1LBQRDMS4');
+</script>
+<style>
+@keyframes bgAnimation {
+    0% { background-color: #0d0d1a; }
+    50% { background-color: #000033; }
+    100% { background-color: #0d0d1a; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d0d1a, #000033);
+    animation: bgAnimation 15s infinite alternate;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00FFFF;
+    border: 2px solid #00FFFF;
+    border-radius: 20px;
+    background: linear-gradient(#000033, #000055);
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+    transform: translateY(-2px);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(#000033, #000055);
+    border: 2px solid #FF3300;
+    border-radius: 15px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.event-card:hover {
+    box-shadow: 0 0 15px #FF3300, 0 0 30px #FF3300, 0 0 45px #FF3300;
+    transform: translateY(-3px);
+}
+
+.event-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.event-card .event-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.event-card .event-time {
+    margin-bottom: 10px;
+}
+
+/* Destaque AO VIVO */
+.live-now {
+    color: #FF3300;
+    font-weight: bold;
+    animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
+}
+
+.watch-btn {
+    padding: 10px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #330000;
+    color: #FF3300;
+    border: 2px solid #FF3300;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 160px;
+    text-align: center;
+    margin-top: 5px;
+    white-space: nowrap; /* <-- impede quebra de linha */
+}
+
+.watch-btn:hover {
+    box-shadow: 0 0 8px #FF3300, 0 0 16px #FF3300, 0 0 24px #FF3300;
+    transform: translateY(-2px);
+}
+
+#iframeContainer {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#iframeContainer iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+#playerButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    white-space: nowrap; /* <-- impede quebra de linha */
+}
+
+.support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+</style>
+</head>
+<body>
+
+<div class="menu">
+    <a href="index.html">Início</a>
+    <a href="futebol.html">Futebol</a>
+    <a href="f1.html">F1</a>
+    <a href="nba.html">NBA</a>
+    <a href="nfl.html">NFL</a>
+    <a href="wwe.html">WWE - AEW</a>
+    <a href="tenis.html">TÊNIS</a>
+    <a href="mrolympia.html">MR OLYMPIA</a>
+    <a href="multistream.html">Multi Stream</a>
+</div>
+
+<div id="iframeMessage" style="display:none; margin-top:15px; font-weight:bold; color:#FF3300; font-size:18px;">
+    A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
+</div>
+
+<!-- Iframe -->
+<div id="iframeContainer">
+    <iframe id="eventIframe" src="" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
+    <div id="playerButtons"></div>
+</div>
+
+<div class="events-grid">
+
+    <div class="event-card" data-time="2025-10-11T20:00:00" data-remove="true">
+    <img src="https://i.ytimg.com/vi/e5XejXlPUnM/maxresdefault.jpg" alt="PPV">
+    <div class="event-title">UFC Fight Night - Oliveira Vs Gamrot</div>
+    <div class="event-time">Sábado 20:00</div>
+    <button class="watch-btn" onclick="setupPlayers([
+        {name:'Player 1 - Celular', url:'https://justembeds.cfd/embed/da032cfa4a561107a608d59e4365355c'},
+        {name:'Player 2 - PC', url:'https://sportzonline.st/channels/bra/br5.php'},
+        {name:'Player 3', url:'https://streamcenter.pro/embed/ch48.php'}
+    ])">Assistir</button>
+</div>
+
+    <div class="event-card" data-time="2025-10-14T21:00:00" onclick="setupPlayers([
+        {name:'Player 1', url:'https://streamfree.to/embed/combat/danawhitescontender'},
+        {name:'Player 2', url:'https://ppv.to/embed/dwcs/wk10'}
+    ])">
+        <img src="https://i.ytimg.com/vi/jQL_FiBnQaU/maxresdefault.jpg" alt="Contender">
+        <div class="event-title">DW Contender Series</div>
+        <div class="event-time">Terça 21:00</div>
+        <button class="watch-btn" onclick="event.stopPropagation(); setupPlayers([
+            {name:'Player 1', url:'https://streamfree.to/embed/combat/danawhitescontender'},
+            {name:'Player 2', url:'https://ppv.to/embed/dwcs/wk9'}
+        ])">Assistir</button>
+    </div>
+
+    <div class="event-card" data-time="2025-10-03T00:00:00" onclick="setupPlayers([
+        {name:'Player 1', url:'https://playertv.net/c/ufc/v.php?v=cGxheS5waHA/aWQ9MjI5MDI0'},
+        {name:'Player 2', url:'https://embedtv-4.icu/ufcfightpass'}
+    ])">
+        <img src="https://i.ibb.co/gMmQvFXr/ufc-logo.png" alt="UFC Fight Pass">
+        <div class="event-title">UFC Fight Pass</div>
+        <div class="event-time">Ao Vivo</div>
+        <button class="watch-btn" onclick="event.stopPropagation(); setupPlayers([
+            {name:'Player 1', url:'https://playertv.net/c/ufc/v.php?v=cGxheS5waHA/aWQ9MjI5MDI0'},
+            {name:'Player 2', url:'https://embedtv-4.icu/ufcfightpass'}
+        ])">Assistir</button>
+    </div>
+
+</div>
+
+<div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+<script>
+function setupPlayers(players) {
+    const container = document.getElementById('iframeContainer');
+    const iframe = document.getElementById('eventIframe');
+    const playerButtons = document.getElementById('playerButtons');
+    const message = document.getElementById('iframeMessage');
+
+    container.style.display = 'flex';
+    message.style.display = 'block';
+    playerButtons.innerHTML = '';
+
+    players.forEach((p) => {
+        const btn = document.createElement('button');
+        btn.className = 'watch-btn';
+        btn.innerText = p.name;
+        btn.onclick = () => { iframe.src = p.url; };
+        playerButtons.appendChild(btn);
+    });
+
+    if(players.length > 0){
+        iframe.src = players[0].url;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// === FUNÇÃO AO VIVO ===
+function checkEventsLive() {
+    const now = new Date();
+    document.querySelectorAll('.event-card').forEach(card => {
+        const eventTime = new Date(card.getAttribute('data-time'));
+        const timeElement = card.querySelector('.event-time');
+
+        // Se já começou, mostra "AO VIVO"
+        if (now >= eventTime) {
+            timeElement.textContent = "AO VIVO";
+            timeElement.classList.add("live-now");
+        }
+
+        // Se o evento tem data-remove e já passou 6h + 50min, remove
+        if (card.getAttribute('data-remove') === "true") {
+            const removeAfter = new Date(eventTime.getTime() + (7 * 60 + 50) * 60000); // 7h50min em ms
+            if (now >= removeAfter) {
+                card.remove();
+            }
+        }
+    });
+}
+
+// Checa já no início
+checkEventsLive();
+// Checa a cada 1 minuto
+setInterval(checkEventsLive, 60000);
+</script>
+
+</body>
+</html>

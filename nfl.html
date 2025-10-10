@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NFL</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+<!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1LBQRDMS4');
+  </script>
+<style>
+@keyframes bgAnimation {
+    0% { background-color: #0d0d1a; }
+    50% { background-color: #000033; }
+    100% { background-color: #0d0d1a; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d0d1a, #000033);
+    animation: bgAnimation 15s infinite alternate;
+    transition: background 0.5s ease;
+}
+
+/* Menu azul neon */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00FFFF;
+    border: 2px solid #00FFFF;
+    border-radius: 20px;
+    background: linear-gradient(#000033, #000055);
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+    transform: translateY(-2px);
+}
+
+/* Iframe acima da grade */
+#iframeContainer {
+    width: 100%;
+    max-width: 1000px;
+    height: 500px;
+    margin: 0 auto 30px;
+    display: none; /* Não aparece inicialmente */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#iframeContainer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Grid de jogos */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Card do jogo */
+.game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(#000033, #000055);
+    border: 2px solid #FF3300;
+    border-radius: 15px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 0 2px #FF3300;
+}
+
+.game-card:hover {
+    box-shadow: 0 0 12px #FF3300, 0 0 20px #FF3300;
+    transform: translateY(-3px);
+}
+
+/* RedZone / Network estilo especial */
+.redzone-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #FF3300;
+    border-radius: 15px;
+    background: linear-gradient(#330000, #550000);
+    box-shadow: 0 0 4px #FF3300, 0 0 5px #FF3300, 0 0 45px #FF3300;
+    padding: 20px;
+}
+
+/* Grid especial */
+.special-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 30px;
+}
+
+/* Imagem dentro do card */
+.game-card img {
+    width: 100%;
+    height: auto;       /* mantém proporção */
+    max-height: 220px;  /* altura máxima */
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/* Texto do card */
+.game-card .game-time, .redzone-card .game-time {
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+/* Botão assistir adaptativo */
+.watch-btn {
+    margin-top: auto;
+    padding: 10px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #330000;
+    color: #FF3300;
+    border: 2px solid #FF3300;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 160px;
+    text-align: center;
+}
+
+.watch-btn:hover {
+    box-shadow: 0 0 8px #FF3300, 0 0 16px #FF3300;
+    transform: translateY(-2px);
+}
+
+/* Estilo para a mensagem abaixo do iframe */
+#iframeMessage {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #FF3300;
+    font-size: 18px;
+}
+.live-text {
+    color: #FF3300;
+    font-weight: bold;
+    text-shadow: 0 0 5px #FF3300, 0 0 10px #FF3300, 0 0 20px #FF3300;
+    animation: blink 2.9s infinite;
+}
+
+.support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+</style>
+</head>
+<body>
+
+<!-- Menu -->
+<div class="menu">
+    <a href="index.html">Início</a>
+    <a href="futebol.html">Futebol</a>
+    <a href="f1.html">F1</a>
+    <a href="nba.html">NBA</a>
+    <a href="ufc.html">UFC</a>
+    <a href="tenis.html">TÊNIS</a>
+    <a href="wwe.html">WWE - AEW</a>
+    <a href="mrolympia.html">MR OLYMPIA</a>
+    <a href="multistream.html">Multi Stream</a>
+</div>
+
+<!-- Mensagem abaixo do iframe -->
+<div id="iframeMessage" style="display:none;">
+    A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
+</div>
+
+<!-- Iframe -->
+<div id="iframeContainer"></div>
+
+<!-- RedZone + NFL Network -->
+<div class="special-grid">
+    <div class="redzone-card">
+        <img src="https://static.www.nfl.com/image/private/t_editorial_landscape_12_desktop/league/tfki7njrm3y8jycbtkrx"
+            alt="NFL Network Logo" style="width:200px; margin-bottom:15px; border-radius:15px;">
+        <div class="game-time">NFL NETWORK</div>
+        <button class="watch-btn" onclick="openStream('https://justembeds.cfd/embed/prareprlcri3on2nos6upr5fujozotro','https://justembeds.cfd/embed/prareprlcri3on2nos6upr5fujozotro')">ASSISTIR</button>
+    </div>
+    
+    <div class="redzone-card" id="redzone" data-start="2025-10-05T14:00:00-03:00" data-end="2025-05-10T18:00:00-03:00">
+    <img src="https://i.imgur.com/jhNuasd.png"
+         alt="NFL RedZone Logo" style="width:200px; margin-bottom:15px; border-radius:15px;">
+    <div class="game-time">DOMINGO - 14:00</div>
+    <button class="watch-btn" onclick="openStream('https://streamkick.org/nflsoccer/redzone/','https://streamcenter.pro/embed/ch42.php')">ASSISTIR</button>
+</div>
+</div>
+
+<!-- Grade de jogos -->
+<div class="games-grid">
+
+    <div class="game-card" data-start="2025-10-09T21:15:00-03:00">
+        <img src="https://i.imgur.com/WvAPo2l.png" alt="Jogo 1">
+        <div class="game-time">QUINTA - 21:15</div>
+        <button class="watch-btn" onclick="openStream('https://streamfree.to/embed/football/philadelphiaeaglesvsnewyorkgia','https://streamcenter.pro/embed/ch30.php')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T10:30:00-03:00">
+        <img src="https://i.imgur.com/gpkjElT.png" alt="Jogo 2">
+        <div class="game-time">DOMINGO - 10:30</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/7292/7292-nyj','https://ppv.to/embed/nfl/7292/7292-nyj')">Assistir</button>
+    </div>
+    
+    <div class="game-card" data-start="2025-10-12T14:00:00-03:00">
+        <img src="https://i.imgur.com/MHu7BAA.png" alt="Jogo 3">
+        <div class="game-time">DOMINGO - 14:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/1470/1470-ind','https://ppv.to/embed/nfl/1470/1470-ind')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T14:00:00-03:00">
+        <img src="https://i.imgur.com/zHBcbPv.png" alt="Jogo 4">
+        <div class="game-time">DOMINGO - 14:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/1084/1084-mia','https://ppv.to/embed/nfl/1084/1084-mia')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T14:00:00-03:00">
+        <img src="https://i.imgur.com/OBn1ZmI.png" alt="Jogo 5">
+        <div class="game-time">DOMINGO - 14:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/6631/6631-no','https://ppv.to/embed/nfl/6631/6631-no')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T14:00:00-03:00">
+        <img src="https://i.imgur.com/WXDeZRI.png" alt="Jogo 6">
+        <div class="game-time">DOMINGO - 14:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/8076/8076-pit','https://ppv.to/embed/nfl/8076/8076-pit')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T14:00:00-03:00">
+        <img src="https://i.imgur.com/fIyHBnE.png" alt="Jogo 7">
+        <div class="game-time">DOMINGO - 14:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/3997/3997-car','https://ppv.to/embed/nfl/3997/3997-car')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T14:00:00-03:00">
+        <img src="https://i.imgur.com/4bZg0Dh.png" alt="Jogo 8">
+        <div class="game-time">DOMINGO - 14:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/7621/7621-jax','https://ppv.to/embed/nfl/7621/7621-jax')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T14:00:00-03:00">
+        <img src="https://i.imgur.com/LPBXVrT.png" alt="Jogo 9">
+        <div class="game-time">DOMINGO - 14:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/6983/6983-bal','https://ppv.to/embed/nfl/6983/6983-bal')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T17:05:00-03:00">
+        <img src="https://i.imgur.com/Ms4gcar.png" alt="Jogo 10">
+        <div class="game-time">DOMINGO - 17:05</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/8483/8483-lv','https://ppv.to/embed/nfl/8483/8483-lv')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T17:25:00-03:00">
+        <img src="https://i.imgur.com/1NiqC66.png" alt="Jogo 11">
+        <div class="game-time">DOMINGO - 17:25</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/8345/8345-gb','https://ppv.to/embed/nfl/8345/8345-gb')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T17:25:00-03:00">
+        <img src="https://i.imgur.com/zer7dXq.png" alt="Jogo 12">
+        <div class="game-time">DOMINGO - 17:25</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/3971/3971-tb','https://ppv.to/embed/nfl/3971/3971-tb')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-12T21:20:00-03:00">
+        <img src="https://i.imgur.com/QMsIDGy.png" alt="Jogo 13">
+        <div class="game-time">DOMINGO - 21:20</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/4432/4432-kc','https://ppv.to/embed/nfl/4432/4432-kc')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-13T20:15:00-03:00">
+        <img src="https://i.imgur.com/p0ZGqwR.png" alt="Jogo 14">
+        <div class="game-time">SEGUNDA - 20:15</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/2932/2932-atl','https://ppv.to/embed/nfl/2932/2932-atl')">Assistir</button>
+    </div>
+
+    <div class="game-card" data-start="2025-10-13T21:15:00-03:00">
+        <img src="https://i.imgur.com/0cKnhO8.png" alt="Jogo 15">
+        <div class="game-time">SEGUNDA - 21:15</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/nfl/2324/2324-was','https://ppv.to/embed/nfl/2324/2324-was')">Assistir</button>
+    </div>
+    
+</div>
+
+<!-- Mensagem quando não houver jogos -->
+<div id="noGamesMessage" style="display:none; margin-top:30px; font-size:18px; font-weight:bold; color:#00FFFF; text-shadow:0 0 2px #00FFFF, 0 0 2px #00FFFF;">
+    ℹ️Dias de jogos da NFL: Quinta, Domingo e Segunda. A grade de jogos será adicionada em breveℹ️
+</div>
+
+<div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+<script>
+const GAME_DURATION_MIN = 180; // 3 horas
+const BUFFER_MIN = 50; // 50 minutos extra
+
+function filterGames() {
+    const now = new Date();
+    let hasVisible = false;
+
+    document.querySelectorAll('.game-card').forEach(game => {
+        const start = new Date(game.dataset.start);
+        const end = new Date(start.getTime() + (GAME_DURATION_MIN + BUFFER_MIN) * 60000);
+        const timeEl = game.querySelector('.game-time');
+
+        if (now > end) {
+            game.style.display = "none"; // evento acabou
+        } else {
+            hasVisible = true; // tem jogo válido
+            if (now >= start) {
+                timeEl.textContent = "AO VIVO"; // evento começou
+                timeEl.classList.add("live-text");
+            } else {
+                timeEl.classList.remove("live-text");
+            }
+            game.style.display = "flex";
+        }
+    });
+
+    // se não houver nenhum jogo visível -> mostra a mensagem
+    document.getElementById('noGamesMessage').style.display = hasVisible ? "none" : "block";
+}
+setInterval(filterGames, 60000);
+filterGames();
+
+function checkRedZoneLive() {
+    const redzoneCard = document.getElementById('redzone');
+    if (!redzoneCard) return;
+
+    const start = new Date(redzoneCard.dataset.start);
+    const end = new Date(redzoneCard.dataset.end);
+    const now = new Date();
+
+    const timeDiv = redzoneCard.querySelector('.game-time');
+
+    // sempre mostra o card
+    redzoneCard.style.display = "flex";
+
+    // só muda o texto para AO VIVO se estiver no horário definido
+    if (now >= start && now <= end) {
+        timeDiv.textContent = "AO VIVO";
+        timeDiv.classList.add("live-text");
+    } else {
+        timeDiv.textContent = "DOMINGO - 14:00"; // texto normal fora do horário
+        timeDiv.classList.remove("live-text");
+    }
+}
+
+// chama a cada 1 segundo
+setInterval(checkRedZoneLive, 1000);
+checkRedZoneLive();
+
+
+function openStream(url1, url2) {
+    const container = document.getElementById('iframeContainer');
+    container.innerHTML = '';
+
+    const iframe = document.createElement('iframe');
+    iframe.id = "mainIframe";
+    iframe.src = url1;
+    iframe.allowFullscreen = true;
+
+    // checa exceções
+    if(url1.includes("embedstreams.top") || url1.includes("embedsports.me") || url1.includes("https://esportesembed.top") ||
+       url2.includes("embedstreams.top") || url2.includes("embedsports.me") || url2.includes("https://esportesembed.top")) {
+        // exceção: sem sandbox, mas bloqueia popups e adiciona overlay
+        window.open = function() {
+            console.log("Popup bloqueado!");
+            return null;
+        };
+
+        // overlay que bloqueia clicks e some ao clicar
+        const overlay = document.createElement('div');
+        overlay.style.position = 'absolute';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'transparent';
+        overlay.style.zIndex = '9999';
+        overlay.onclick = () => overlay.remove();
+        container.style.position = "relative";
+        container.appendChild(overlay);
+
+    } else {
+        // padrão: aplica sandbox
+        iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
+    }
+
+    container.appendChild(iframe);
+
+    // Botões de opção de stream
+    const btnContainer = document.createElement('div');
+    btnContainer.style.marginTop = "15px";
+    btnContainer.style.display = "flex";
+    btnContainer.style.gap = "10px";
+    btnContainer.style.justifyContent = "center";
+
+    const btn1 = document.createElement('button');
+    btn1.textContent = "Opção 1 - Celular";
+    btn1.className = "watch-btn";
+    btn1.style.whiteSpace = "nowrap";
+    btn1.onclick = () => { document.getElementById('mainIframe').src = url1; };
+
+    const btn2 = document.createElement('button');
+    btn2.textContent = "Opção 2 - PC";
+    btn2.className = "watch-btn";
+    btn2.style.whiteSpace = "nowrap";
+    btn2.onclick = () => { document.getElementById('mainIframe').src = url2; };
+
+    btnContainer.appendChild(btn1);
+    btnContainer.appendChild(btn2);
+    container.appendChild(btnContainer);
+
+    container.style.display = 'flex';
+    container.style.flexDirection = "column";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    document.getElementById('iframeMessage').style.display = 'block';
+}
+</script>
+
+</body>
+</html>

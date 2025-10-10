@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futebol</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E1LBQRDMS4');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+@keyframes bgAnimation {
+    0% { background-color: #0d0d1a; }
+    50% { background-color: #000033; }
+    100% { background-color: #0d0d1a; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d0d1a, #000033);
+    animation: bgAnimation 15s infinite alternate;
+    transition: background 0.5s ease;
+}
+
+/* Menu azul neon */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00FFFF;
+    border: 2px solid #00FFFF;
+    border-radius: 20px;
+    background: linear-gradient(#000033, #000055);
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+    transform: translateY(-2px);
+}
+
+/* Iframe acima da grade */
+#iframeContainer {
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    margin: 0 auto 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#iframeContainer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Grid de jogos */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Card do jogo */
+.game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(#000033, #000055);
+    border: 2px solid #FF3300;
+    border-radius: 15px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 0 2px #FF3300;
+}
+
+.game-card:hover {
+    box-shadow: 0 0 12px #FF3300, 0 0 20px #FF3300;
+    transform: translateY(-3px);
+}
+
+/* Imagem dentro do card */
+.game-card img {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/* Texto do card */
+.game-card .game-time {
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+/* Botão assistir adaptativo */
+.watch-btn {
+    margin-top: auto;
+    padding: 10px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #330000;
+    color: #FF3300;
+    border: 2px solid #FF3300;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 160px;
+    text-align: center;
+}
+
+.watch-btn:hover {
+    box-shadow: 0 0 8px #FF3300, 0 0 16px #FF3300;
+    transform: translateY(-2px);
+}
+
+/* Estilo para a mensagem abaixo do iframe */
+#iframeMessage {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #FF3300;
+    font-size: 18px;
+}
+
+.live-text {
+    color: #FF3300;
+    font-weight: bold;
+    text-shadow: 0 0 5px #FF3300, 0 0 10px #FF3300, 0 0 20px #FF3300;
+    animation: blink 2.9s infinite;
+}
+
+.support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+
+.no-games-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF3300;
+    background: linear-gradient(#330000, #660000);
+    border: 2px solid #FF3300;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.no-games-btn:hover {
+    box-shadow: 0 0 10px #FF3300, 0 0 20px #FF3300;
+    transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+
+<!-- Menu -->
+<div class="menu">
+    <a href="index.html">Início</a>
+    <a href="nfl.html">NFL</a>
+    <a href="f1.html">F1</a>
+    <a href="nba.html">NBA</a>
+    <a href="ufc.html">UFC</a>
+    <a href="tenis.html">TÊNIS</a>
+    <a href="wwe.html">WWE - AEW</a>
+    <a href="mrolympia.html">MR OLYMPIA</a>
+    <a href="multistream.html">Multi Stream</a>
+</div>
+
+<div id="topoTexto" style="margin-bottom:10px; font-size:20px; font-weight:bold; color:#FF3300; text-shadow: 0 0 2px #FF3300, 0 0 2px #FF3300;">
+    ⚽ JOGOS DE HOJE ⚽
+</div>
+
+<!-- Mensagem abaixo do iframe -->
+<div id="iframeMessage" style="display:none;">
+    A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
+</div>
+
+<!-- Iframe -->
+<div id="iframeContainer"></div>
+
+<div id="noGamesContainer" style="display:none; margin: 50px 0; text-align: center;">
+    <a href="futebol2.html" class="no-games-btn">👉 Clique aqui para ver os jogos 👈</a>
+</div>
+
+<!-- Grade de jogos -->
+<div class="games-grid">
+    <div class="game-card"
+         data-start="2025-10-07T11:15:00-03:00"
+         data-end="2025-10-07T13:25:00-03:00">
+        <img src="https://www.365scores.com/pt-br/news/magazine/wp-content/uploads/2025/10/sevilla-barcelona.jpg" alt="sevilla-barcelona">
+        <div class="game-time">DOMINGO - 11:15</div>
+        <button class="watch-btn" onclick="openStream('https://sportzonline.st/channels/bra/br3.php','https://futeboldegraca.com/player.php?id=12322')">Assistir</button>
+    </div>
+</div>
+
+
+<div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+<script>
+function filterGames() {
+    const now = new Date();
+    let anyVisible = false;
+
+    document.querySelectorAll('.game-card').forEach(game => {
+        const start = new Date(game.dataset.start);
+        const end = new Date(game.dataset.end);
+        const timeEl = game.querySelector('.game-time');
+
+        if (now > end) {
+            game.style.display = "none";
+        } else {
+            game.style.display = "flex";
+            anyVisible = true;
+
+            if (now >= start && now <= end) {
+                timeEl.textContent = "AO VIVO";
+                timeEl.classList.add("live-text");
+            } else {
+                timeEl.classList.remove("live-text");
+            }
+        }
+    });
+
+    const noGamesBtn = document.getElementById('noGamesContainer');
+    const iframeContainer = document.getElementById('iframeContainer');
+
+    if (!anyVisible) {
+        noGamesBtn.style.display = 'block';
+        iframeContainer.style.display = 'none';
+    } else {
+        noGamesBtn.style.display = 'none';
+    }
+}
+
+setInterval(filterGames, 60000);
+filterGames();
+
+function openStream(url1, url2) {
+    const container = document.getElementById('iframeContainer');
+    container.innerHTML = '';
+
+    function createPlayer(url) {
+        if (url.endsWith('.m3u8')) {
+            const video = document.createElement('video');
+            video.src = url;
+            video.controls = true;
+            video.autoplay = true;
+            video.style.width = '100%';
+            video.style.height = '500px';
+            return video;
+        } else {
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.allowFullscreen = true;
+            iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
+            iframe.style.width = '100%';
+            iframe.style.height = '500px';
+            return iframe;
+        }
+    }
+
+    const player = createPlayer(url1);
+    player.id = 'mainPlayer';
+    container.appendChild(player);
+
+    // Botões de opção de stream
+    const btnContainer = document.createElement('div');
+    btnContainer.style.marginTop = "15px";
+    btnContainer.style.display = "flex";
+    btnContainer.style.gap = "10px";
+    btnContainer.style.justifyContent = "center";
+
+    const btn1 = document.createElement('button');
+    btn1.textContent = "Opção 1";
+    btn1.className = "watch-btn";
+    btn1.onclick = () => {
+        const newPlayer = createPlayer(url1);
+        newPlayer.id = 'mainPlayer';
+        container.replaceChild(newPlayer, document.getElementById('mainPlayer'));
+    };
+
+    const btn2 = document.createElement('button');
+    btn2.textContent = "Opção 2";
+    btn2.className = "watch-btn";
+    btn2.onclick = () => {
+        const newPlayer = createPlayer(url2);
+        newPlayer.id = 'mainPlayer';
+        container.replaceChild(newPlayer, document.getElementById('mainPlayer'));
+    };
+
+    btnContainer.appendChild(btn1);
+    btnContainer.appendChild(btn2);
+    container.appendChild(btnContainer);
+
+    container.style.display = 'flex';
+    container.style.flexDirection = "column";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    document.getElementById('iframeMessage').style.display = 'block';
+}
+function createPlayer(url) {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.autoplay = true;
+    video.style.width = '100%';
+    video.style.height = '500px';
+
+    if (Hls.isSupported() && url.endsWith('.m3u8')) {
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+        });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+    } else if (!url.endsWith('.m3u8')) {
+        // fallback para iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.allowFullscreen = true;
+        iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
+        iframe.style.width = '100%';
+        iframe.style.height = '500px';
+        return iframe;
+    }
+
+    return video;
+}
+</script>
+
+</body>
+</html>
