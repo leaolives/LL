@@ -46,6 +46,7 @@
 <div class="btns">
   <button class="active" onclick="trocarPlayer(1)">Player 1</button>
   <button onclick="trocarPlayer(2)">Player 2</button>
+  <button onclick="trocarPlayer(3)">Player 3 - Celular</button>
 </div>
 
 <div class="player-container" id="playerContainer">
@@ -56,6 +57,7 @@
   const sources = {
     1: { type: 'm3u8', src: 'https://saz.blitzen.store/olympia.m3u8' },
     2: { type: 'embed', src: 'https://justembeds.cfd/embed/f19732bb1833ed0ce55c80e7e91abcff' }
+    3: { type: 'embed', src: 'https://ppv.to/embed/2025-mr.-olympia-saturday-finals' }
   };
 
   const host = document.getElementById('playerContainer');
