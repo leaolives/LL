@@ -26,6 +26,28 @@
   button{background:#00142a;border:1px solid gold;color:gold;padding:10px 25px;border-radius:25px;cursor:pointer}
   button.active, button:hover{background:gold;color:#00142a}
   @media (max-width:700px){ #playerHost{height:300px} h1{font-size:1.5rem} }
+  .support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px gold;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px gold, 0 0 25px gold;
+}
+
 </style>
 </head>
 <body>
@@ -54,10 +76,21 @@
   <!-- conteúdo é gerado dinamicamente -->
 </div>
 
+<div class="support-links">
+  <a href="https://livepix.gg/leaolives" target="_blank">
+    <img src="https://i.imgur.com/7cQ8lY6.png" alt="Doe via LivePix" class="support-img">
+  </a>
+
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+
 <script>
   const sources = {
     1: { type: 'embed', src: 'https://justembeds.cfd/embed/0e98d41df49690fa54987c779f16c557' },
-    2: { type: 'm3u8', src: 'https://suc.pohon8-amp.click/ppv.m3u8' },
+    2: { type: 'embed', src: 'https://suc.pohon8-amp.click/ppv.m3u8' },
     3: { type: 'embed', src: 'https://justembeds.cfd/embed/0e98d41df49690fa54987c779f16c557' }
   };
 
