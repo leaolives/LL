@@ -16,6 +16,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5426225451250724"
      crossorigin="anonymous"></script>
 <style>
+/* Animação de fundo */
 @keyframes bgAnimation {
     0% { background-color: #0d0d1a; }
     50% { background-color: #000033; }
@@ -23,8 +24,8 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    color: white;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #fff;
     margin: 0;
     padding: 20px;
     text-align: center;
@@ -37,42 +38,47 @@ body {
     transition: background 0.5s ease;
 }
 
-/* Menu azul neon */
+/* Menu azul neon modernizado */
 .menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 30px;
 }
 
 .menu a {
-    padding: 10px 20px;
+    padding: 12px 22px;
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
     color: #00FFFF;
     border: 2px solid #00FFFF;
-    border-radius: 20px;
-    background: linear-gradient(#000033, #000055);
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #000033, #000044);
     transition: all 0.3s ease;
+    box-shadow: 0 0 6px #00FFFF;
 }
 
 .menu a:hover {
-    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
-    transform: translateY(-2px);
+    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF, 0 0 60px #00FFFF;
+    transform: translateY(-3px);
 }
 
-/* Iframe acima da grade */
+/* Iframe principal */
 #iframeContainer {
     width: 100%;
     max-width: 1000px;
-    height: 500px;
-    margin: 0 auto 30px;
-    display: none; /* Não aparece inicialmente */
+    height: 520px;
+    margin: 0 auto 40px;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #00FFFF88;
+    background: #000022;
 }
 
 #iframeContainer iframe {
@@ -81,120 +87,147 @@ body {
     border: none;
 }
 
+/* Mensagem abaixo do iframe */
+#iframeMessage {
+    margin-top: 5px;
+    font-weight: bold;
+    color: #FF3300;
+    font-size: 18px;
+}
+
 /* Grid de jogos */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
     width: 100%;
     max-width: 1200px;
 }
 
 /* Card do jogo */
-.game-card {
+.game-card, .redzone-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(#000033, #000055);
-    border: 2px solid #FF3300;
-    border-radius: 15px;
-    padding: 10px;
-    transition: all 0.3s ease;
+    padding: 15px;
+    border-radius: 20px;
+    transition: all 0.4s ease;
     overflow: hidden;
-    box-shadow: 0 0 2px #FF3300;
+}
+
+/* Cards padrão */
+.game-card {
+    background: linear-gradient(145deg, #000033, #000055);
+    border: 2px solid #FF3300;
+    box-shadow: 0 0 6px #FF3300;
 }
 
 .game-card:hover {
-    box-shadow: 0 0 12px #FF3300, 0 0 20px #FF3300;
-    transform: translateY(-3px);
+    box-shadow: 0 0 15px #FF3300, 0 0 25px #FF3300;
+    transform: translateY(-5px);
 }
 
-/* RedZone / Network estilo especial */
+/* Cards especiais RedZone / NFL Network */
 .redzone-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: linear-gradient(145deg, #330000, #550000);
     border: 2px solid #FF3300;
-    border-radius: 15px;
-    background: linear-gradient(#330000, #550000);
-    box-shadow: 0 0 4px #FF3300, 0 0 5px #FF3300, 0 0 45px #FF3300;
+    box-shadow: 0 0 10px #FF3300, 0 0 20px #FF3300;
     padding: 20px;
 }
 
-/* Grid especial */
-.special-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+/* Imagem do card */
+.game-card img, .redzone-card img {
     width: 100%;
-    max-width: 1200px;
-    margin-bottom: 30px;
+    max-width: 220px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Imagem dentro do card */
-.game-card img {
-    width: 100%;
-    height: auto;       /* mantém proporção */
-    max-height: 220px;  /* altura máxima */
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 10px;
+.game-card img:hover, .redzone-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #FF3300;
 }
 
 /* Texto do card */
 .game-card .game-time, .redzone-card .game-time {
     font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
-/* Botão assistir adaptativo */
+/* Texto AO VIVO */
+.live-text {
+    color: #FF3300;
+    font-weight: bold;
+    text-shadow: 0 0 5px #FF3300, 0 0 10px #FF3300, 0 0 20px #FF3300;
+    animation: blink 3.1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.3; }
+}
+
+/* Botão assistir */
 .watch-btn {
-    margin-top: auto;
-    padding: 10px 15px;
+    padding: 10px 18px;
     font-weight: bold;
     text-transform: uppercase;
     background-color: #330000;
     color: #FF3300;
     border: 2px solid #FF3300;
-    border-radius: 15px;
+    border-radius: 18px;
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
     max-width: 160px;
     text-align: center;
+    margin-top: auto;
 }
 
 .watch-btn:hover {
-    box-shadow: 0 0 8px #FF3300, 0 0 16px #FF3300;
+    box-shadow: 0 0 10px #FF3300, 0 0 20px #FF3300;
     transform: translateY(-2px);
 }
 
-/* Estilo para a mensagem abaixo do iframe */
-#iframeMessage {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #FF3300;
-    font-size: 18px;
-}
-.live-text {
-    color: #FF3300;
-    font-weight: bold;
-    text-shadow: 0 0 5px #FF3300, 0 0 10px #FF3300, 0 0 20px #FF3300;
-    animation: blink 2.9s infinite;
+/* Botões de opções de stream dentro do iframe */
+#iframeContainer .watch-btn {
+    margin: 0;
 }
 
+/* Grid especial RedZone / NFL Network */
+.special-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+}
+
+/* Mensagem sem jogos */
+#noGamesMessage {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #00FFFF;
+    text-shadow: 0 0 4px #00FFFF, 0 0 8px #00FFFF;
+}
+
+/* Links de suporte */
 .support-links {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* distância entre as imagens */
-    margin-top: 40px;
+    gap: 20px;
+    margin-top: 50px;
     flex-wrap: wrap;
 }
 
 .support-img {
-    width: 220px; /* ajuste conforme desejar */
+    width: 220px;
     height: auto;
     border-radius: 15px;
     transition: all 0.3s ease;
@@ -206,6 +239,7 @@ body {
     box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
 }
 </style>
+
 </head>
 <body>
 
@@ -259,7 +293,6 @@ body {
         <div class="game-time">SEGUNDA - 21:15</div>
         <button class="watch-btn" onclick="openStream('https://justembeds.cfd/embed/wffwehg9yklo7k3dmabqxi70sbws5w4q','https://streamcenter.pro/embed/ch31.php')">Assistir</button>
     </div>
-    
 </div>
 
 <!-- Mensagem quando não houver jogos -->
