@@ -3,166 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <title>LEAO LIVES</title>
-  <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-E1LBQRDMS4');
-  </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5426225451250724"
-     crossorigin="anonymous"></script>
+  <title>LEÃO LIVES</title>
+  <link rel="icon" href="https://i.imgur.com/YMaai6y.png" type="image/png">
+  
   <style>
-    
-    /* Animação suave do background */
-    @keyframes bgAnimation {
-      0% { background-color: #0d0d1a; }
-      50% { background-color: #000033; }
-      100% { background-color: #0d0d1a; }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      text-align: center;
+      background: linear-gradient(-45deg, #0d002b, #00134d, #002b55, #0a0066);
+      background-size: 300% 300%;
+      animation: gradientMove 15s ease infinite;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      color: white;
-      background: linear-gradient(135deg, #0d0d1a, #000033);
-      animation: bgAnimation 15s infinite alternate;
-      transition: background 0.5s ease;
     }
 
-    img.logo {
+    .logo {
       width: 200px;
-      margin-bottom: 10px;
+      margin-top: 60px;
+      filter: drop-shadow(0 0 25px #00ffff);
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .creator {
-      margin-bottom: 30px;
+      margin-top: 10px;
       font-size: 16px;
-      font-weight: bold;
       text-transform: uppercase;
-      color: white;
+      letter-spacing: 2px;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
     }
 
-    /* Menu de esportes no estilo neon azul */
+    /* Grade dos esportes */
     .menu {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 25px;
       max-width: 1000px;
-      width: 100%;
-      margin-top: 20px;
+      width: 90%;
+      margin: 50px auto;
     }
 
     .menu a {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      text-transform: uppercase;
+      align-items: center;
+      padding: 25px 10px;
+      background: rgba(0, 0, 30, 0.7);
+      border: 2px solid #00ffff;
+      border-radius: 20px;
       text-decoration: none;
-      border-radius: 15px;
-      border: 2px solid #00FFFF;
-      color: #00FFFF;
-      background: linear-gradient(#000033, #000055);
+      color: #00ffff;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu a::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%);
+      transform: rotate(25deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .menu a:hover::before {
+      opacity: 1;
     }
 
     .menu a:hover {
-      box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
     }
 
-    /* Ajuste das imagens para altura uniforme */
-    .menu a img {
-      width: 100px;
-      max-height: 80px;
+    .menu img {
+      width: 90px;
+      height: 80px;
       object-fit: contain;
-      margin-bottom: 0;
+      margin-bottom: 8px;
     }
 
+    /* Discord */
     .support-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* distância entre as imagens */
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
+      margin-top: 10px;
+      margin-bottom: 40px;
+    }
 
-.support-img {
-    width: 220px; /* ajuste conforme desejar */
-    height: auto;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px #FF3300;
-}
+    .support-img {
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #5865f2;
+      transition: all 0.3s ease;
+    }
 
-.support-img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
-}
+    .support-img:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 30px #5865f2, 0 0 60px #5865f2;
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .logo {
+        width: 150px;
+      }
+      .menu {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .menu img {
+        width: 70px;
+        height: 60px;
+      }
+    }
   </style>
 </head>
 <body>
 
   <img class="logo" src="https://i.imgur.com/DHzY9U6.png" alt="Logo LL">
-  <div class="creator">Criado por Leão Lives</div>
 
   <div class="menu">
-    <a href="futebol.html">
-      <img src="https://images.vexels.com/media/users/3/320306/isolated/preview/01adb8fcdea1009c64532efad2fa3c10-logotipo-simbolico-do-futebol-da-copa-do-mundo.png" alt="Futebol Logo">
-    </a>
-
-    <a href="f1.html">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png" alt="F1 Logo">
-    </a>
-
-    <a href="nba.html">
-      <img src="https://cdn.freebiesupply.com/images/large/2x/nba-logo-transparent.png" alt="Basquete Logo">
-    </a>
-
-    <a href="nfl.html">
-      <img src="https://logodownload.org/wp-content/uploads/2018/06/nfl-logo.png" alt="NFL Logo">
-    </a>
-
-    <a href="ufc.html">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/2560px-UFC_Logo.svg.png" alt="UFC Logo">
-    </a>
-
-    <a href="tenis.html">
-      <img src="https://static.vecteezy.com/system/resources/previews/028/210/875/non_2x/sport-equipment-blue-tennis-racket-and-yellow-tennis-ball-sports-equipment-isolated-on-white-background-file-png.png" alt="Tênis Logo">
-    </a>
-    
-    <a href="wwe.html">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/WWE_Logo.svg/2243px-WWE_Logo.svg.png" alt="WWE/AEW Logo">
-    </a>
-
-    <a href="multistream.html">
-      <img src="https://i.imgur.com/45lKOXE.png" alt="Multi Stream Logo">
-    </a>
-
-    <a href="mais-esportes.html">
-      <span style="font-size: 40px; font-weight: bold; color: #00FFFF;">+</span>
-    </a>
+    <a href="futebol.html"><img src="https://images.vexels.com/media/users/3/320306/isolated/preview/01adb8fcdea1009c64532efad2fa3c10-logotipo-simbolico-do-futebol-da-copa-do-mundo.png" alt="Futebol"></a>
+    <a href="f1.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png" alt="F1"></a>
+    <a href="nba.html"><img src="https://cdn.freebiesupply.com/images/large/2x/nba-logo-transparent.png" alt="NBA"></a>
+    <a href="nfl.html"><img src="https://logodownload.org/wp-content/uploads/2018/06/nfl-logo.png" alt="NFL"></a>
+    <a href="ufc.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/2560px-UFC_Logo.svg.png" alt="UFC"></a>
+    <a href="tenis.html"><img src="https://static.vecteezy.com/system/resources/previews/028/210/875/non_2x/sport-equipment-blue-tennis-racket-and-yellow-tennis-ball-sports-equipment-isolated-on-white-background-file-png.png" alt="Tênis"></a>
+    <a href="wwe.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/WWE_Logo.svg/2243px-WWE_Logo.svg.png" alt="WWE"></a>
+    <a href="multistream.html"><img src="https://i.imgur.com/45lKOXE.png" alt="Multi Stream"></a>
+    <a href="mais-esportes.html"><span style="font-size:40px;font-weight:bold;">+</span></a>
   </div>
 
   <div class="support-links">
-  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
-    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
-  </a>
-</div>
+    <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+      <img src="https://i.imgur.com/31P8ZR3.png" alt="Discord" class="support-img">
+    </a>
+  </div>
 
 </body>
 </html>
