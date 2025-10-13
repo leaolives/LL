@@ -8,20 +8,17 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-E1LBQRDMS4');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-E1LBQRDMS4');
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5426225451250724"
-     crossorigin="anonymous"></script>    
 <style>
 @keyframes bgAnimation {
     0% { background-color: #0d0d1a; }
     50% { background-color: #000033; }
     100% { background-color: #0d0d1a; }
 }
-
 body {
     font-family: Arial, sans-serif;
     color: white;
@@ -36,8 +33,6 @@ body {
     animation: bgAnimation 15s infinite alternate;
     transition: background 0.5s ease;
 }
-
-/* Menu azul neon */
 .menu {
     display: flex;
     flex-wrap: wrap;
@@ -45,7 +40,6 @@ body {
     gap: 10px;
     margin-bottom: 30px;
 }
-
 .menu a {
     padding: 10px 20px;
     text-decoration: none;
@@ -57,13 +51,10 @@ body {
     background: linear-gradient(#000033, #000055);
     transition: all 0.3s ease;
 }
-
 .menu a:hover {
     box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
     transform: translateY(-2px);
 }
-
-/* Grid de eventos */
 .events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -72,48 +63,59 @@ body {
     max-width: 1200px;
 }
 
-/* Card do evento */
-.event-card {
+/* PPV separado — compacto e centralizado */
+.ppv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit);
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.event-card, .ppv-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     background: linear-gradient(#000033, #000055);
-    border: 2px solid #FF3300; /* Vermelho neon */
     border-radius: 15px;
     padding: 10px;
     transition: all 0.3s ease;
     cursor: pointer;
 }
-
+.event-card {
+    border: 2px solid #FF3300;
+}
 .event-card:hover {
     box-shadow: 0 0 15px #FF3300, 0 0 30px #FF3300, 0 0 45px #FF3300;
     transform: translateY(-3px);
 }
-
-.event-card img {
+.ppv-card {
+    border: 2px solid #FFD700;
+    background: linear-gradient(#330000, #660000);
+}
+.ppv-card:hover {
+    box-shadow: 0 0 20px #FFD700, 0 0 40px #FF3300;
+    transform: translateY(-3px);
+}
+.event-card img, .ppv-card img {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
 }
-
-.event-card .event-title {
+.event-time {
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
-
-.event-card .event-time {
+    color: #FF3300;
+    text-shadow: 0 0 5px #FF3300;
     margin-bottom: 10px;
 }
-
-.event-card .event-time {
-    font-size: 18px; /* Ajuste para o tamanho que quiser */
-    font-weight: bold; /* Destaca o horário */
-    color: #FF3300; /* Vermelho neon */
-    text-shadow: 0 0 5px #FF3300; /* Efeito neon mais suave */
-    margin-bottom: 10px;
+.ppv-card .event-time {
+    color: #FFD700;
+    text-shadow: 0 0 8px #FF3300;
+    font-size: 20px;
 }
-
 .watch-btn {
     margin-top: auto;
     padding: 10px 15px;
@@ -125,19 +127,11 @@ body {
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: auto;
-    max-width: none;
-    text-align: center;
-    font-size: 15px;
-    white-space: nowrap;
 }
-
 .watch-btn:hover {
     box-shadow: 0 0 8px #FF3300, 0 0 16px #FF3300, 0 0 24px #FF3300;
     transform: translateY(-2px);
 }
-
-/* Iframe acima da grade */
 #iframeContainer {
     width: 100%;
     max-width: 1000px;
@@ -147,104 +141,53 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 #iframeContainer iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
-
-/* AO VIVO vermelho para eventos semanais */
 .live-now-red {
     color: #FF3300;
     font-weight: bold;
     animation: pulse-red 1s infinite alternate;
 }
-
-/* AO VIVO dourado para PPV */
 .live-now-gold {
     color: #FFD700;
     font-weight: bold;
     animation: pulse-gold 1s infinite alternate;
 }
-
-/* Animação de piscar vermelho */
 @keyframes pulse-red {
     from { opacity: 1; }
     to { opacity: 0.5; }
 }
-
-/* Animação de piscar dourado */
 @keyframes pulse-gold {
     from { opacity: 1; }
     to { opacity: 0.5; }
 }
-
 .support-links {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* distância entre as imagens */
+    gap: 20px;
     margin-top: 40px;
     flex-wrap: wrap;
 }
-
 .support-img {
-    width: 220px; /* ajuste conforme desejar */
+    width: 220px;
     height: auto;
     border-radius: 15px;
     transition: all 0.3s ease;
     box-shadow: 0 0 20px #FF3300;
 }
-
 .support-img:hover {
     transform: scale(1.05);
     box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
-}
-
-.ppv-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 800px;
-}
-
-.ppv-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(#330000, #660000);
-    border: 2px solid #FFD700;
-    border-radius: 15px;
-    padding: 10px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.ppv-card:hover {
-    box-shadow: 0 0 20px #FFD700, 0 0 40px #FF3300;
-    transform: translateY(-3px);
-}
-
-.ppv-card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.ppv-card .event-time {
-    font-size: 20px; /* Aumente para o tamanho que desejar */
-    font-weight: bold; /* Deixa mais destacado */
-    color: #FFD700; /* Mantém a cor dourada neon */
-    text-shadow: 0 0 8px #FF3300; /* Adiciona efeito neon */
-    margin-bottom: 10px;
 }
 </style>
 </head>
 <body>
 
-<!-- Menu -->
+<!-- MENU -->
 <div class="menu">
     <a href="index.html">Início</a>
     <a href="futebol.html">Futebol</a>
@@ -252,39 +195,34 @@ body {
     <a href="nba.html">NBA</a>
     <a href="nfl.html">NFL</a>
     <a href="ufc.html">UFC</a>
-    <a href="tenis.html">TÊNIS</a>
+    <a href="tenis.html">Tênis</a>
     <a href="multistream.html">Multi Stream</a>
 </div>
 
 <div id="iframeMessage" style="display:none; margin-top:15px; font-weight:bold; color:#FF3300; font-size:18px;">
     A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
 </div>
-
-<!-- Iframe -->
 <div id="iframeContainer"></div>
 
-<!-- Seção PPV -->
-<h2 style="margin-top:10px; color:#FFD700; text-shadow:0 0 10px #FF3300;">⬇ EVENTOS ESPECIAIS / PPV ⬇</h2>
-
+<!-- PPV -->
+<h2 style="color:#FFD700;text-shadow:0 0 10px #FF3300;">⬇ EVENTOS ESPECIAIS / PPV ⬇</h2>
 <div class="ppv-grid">
-    <!-- PPV -->
-    <div class="ppv-card" data-time="2025-10-11T09:00:00" data-remove="true">
-        <img src="https://pbs.twimg.com/media/G1xanOpW0AAqsEP?format=jpg&name=large" alt="WWE Crown Jewel">
-        <div class="event-time">SÁBADO 09:00</div>
-        <button class="watch-btn" onclick="openStream('https://justembeds.cfd/embed/c44ab36fdd91d71dc09e7f59fc3372f9','https://justembeds.cfd/embed/c44ab36fdd91d71dc09e7f59fc3372f9')">Assistir</button>
+    <div class="ppv-card" data-time="2025-10-18T20:00:00" data-remove="true">
+        <img src="https://static.wixstatic.com/media/815952_c4d3049265fa446fae7f5c42599f35f6~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_90/AEW_Wrestledream_2025-X-TICKETS.jpg" alt="WWE Crown Jewel">
+        <div class="event-time">SÁBADO 20:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/wwe/crown1','https://streamcenter.pro/embed/ch1.php')">Assistir</button>
     </div>
 </div>
 
-<h2 style="margin-top:10px; color:#FF3300; text-shadow:0 0 10px #FF3300;">⬇ EVENTOS SEMANAIS ⬇</h2>
-
-<!-- Grade de eventos -->
+<!-- EVENTOS SEMANAIS -->
+<h2 style="color:#FF3300;text-shadow:0 0 10px #FF3300;">⬇ EVENTOS SEMANAIS ⬇</h2>
 <div class="events-grid">
     <!-- RAW -->
-    <div class="event-card" data-time="2025-10-13T09:00:00">
+    <div class="event-card" data-time="2025-10-20T21:00:00">
         <img src="https://www.newscaststudio.com/wp-content/uploads/2024/12/raw-new-logo.jpg" alt="WWE Raw">
         <div class="event-title">Raw</div>
-        <div class="event-time">Segunda 09:00</div>
-        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/wwe/raw/25-10-13','https://streamcenter.pro/embed/ch47.php')">Assistir</button>
+        <div class="event-time">Segunda 21:00</div>
+        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/wwe/raw/25-10-20','https://streamcenter.pro/embed/ch47.php')">Assistir</button>
     </div>
 
     <!-- Smackdown -->
@@ -330,7 +268,7 @@ body {
 
 <div class="support-links">
   <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
-    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+    <img src="https://i.imgur.com/31P8ZR3.png" class="support-img" alt="Discord">
   </a>
 </div>
 
@@ -338,139 +276,61 @@ body {
 function openStream(url1, url2 = null) {
     const container = document.getElementById('iframeContainer');
     const message = document.getElementById('iframeMessage');
-
-    // Interrompe todos os iframes anteriores
-    container.querySelectorAll('iframe').forEach(f => {
-        f.src = ''; // Para o vídeo
-        f.remove(); // Remove o iframe do DOM
-    });
-
-    container.innerHTML = ''; // limpa tudo (btns antigas também)
-
-    // Cria iframe 1
+    container.innerHTML = '';
     const iframe1 = document.createElement('iframe');
     iframe1.src = url1;
-    iframe1.id = "iframeCelular";
     iframe1.allowFullscreen = true;
     iframe1.sandbox = "allow-same-origin allow-scripts allow-forms";
-    iframe1.style.width = "100%";
-    iframe1.style.height = "500px";
-    iframe1.style.border = "none";
-    iframe1.style.display = "block";
     container.appendChild(iframe1);
-
-    let iframe2;
     if (url2) {
-        iframe2 = document.createElement('iframe');
+        const iframe2 = document.createElement('iframe');
         iframe2.src = url2;
-        iframe2.id = "iframePC";
+        iframe2.style.display = 'none';
         iframe2.allowFullscreen = true;
         iframe2.sandbox = "allow-same-origin allow-scripts allow-forms";
-        iframe2.style.width = "100%";
-        iframe2.style.height = "500px";
-        iframe2.style.border = "none";
-        iframe2.style.display = "none";
         container.appendChild(iframe2);
-
-        // Botões de alternância
-        const btnContainer = document.createElement('div');
-        btnContainer.style.marginTop = "15px";
-        btnContainer.style.display = "flex";
-        btnContainer.style.gap = "10px";
-        btnContainer.style.justifyContent = "center";
-        btnContainer.style.flexWrap = "wrap";
-
-        const btn1 = document.createElement('button');
-        btn1.textContent = "Stream 1 - Celular";
-        btn1.className = "watch-btn";
-        btn1.onclick = () => {
-            iframe1.src = url1;  // Reinicia o stream 1
-            iframe2.src = '';     // Para o stream 2
-            iframe1.style.display = "block";
-            iframe2.style.display = "none";
-        };
-
-        const btn2 = document.createElement('button');
-        btn2.textContent = "Stream 2 - PC";
-        btn2.className = "watch-btn";
-        btn2.onclick = () => {
-            iframe2.src = url2;  // Reinicia o stream 2
-            iframe1.src = '';     // Para o stream 1
-            iframe1.style.display = "none";
-            iframe2.style.display = "block";
-        };
-
-        btnContainer.appendChild(btn1);
-        btnContainer.appendChild(btn2);
-        container.appendChild(btnContainer);
+        const btns = document.createElement('div');
+        btns.style.display = 'flex';
+        btns.style.gap = '10px';
+        btns.style.justifyContent = 'center';
+        const b1 = document.createElement('button');
+        const b2 = document.createElement('button');
+        b1.textContent = "Stream 1 - Celular";
+        b2.textContent = "Stream 2 - PC";
+        b1.className = b2.className = 'watch-btn';
+        b1.onclick = () => {iframe1.style.display='block';iframe2.style.display='none';iframe1.src=url1;iframe2.src='';};
+        b2.onclick = () => {iframe2.style.display='block';iframe1.style.display='none';iframe2.src=url2;iframe1.src='';};
+        btns.appendChild(b1);btns.appendChild(b2);container.appendChild(btns);
     }
-
     container.style.display = 'flex';
-    container.style.flexDirection = "column";
+    container.style.flexDirection = 'column';
     message.style.display = 'block';
-
-    // Scroll suave até o player
-    const containerTop = container.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: containerTop - 50, behavior: 'smooth' });
+    window.scrollTo({top: container.offsetTop - 50, behavior:'smooth'});
 }
-
-// === FUNÇÃO AO VIVO + REMOVER ===
-function checkEventsLive() {
-    const now = new Date();
-
-    // Eventos semanais
-    document.querySelectorAll('.event-card').forEach(card => {
-        const eventTimeAttr = card.getAttribute('data-time');
-        const timeElement = card.querySelector('.event-time');
-        if (!eventTimeAttr || !timeElement) return;
-
-        const eventTime = new Date(eventTimeAttr);
-
-        if (!timeElement.hasAttribute("data-original")) {
-            timeElement.setAttribute("data-original", timeElement.textContent);
-        }
-
-        const liveEnd = new Date(eventTime.getTime() + 3*60*60000); // 3h ao vivo
-
-        if (now >= eventTime && now < liveEnd) {
-            timeElement.textContent = "AO VIVO";
-            timeElement.classList.add("live-now-red");
-        } else {
-            timeElement.textContent = timeElement.getAttribute("data-original");
-            timeElement.classList.remove("live-now-red");
-        }
+function checkEventsLive(){
+    const now=new Date();
+    document.querySelectorAll('.event-card').forEach(c=>{
+        const t=c.getAttribute('data-time');if(!t)return;
+        const eT=new Date(t);
+        const end=new Date(eT.getTime()+3*60*60000);
+        const el=c.querySelector('.event-time');
+        if(!el.hasAttribute('data-original'))el.setAttribute('data-original',el.textContent);
+        if(now>=eT && now<end){el.textContent="AO VIVO";el.classList.add("live-now-red");}
+        else{el.textContent=el.getAttribute('data-original');el.classList.remove("live-now-red");}
     });
-
-    // PPV / eventos especiais
-    document.querySelectorAll('.ppv-card').forEach(card => {
-        const eventTimeAttr = card.getAttribute('data-time');
-        const timeElement = card.querySelector('.event-time');
-        if (!eventTimeAttr || !timeElement) return;
-
-        const eventTime = new Date(eventTimeAttr);
-
-        if (!timeElement.hasAttribute("data-original")) {
-            timeElement.setAttribute("data-original", timeElement.textContent);
-        }
-
-        const liveEndPPV = new Date(eventTime.getTime() + 290*60000); // 4h50min ao vivo PPV
-
-        if (now >= eventTime && now < liveEndPPV) {
-            timeElement.textContent = "AO VIVO";
-            timeElement.classList.add("live-now-gold");
-        } else if (card.getAttribute('data-remove') === "true" && now >= liveEndPPV) {
-            card.remove(); // remove PPV antigo
-        } else {
-            timeElement.textContent = timeElement.getAttribute("data-original");
-            timeElement.classList.remove("live-now-gold");
-        }
+    document.querySelectorAll('.ppv-card').forEach(c=>{
+        const t=c.getAttribute('data-time');if(!t)return;
+        const eT=new Date(t);
+        const end=new Date(eT.getTime()+290*60000);
+        const el=c.querySelector('.event-time');
+        if(!el.hasAttribute('data-original'))el.setAttribute('data-original',el.textContent);
+        if(now>=eT && now<end){el.textContent="AO VIVO";el.classList.add("live-now-gold");}
+        else if(c.getAttribute('data-remove')==="true" && now>=end){c.remove();}
+        else{el.textContent=el.getAttribute('data-original');el.classList.remove("live-now-gold");}
     });
 }
-
-// Executa a checagem imediatamente e a cada minuto
 checkEventsLive();
-setInterval(checkEventsLive, 60000);
+setInterval(checkEventsLive,60000);
 </script>
-
 </body>
 </html>
