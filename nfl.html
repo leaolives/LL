@@ -69,29 +69,29 @@ body {
 #iframeContainer {
     width: 100%;
     max-width: 1000px;
-    height: 520px;
-    margin: 0 auto 40px;
+    height: 600px;
+    margin: 0 auto 10px;
     display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 0 10px #00FFFF88;
+    box-shadow: 0 0 10px #FFD700;
     background: #000022;
 }
 
 #iframeContainer iframe {
     width: 100%;
     height: 100%;
-    border: none;
+    border: 10px;
 }
 
 /* Mensagem abaixo do iframe */
 #iframeMessage {
-    margin-top: 5px;
+    margin-top: 10px;
     font-weight: bold;
-    color: #FF3300;
+    color: #FFD700;
     font-size: 18px;
 }
 
@@ -193,7 +193,30 @@ body {
 
 /* Botões de opções de stream dentro do iframe */
 #iframeContainer .watch-btn {
-    margin: 0;
+    margin: 8px;
+    display: inline-flex; /* mantém alinhado lado a lado e centraliza o texto */
+    justify-content: center;
+    align-items: center;
+
+    /* Aqui você controla manualmente: */
+    width: 155px;   /* 👈 ajuste livre */
+    height: 40px;   /* 👈 ajuste livre */
+    font-size: 14px; /* 👈 ajuste livre */
+    border-radius: px; /* 👈 ajuste livre */
+
+    border: 2px solid #ff3300;
+    background-color: transparent;
+    color: #ff3300;
+    white-space: nowrap; /* impede quebra de linha */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Efeito hover opcional */
+#iframeContainer .watch-btn:hover {
+    background-color: #ff3300;
+    color: #000;
+    box-shadow: 0 0 10px #ff3300;
 }
 
 /* Grid especial RedZone / NFL Network */
@@ -237,6 +260,54 @@ body {
     transform: scale(1.05);
     box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
 }
+
+/* Container que agrupa o vídeo e o chat */
+.stream-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 15px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* empilha no celular */
+}
+
+/* Iframe principal */
+.stream-video {
+  flex: 2;
+  min-width: 350px;
+  height: 520px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000022;
+  box-shadow: 0 0 10px #00FFFF88;
+}
+
+/* Chat lateral */
+.stream-chat {
+  flex: 1;
+  min-width: 300px;
+  height: 520px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #FF3300;
+  background: #000;
+}
+
+/* Responsividade: no celular, empilha */
+@media (max-width: 900px) {
+  .stream-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stream-video, .stream-chat {
+    width: 100%;
+    max-width: 1000px;
+    height: 480px;
+  }
+}
 </style>
 
 </head>
@@ -254,13 +325,12 @@ body {
     <a href="multistream.html">Multi Stream</a>
 </div>
 
+<!-- Iframe -->
+<div id="iframeContainer"></div>
 <!-- Mensagem abaixo do iframe -->
 <div id="iframeMessage" style="display:none;">
     A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
 </div>
-
-<!-- Iframe -->
-<div id="iframeContainer"></div>
 
 <!-- RedZone + NFL Network -->
 <div class="special-grid">
@@ -332,7 +402,6 @@ function filterGames() {
         }
     });
 
-    // se não houver nenhum jogo visível -> mostra a mensagem
     document.getElementById('noGamesMessage').style.display = hasVisible ? "none" : "block";
 }
 setInterval(filterGames, 60000);
@@ -347,44 +416,50 @@ function checkRedZoneLive() {
     const now = new Date();
 
     const timeDiv = redzoneCard.querySelector('.game-time');
-
-    // sempre mostra o card
     redzoneCard.style.display = "flex";
 
-    // só muda o texto para AO VIVO se estiver no horário definido
     if (now >= start && now <= end) {
         timeDiv.textContent = "AO VIVO";
         timeDiv.classList.add("live-text");
     } else {
-        timeDiv.textContent = "DOMINGO - 14:00"; // texto normal fora do horário
+        timeDiv.textContent = "DOMINGO - 14:00";
         timeDiv.classList.remove("live-text");
     }
 }
-
-// chama a cada 1 segundo
 setInterval(checkRedZoneLive, 1000);
 checkRedZoneLive();
 
-
 function openStream(url1, url2) {
     const container = document.getElementById('iframeContainer');
+    const body = document.body;
+
+    // esconde todo o resto
+    document.querySelector('.menu').style.display = 'none';
+    document.querySelectorAll('.special-grid, .games-grid, #noGamesMessage, .support-links')
+        .forEach(el => el.style.display = 'none');
+
+    // mostra o iframe isolado
+    container.style.display = 'flex';
+    container.style.flexDirection = "column";
     container.innerHTML = '';
 
+    // cria o botão voltar
+    const backBtn = document.createElement('button');
+    backBtn.textContent = "⬅Voltar";
+    backBtn.className = "watch-btn";
+    backBtn.style.marginBottom = "15px";
+    backBtn.onclick = closeStream;
+    container.appendChild(backBtn);
+
+    // cria o iframe
     const iframe = document.createElement('iframe');
     iframe.id = "mainIframe";
     iframe.src = url1;
     iframe.allowFullscreen = true;
 
-    // checa exceções
     if(url1.includes("embedstreams.top") || url1.includes("embedsports.me") || url1.includes("https://esportesembed.top") ||
        url2.includes("embedstreams.top") || url2.includes("embedsports.me") || url2.includes("https://esportesembed.top")) {
-        // exceção: sem sandbox, mas bloqueia popups e adiciona overlay
-        window.open = function() {
-            console.log("Popup bloqueado!");
-            return null;
-        };
-
-        // overlay que bloqueia clicks e some ao clicar
+        window.open = function() { console.log("Popup bloqueado!"); return null; };
         const overlay = document.createElement('div');
         overlay.style.position = 'absolute';
         overlay.style.top = '0';
@@ -396,15 +471,13 @@ function openStream(url1, url2) {
         overlay.onclick = () => overlay.remove();
         container.style.position = "relative";
         container.appendChild(overlay);
-
     } else {
-        // padrão: aplica sandbox
         iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
     }
 
     container.appendChild(iframe);
 
-    // Botões de opção de stream
+    // botões de opção
     const btnContainer = document.createElement('div');
     btnContainer.style.marginTop = "15px";
     btnContainer.style.display = "flex";
@@ -414,26 +487,33 @@ function openStream(url1, url2) {
     const btn1 = document.createElement('button');
     btn1.textContent = "Opção 1 - Celular";
     btn1.className = "watch-btn";
-    btn1.style.whiteSpace = "nowrap";
     btn1.onclick = () => { document.getElementById('mainIframe').src = url1; };
 
     const btn2 = document.createElement('button');
     btn2.textContent = "Opção 2 - PC";
     btn2.className = "watch-btn";
-    btn2.style.whiteSpace = "nowrap";
     btn2.onclick = () => { document.getElementById('mainIframe').src = url2; };
 
     btnContainer.appendChild(btn1);
     btnContainer.appendChild(btn2);
     container.appendChild(btnContainer);
 
-    container.style.display = 'flex';
-    container.style.flexDirection = "column";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
     document.getElementById('iframeMessage').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function closeStream() {
+    const container = document.getElementById('iframeContainer');
+    container.style.display = 'none';
+    container.innerHTML = '';
+
+    // restaura o restante da página
+    document.querySelector('.menu').style.display = 'flex';
+    document.querySelectorAll('.special-grid, .games-grid, .support-links')
+        .forEach(el => el.style.display = '');
+    document.getElementById('noGamesMessage').style.display = 'none';
+    document.getElementById('iframeMessage').style.display = 'none';
 }
 </script>
-
 </body>
 </html>
