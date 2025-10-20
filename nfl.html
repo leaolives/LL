@@ -435,7 +435,7 @@ function openStream(url1, url2) {
 
     // esconde todo o resto
     document.querySelector('.menu').style.display = 'none';
-    document.querySelectorAll('.special-grid, .games-grid, #noGamesMessage, .support-links')
+    document.querySelectorAll('.special-grid, .games-grid, #noGamesMessage')
         .forEach(el => el.style.display = 'none');
 
     // mostra o iframe isolado
@@ -515,5 +515,7 @@ function closeStream() {
     document.getElementById('iframeMessage').style.display = 'none';
 }
 </script>
+
+
 </body>
 </html>
