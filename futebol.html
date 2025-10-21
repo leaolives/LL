@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Futebol</title>
 <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
-<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,176 +13,186 @@
   gtag('config', 'G-E1LBQRDMS4');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5426225451250724"
-     crossorigin="anonymous"></script>  
+
 <style>
 @keyframes bgAnimation {
-    0% { background-color: #0d0d1a; }
-    50% { background-color: #000033; }
-    100% { background-color: #0d0d1a; }
+  0% { background-color: #0d0d1a; }
+  50% { background-color: #000033; }
+  100% { background-color: #0d0d1a; }
 }
 
 body {
-    font-family: Arial, sans-serif;
-    color: white;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0d0d1a, #000033);
-    animation: bgAnimation 15s infinite alternate;
-    transition: background 0.5s ease;
+  font-family: Arial, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a, #000033);
+  animation: bgAnimation 15s infinite alternate;
+  transition: background 0.5s ease;
 }
 
-/* Menu azul neon */
+/* MENU */
 .menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
 .menu a {
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #00FFFF;
-    border: 2px solid #00FFFF;
-    border-radius: 20px;
-    background: linear-gradient(#000033, #000055);
-    transition: all 0.3s ease;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
+  border-radius: 20px;
+  background: linear-gradient(#000033, #000055);
+  transition: all 0.3s ease;
 }
 
 .menu a:hover {
-    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
-    transform: translateY(-2px);
+  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF;
+  transform: translateY(-2px);
 }
 
-/* Iframe acima da grade */
+/* IFRAME CONTAINER */
 #iframeContainer {
-    width: 100%;
-    max-width: 800px;
-    height: 500px;
-    margin: 0 auto 30px;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto 30px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#iframeContainer iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+#iframeContainer iframe,
+#iframeContainer video {
+  width: 100%;
+  height: 500px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #FFD700;
 }
 
-/* Grid de jogos */
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
+/* MENSAGEM */
+#iframeMessage {
+  margin-top: 5px;
+  font-weight: bold;
+  color: #FF3300;
+  font-size: 18px;
 }
 
-/* Card do jogo */
-.game-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(#000033, #000055);
-    border: 2px solid #FF3300;
-    border-radius: 15px;
-    padding: 10px;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    box-shadow: 0 0 2px #FF3300;
-}
-
-.game-card:hover {
-    box-shadow: 0 0 12px #FF3300, 0 0 20px #FF3300;
-    transform: translateY(-3px);
-}
-
-/* Imagem dentro do card */
-.game-card img {
-    width: 100%;
-    height: auto;
-    max-height: 220px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
-
-/* Texto do card */
-.game-card .game-time {
-    font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 8px;
-}
-
-/* Botão assistir adaptativo */
+/* BOTÕES */
 .watch-btn {
-    margin-top: auto;
-    padding: 10px 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    background-color: #330000;
-    color: #FF3300;
-    border: 2px solid #FF3300;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 160px;
-    text-align: center;
+  padding: 10px 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #330000;
+  color: #FF3300;
+  border: 2px solid #FF3300;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 140px;
+  height: 40px;
 }
 
 .watch-btn:hover {
-    box-shadow: 0 0 8px #FF3300, 0 0 16px #FF3300;
-    transform: translateY(-2px);
+  box-shadow: 0 0 10px #FF3300, 0 0 20px #FF3300;
+  transform: translateY(-2px);
 }
 
-/* Estilo para a mensagem abaixo do iframe */
-#iframeMessage {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #FF3300;
-    font-size: 18px;
+#iframeContainer .watch-btn {
+    margin: 8px;
+    display: inline-flex; /* mantém alinhado lado a lado e centraliza o texto */
+    justify-content: center;
+    align-items: center;
+
+    /* Aqui você controla manualmente: */
+    width: 155px;   /* 👈 ajuste livre */
+    height: 40px;   /* 👈 ajuste livre */
+    font-size: 14px; /* 👈 ajuste livre */
+    border-radius: px; /* 👈 ajuste livre */
+
+    border: 2px solid #ff3300;
+    background-color: transparent;
+    color: #ff3300;
+    white-space: nowrap; /* impede quebra de linha */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Efeito hover opcional */
+#iframeContainer .watch-btn:hover {
+    background-color: #ff3300;
+    color: #000;
+    box-shadow: 0 0 10px #ff3300;
+}
+
+/* BOTÃO VOLTAR */
+.back-btn {
+  margin-bottom: 15px;
+  width: 110px;
+  font-size: 14px;
+}
+
+/* GRADE */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(#000033, #000055);
+  border: 2px solid #FF3300;
+  border-radius: 15px;
+  padding: 10px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.game-card:hover {
+  box-shadow: 0 0 12px #FF3300;
+  transform: translateY(-3px);
+}
+
+.game-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.game-time {
+  font-weight: bold;
+  margin-bottom: 8px; /* afasta o texto do botão */
+  color: #ffffff;
+  font-size: 16px;
 }
 
 .live-text {
-    color: #FF3300;
-    font-weight: bold;
-    text-shadow: 0 0 5px #FF3300, 0 0 10px #FF3300, 0 0 20px #FF3300;
-    animation: blink 2.9s infinite;
+  color: #FF3300;
+  font-weight: bold;
+  text-shadow: 0 0 8px #FF3300, 0 0 15px #FF3300;
+  animation: blink 3s infinite;
 }
 
-.support-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* distância entre as imagens */
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-
-.support-img {
-    width: 220px; /* ajuste conforme desejar */
-    height: auto;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px #FF3300;
-}
-
-.support-img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.4; }
 }
 
 .no-games-btn {
@@ -208,184 +217,201 @@ body {
 </head>
 <body>
 
-<!-- Menu -->
 <div class="menu">
-    <a href="index.html">Início</a>
-    <a href="nfl.html">NFL</a>
-    <a href="f1.html">F1</a>
-    <a href="nba.html">NBA</a>
-    <a href="ufc.html">UFC</a>
-    <a href="tenis.html">TÊNIS</a>
-    <a href="wwe.html">WWE - AEW</a>
-    <a href="multistream.html">Multi Stream</a>
+  <a href="index.html">Início</a>
+  <a href="nfl.html">NFL</a>
+  <a href="f1.html">F1</a>
+  <a href="nba.html">NBA</a>
+  <a href="ufc.html">UFC</a>
+  <a href="tenis.html">TÊNIS</a>
+  <a href="wwe.html">WWE - AEW</a>
+  <a href="multistream.html">Multi Stream</a>
 </div>
 
-<div id="topoTexto" style="margin-bottom:10px; font-size:20px; font-weight:bold; color:#FF3300; text-shadow: 0 0 2px #FF3300, 0 0 2px #FF3300;">
-    ⚽ JOGOS DE HOJE ⚽
+<div id="topoTexto" style="margin-bottom:10px; font-size:20px; font-weight:bold; color:#FF3300;">
+  ⚽ JOGOS DE HOJE ⚽
 </div>
 
-<!-- Mensagem abaixo do iframe -->
-<div id="iframeMessage" style="display:none;">
-    A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
-</div>
-
-<!-- Iframe -->
 <div id="iframeContainer"></div>
 
 <div id="noGamesContainer" style="display:none; margin: 50px 0; text-align: center;">
     <a href="futebol2.html" class="no-games-btn">👉 Clique aqui para ver os jogos 👈</a>
 </div>
 
-<!-- Grade de jogos -->
+<div id="iframeMessage" style="display:none;">
+  ⚠️ A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR ⚠️
+</div>
+
 <div class="games-grid">
-    <div class="game-card"
-         data-start="2025-10-07T11:15:00-03:00"
-         data-end="2025-10-07T13:25:00-03:00">
-        <img src="https://www.365scores.com/pt-br/news/magazine/wp-content/uploads/2025/10/sevilla-barcelona.jpg" alt="sevilla-barcelona">
-        <div class="game-time">DOMINGO - 11:15</div>
-        <button class="watch-btn" onclick="openStream('https://sportzonline.st/channels/bra/br3.php','https://futeboldegraca.com/player.php?id=12322')">Assistir</button>
-    </div>
+  <div class="game-card" data-start="2025-10-21T13:45:00-03:00" data-end="2025-10-21T15:55:00-03:00">
+    <img src="https://i.imgur.com/8PCAhEX.jpeg" alt="sevilla-barcelona">
+    <div class="game-time">TERÇA 13:45</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/tnt','https://streamfree.to/embed/soccer/olympiacosvsbarcelona')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T16:00:00-03:00" data-end="2025-10-21T18:10:00-03:00">
+    <img src="https://i.imgur.com/vySW78V.png" alt="inter">
+    <div class="game-time">TERÇA 16:00</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/max3','https://streamfree.to/embed/soccer/internazionalevsunionstgilloi')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T16:00:00-03:00" data-end="2025-10-21T18:10:00-03:00">
+    <img src="https://i.imgur.com/loiTRNI.png" alt="city">
+    <div class="game-time">TERÇA 16:00</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/space','https://streamfree.to/embed/soccer/manchestercityvsvillarreal')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T16:00:00-03:00" data-end="2025-10-21T18:10:00-03:00">
+    <img src="https://i.imgur.com/WU6XF6b.png" alt="borussia">
+    <div class="game-time">TERÇA 16:00</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/max2','https://streamfree.to/embed/soccer/borussiadortmundvsfck%C3%B8benhav')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T16:00:00-03:00" data-end="2025-10-21T18:10:00-03:00">
+    <img src="https://i.imgur.com/cForRuX.png" alt="psv">
+    <div class="game-time">TERÇA 16:00</div>
+    <button class="watch-btn" onclick="openStream('https://sportzonline.live/channels/bra/br2.php','https://streamfree.to/embed/soccer/napolivspsveindhoven')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T16:00:00-03:00" data-end="2025-10-21T18:10:00-03:00">
+    <img src="https://i.imgur.com/G88ibEs.png" alt="psg">
+    <div class="game-time">TERÇA 16:00</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/max1','https://streamfree.to/embed/soccer/parissaintgermainvsbayerleverk')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T16:00:00-03:00" data-end="2025-10-21T18:10:00-03:00">
+    <img src="https://i.imgur.com/GH5RKTU.png" alt="arsenal">
+    <div class="game-time">TERÇA 16:00</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/tnt','https://streamfree.to/embed/soccer/atl%C3%A9ticomadridvsarsenal')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T16:00:00-03:00" data-end="2025-10-21T18:10:00-03:00">
+    <img src="https://i.imgur.com/rnwn8bA.png" alt="benfica">
+    <div class="game-time">TERÇA 16:00</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/pt_sportv5','https://streamfree.to/embed/soccer/benficavsnewcastleunited')">Assistir</button>
+  </div>
+
+  <div class="game-card" data-start="2025-10-21T21:30:00-03:00" data-end="2025-10-21T23:45:00-03:00">
+    <img src="https://i.imgur.com/2ucfdzC.png" alt="galo">
+    <div class="game-time">TERÇA 21:30</div>
+    <button class="watch-btn" onclick="openStream('https://embedtv-4.icu/sbt','https://sportzonline.live/channels/bra/br2.php')">Assistir</button>
+  </div>
 </div>
-
-
-<div class="support-links">
-  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
-    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
-  </a>
-</div>
-
 <script>
 function filterGames() {
-    const now = new Date();
-    let anyVisible = false;
-
-    document.querySelectorAll('.game-card').forEach(game => {
-        const start = new Date(game.dataset.start);
-        const end = new Date(game.dataset.end);
-        const timeEl = game.querySelector('.game-time');
-
-        if (now > end) {
-            game.style.display = "none";
-        } else {
-            game.style.display = "flex";
-            anyVisible = true;
-
-            if (now >= start && now <= end) {
-                timeEl.textContent = "AO VIVO";
-                timeEl.classList.add("live-text");
-            } else {
-                timeEl.classList.remove("live-text");
-            }
-        }
-    });
-
+  const now = new Date();
+  let visible = false;
+  document.querySelectorAll('.game-card').forEach(g => {
+    const start = new Date(g.dataset.start);
+    const end = new Date(g.dataset.end);
+    const timeEl = g.querySelector('.game-time');
+    if (now > end) g.style.display = "none";
+    else {
+      g.style.display = "flex"; visible = true;
+      if (now >= start && now <= end) {
+        timeEl.textContent = "AO VIVO";
+        timeEl.classList.add("live-text");
+      } else timeEl.classList.remove("live-text");
+    }
+  });
     const noGamesBtn = document.getElementById('noGamesContainer');
-    const iframeContainer = document.getElementById('iframeContainer');
+const iframeContainer = document.getElementById('iframeContainer');
 
-    if (!anyVisible) {
-        noGamesBtn.style.display = 'block';
-        iframeContainer.style.display = 'none';
-    } else {
-        noGamesBtn.style.display = 'none';
-    }
+if (!visible) {  // usa a variável correta
+    noGamesBtn.style.display = 'block';
+    iframeContainer.style.display = 'none';
+} else {
+    noGamesBtn.style.display = 'none';
 }
-
-setInterval(filterGames, 60000);
-filterGames();
-
-function openStream(url1, url2) {
-    const container = document.getElementById('iframeContainer');
-    container.innerHTML = '';
-
-    function createPlayer(url) {
-        if (url.endsWith('.m3u8')) {
-            const video = document.createElement('video');
-            video.src = url;
-            video.controls = true;
-            video.autoplay = true;
-            video.style.width = '100%';
-            video.style.height = '500px';
-            return video;
-        } else {
-            const iframe = document.createElement('iframe');
-            iframe.src = url;
-            iframe.allowFullscreen = true;
-            iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
-            iframe.style.width = '100%';
-            iframe.style.height = '500px';
-            return iframe;
-        }
-    }
-
-    const player = createPlayer(url1);
-    player.id = 'mainPlayer';
-    container.appendChild(player);
-
-    // Botões de opção de stream
-    const btnContainer = document.createElement('div');
-    btnContainer.style.marginTop = "15px";
-    btnContainer.style.display = "flex";
-    btnContainer.style.gap = "10px";
-    btnContainer.style.justifyContent = "center";
-
-    const btn1 = document.createElement('button');
-    btn1.textContent = "Opção 1";
-    btn1.className = "watch-btn";
-    btn1.onclick = () => {
-        const newPlayer = createPlayer(url1);
-        newPlayer.id = 'mainPlayer';
-        container.replaceChild(newPlayer, document.getElementById('mainPlayer'));
-    };
-
-    const btn2 = document.createElement('button');
-    btn2.textContent = "Opção 2";
-    btn2.className = "watch-btn";
-    btn2.onclick = () => {
-        const newPlayer = createPlayer(url2);
-        newPlayer.id = 'mainPlayer';
-        container.replaceChild(newPlayer, document.getElementById('mainPlayer'));
-    };
-
-    btnContainer.appendChild(btn1);
-    btnContainer.appendChild(btn2);
-    container.appendChild(btnContainer);
-
-    container.style.display = 'flex';
-    container.style.flexDirection = "column";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-    document.getElementById('iframeMessage').style.display = 'block';
 }
+setInterval(filterGames, 60000); filterGames();
+
 function createPlayer(url) {
+  if (url.endsWith('.m3u8')) {
     const video = document.createElement('video');
     video.controls = true;
     video.autoplay = true;
     video.style.width = '100%';
     video.style.height = '500px';
-
-    if (Hls.isSupported() && url.endsWith('.m3u8')) {
-        const hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            video.play();
-        });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-    } else if (!url.endsWith('.m3u8')) {
-        // fallback para iframe
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-        iframe.allowFullscreen = true;
-        iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
-        iframe.style.width = '100%';
-        iframe.style.height = '500px';
-        return iframe;
-    }
-
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+    } else video.src = url;
     return video;
+  } else {
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.allowFullscreen = true;
+    iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
+    iframe.style.width = '100%';
+    iframe.style.height = '500px';
+    return iframe;
+  }
+}
+
+function openStream(url1, url2) {
+  const container = document.getElementById('iframeContainer');
+  container.innerHTML = '';
+  container.style.display = 'flex';
+  container.style.flexDirection = 'column';
+  
+  // Esconder o "JOGOS DE HOJE"
+  document.getElementById('topoTexto').style.display = 'none';
+  
+  // Botão voltar
+  const backBtn = document.createElement('button');
+  backBtn.textContent = "⬅ Voltar";
+  backBtn.className = "watch-btn back-btn";
+  backBtn.onclick = () => {
+    container.style.display = 'none';
+    container.innerHTML = '';
+    document.querySelector('.games-grid').style.display = 'grid';
+    document.getElementById('iframeMessage').style.display = 'none';
+    
+    // Mostrar o "JOGOS DE HOJE" novamente
+    document.getElementById('topoTexto').style.display = 'block';
+  };
+  container.appendChild(backBtn);
+
+  // Player inicial
+  const player = createPlayer(url1);
+  player.id = "mainPlayer";
+  container.appendChild(player);
+
+  // Botões opções
+  const btnContainer = document.createElement('div');
+  btnContainer.style.marginTop = "15px";
+  btnContainer.style.display = "flex";
+  btnContainer.style.justifyContent = "center";
+  btnContainer.style.gap = "10px";
+
+  const btn1 = document.createElement('button');
+  btn1.textContent = "Opção 1 - Celular";
+  btn1.className = "watch-btn";
+  btn1.onclick = () => {
+    const newP = createPlayer(url1);
+    newP.id = "mainPlayer";
+    container.replaceChild(newP, document.getElementById("mainPlayer"));
+  };
+
+  const btn2 = document.createElement('button');
+  btn2.textContent = "Opção 2 - PC";
+  btn2.className = "watch-btn";
+  btn2.onclick = () => {
+    const newP = createPlayer(url2);
+    newP.id = "mainPlayer";
+    container.replaceChild(newP, document.getElementById("mainPlayer"));
+  };
+
+  btnContainer.appendChild(btn1);
+  btnContainer.appendChild(btn2);
+  container.appendChild(btnContainer);
+
+  document.querySelector('.games-grid').style.display = 'none';
+  document.getElementById('iframeMessage').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
-
 </body>
 </html>
