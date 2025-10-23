@@ -123,7 +123,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* IFRAME ISOLADO (do NFL) */
+/* IFRAME ISOLADO */
 #iframeContainer {
   width: 100%;
   max-width: 1000px;
@@ -170,6 +170,21 @@ body {
   box-shadow: 0 0 10px #ff3300;
 }
 
+/* Mensagem quando não há eventos futuros */
+#noEventsMessage {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #00FFFF;
+  text-shadow: 0 0 4px #00FFFF, 0 0 8px #00FFFF;
+  display: none;
+  animation: blinkNeon 2s infinite alternate;
+}
+@keyframes blinkNeon {
+  from { opacity: 1; text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; }
+  to { opacity: 0.6; text-shadow: 0 0 3px #00FFFF; }
+}
+
 /* Discord */
 .support-links {
   display: flex;
@@ -213,7 +228,7 @@ body {
 </div>
 
 <!-- EVENTOS -->
-<div class="events-grid">
+<div class="events-grid" id="eventsGrid">
   <div class="event-card" data-time="2025-10-25T11:00:00" data-remove="true">
     <img src="https://artwork.espncdn.com/programs/f32f65f7-ac6f-4fba-804c-636c9936953c/16x9/1280x720_20251016142518.jpg" alt="PPV">
     <div class="event-title">UFC 321</div>
@@ -227,6 +242,9 @@ body {
   </div>
 </div>
 
+<!-- MENSAGEM QUANDO NÃO HÁ EVENTOS FUTUROS -->
+<div id="noEventsMessage">⚠️ Nenhum evento futuro disponível no momento. Volte mais tarde! ⚠️</div>
+
 <!-- DISCORD -->
 <div class="support-links">
   <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
@@ -236,44 +254,57 @@ body {
 
 <script>
 function checkEventsLive() {
-    const now = new Date();
-    document.querySelectorAll('.event-card').forEach(card => {
-        const eventTime = new Date(card.getAttribute('data-time'));
-        const timeElement = card.querySelector('.event-time');
+  const now = new Date();
+  const cards = document.querySelectorAll('.event-card');
+  const noEventsMsg = document.getElementById('noEventsMessage');
+  let hasFutureEvent = false;
 
-        if (now >= eventTime) {
-            timeElement.textContent = "AO VIVO";
-            timeElement.classList.add("live-now");
-        }
+  cards.forEach(card => {
+    const eventTime = new Date(card.getAttribute('data-time'));
+    const timeElement = card.querySelector('.event-time');
 
-        if (card.getAttribute('data-remove') === "true") {
-            const removeAfter = new Date(eventTime.getTime() + (7 * 60 + 50) * 60000);
-            if (now >= removeAfter) {
-                card.remove();
-            }
-        }
-    });
+    if (now >= eventTime) {
+      timeElement.textContent = "AO VIVO";
+      timeElement.classList.add("live-now");
+    } else {
+      hasFutureEvent = true; // tem evento futuro
+    }
+
+    if (card.getAttribute('data-remove') === "true") {
+      const removeAfter = new Date(eventTime.getTime() + (7 * 60 + 50) * 60000);
+      if (now >= removeAfter) {
+        card.remove();
+      }
+    }
+  });
+
+  // Mostrar mensagem apenas se não houver nenhum evento futuro
+  noEventsMsg.style.display = hasFutureEvent ? 'none' : 'block';
 }
 
 checkEventsLive();
 setInterval(checkEventsLive, 60000);
 
-/* === IFRAME ISOLADO (agora com 4 opções) === */
+/* === IFRAME ISOLADO (4 opções) === */
 function openStream(url1, url2, url3, url4) {
   const container = document.getElementById('iframeContainer');
   const message = document.getElementById('iframeMessage');
   const menu = document.querySelector('.menu');
   const events = document.querySelector('.events-grid');
   const support = document.querySelector('.support-links');
+  const noEventsMsg = document.getElementById('noEventsMessage');
 
+  // Oculta seções desnecessárias
   menu.style.display = 'none';
   events.style.display = 'none';
-  support.style.display = 'none';
+  if (noEventsMsg) noEventsMsg.style.display = 'none';
 
+  // Mostra o container isolado
   container.style.display = 'flex';
   container.style.flexDirection = 'column';
   container.innerHTML = '';
 
+  // Botão voltar
   const backBtn = document.createElement('button');
   backBtn.textContent = '⬅ Voltar';
   backBtn.className = 'watch-btn';
@@ -285,9 +316,11 @@ function openStream(url1, url2, url3, url4) {
     events.style.display = 'grid';
     support.style.display = 'flex';
     container.innerHTML = '';
+    checkEventsLive();
   };
   container.appendChild(backBtn);
 
+  // Iframe principal
   const iframe = document.createElement('iframe');
   iframe.id = 'mainIframe';
   iframe.src = url1;
@@ -295,6 +328,7 @@ function openStream(url1, url2, url3, url4) {
   iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
   container.appendChild(iframe);
 
+  // Botões de opções
   const btnContainer = document.createElement('div');
   btnContainer.style.marginTop = '15px';
   btnContainer.style.display = 'flex';
@@ -316,7 +350,19 @@ function openStream(url1, url2, url3, url4) {
   addBtn('Opção 4', url4);
 
   container.appendChild(btnContainer);
+
+  // Mostra mensagem dourada
   message.style.display = 'block';
+
+  // Exibe o support-links no final
+  support.style.display = 'flex';
+  support.style.marginTop = '30px';
+  support.style.justifyContent = 'center';
+  support.style.flexWrap = 'wrap';
+
+  // Move o bloco de suporte para o final da página (logo após o player)
+  document.body.appendChild(support);
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
