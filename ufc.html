@@ -205,6 +205,19 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 40px #FF3300;
 }
+
+/* 🔹 Correção para telas pequenas */
+@media (max-width: 600px) {
+  #iframeContainer .watch-btn {
+    width: 100%;
+    max-width: 250px;
+    font-size: 13px;
+    padding: 10px;
+  }
+  #iframeContainer div {
+    flex-wrap: wrap;
+  }
+}
 </style>
 </head>
 <body>
@@ -332,6 +345,7 @@ function openStream(url1, url2, url3, url4) {
   const btnContainer = document.createElement('div');
   btnContainer.style.marginTop = '15px';
   btnContainer.style.display = 'flex';
+  btnContainer.style.flexWrap = 'wrap'; // 🔹 garante que todas opções apareçam
   btnContainer.style.gap = '10px';
   btnContainer.style.justifyContent = 'center';
 
