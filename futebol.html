@@ -378,20 +378,25 @@ function createPlayer(url) {
       const hls = new Hls();
       hls.loadSource(url);
       hls.attachMedia(video);
-    } else video.src = url;
+    } else {
+      video.src = url;
+    }
     return video;
   } else {
     const iframe = document.createElement('iframe');
     iframe.src = url;
     iframe.allowFullscreen = true;
-
-    // 🔸 Exceção: se o link for da Disney, não aplica sandbox
-    if (!url.includes("https://embedflix.space/disney/player.php?id=")) {
-      iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
-    }
-
     iframe.style.width = '100%';
     iframe.style.height = '500px';
+
+    // ✅ Só aplica sandbox se NÃO for o link da Disney
+    if (!url.includes("https://embedflix.space/disney/player.php?id=")) {
+      iframe.setAttribute(
+        "sandbox",
+        "allow-same-origin allow-scripts allow-forms"
+      );
+    }
+
     return iframe;
   }
 }
