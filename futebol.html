@@ -384,7 +384,12 @@ function createPlayer(url) {
     const iframe = document.createElement('iframe');
     iframe.src = url;
     iframe.allowFullscreen = true;
-    iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
+
+    // 🔸 Exceção: se o link for da Disney, não aplica sandbox
+    if (!url.includes("https://embedflix.space/disney/player.php?id=")) {
+      iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
+    }
+
     iframe.style.width = '100%';
     iframe.style.height = '500px';
     return iframe;
