@@ -5,159 +5,164 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NBA</title>
 <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
-<!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-E1LBQRDMS4');
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E1LBQRDMS4');
+</script>
+
 <style>
 @keyframes bgAnimation {
-    0% { background-color: #0d0d1a; }
-    50% { background-color: #000033; }
-    100% { background-color: #0d0d1a; }
+  0% { background-color: #0d0d1a; }
+  50% { background-color: #000033; }
+  100% { background-color: #0d0d1a; }
 }
 
 body {
-    font-family: Arial, sans-serif;
-    color: white;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0d0d1a, #000033);
-    animation: bgAnimation 15s infinite alternate;
-    transition: background 0.5s ease;
+  font-family: Arial, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a, #000033);
+  animation: bgAnimation 15s infinite alternate;
 }
 
-/* Menu azul neon */
 .menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
 .menu a {
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #00FFFF;
-    border: 2px solid #00FFFF;
-    border-radius: 20px;
-    background: linear-gradient(#000033, #000055);
-    transition: all 0.3s ease;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
+  border-radius: 20px;
+  background: linear-gradient(#000033, #000055);
+  transition: all 0.3s ease;
 }
 
 .menu a:hover {
-    box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
-    transform: translateY(-2px);
-}
-
-/* Iframe acima da grade */
-#iframeContainer {
-    width: 100%;
-    max-width: 1200px;
-    height: 1000px;
-    margin: 0 auto 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#iframeContainer iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.support-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* distância entre as imagens */
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-
-.support-img {
-    width: 220px; /* ajuste conforme desejar */
-    height: auto;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px #FF3300;
-}
-
-.support-img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+  transform: translateY(-2px);
 }
 
 .back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #FF3300;
-    border: 2px solid #FF3300;
-    border-radius: 20px;
-    background: linear-gradient(#330000, #550000);
-    cursor: pointer;
-    transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #FF3300;
+  border: 2px solid #FF3300;
+  border-radius: 20px;
+  background: linear-gradient(#330000, #550000);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .back-btn:hover {
-    box-shadow: 0 0 15px #FF3300, 0 0 30px #FF3300;
-    transform: translateY(-2px);
+  box-shadow: 0 0 15px #FF3300, 0 0 30px #FF3300;
+  transform: translateY(-2px);
 }
 
+.nba-ticker {
+  width: 100%;
+  overflow: hidden;
+  background: #000033;
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.nba-ticker p {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: tickerAnim 35s linear infinite;
+  font-size: 1.1em;
+}
+
+@keyframes tickerAnim {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Apoio */
+.support-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.support-img {
+  width: 220px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
 </style>
 </head>
 <body>
 
-<!-- Menu -->
 <div class="menu">
-    <a href="index.html">Início</a>
-    <a href="futebol.html">Futebol</a>
-    <a href="f1.html">F1</a>
-    <a href="nfl.html">NFL</a>
-    <a href="ufc.html">UFC</a>
-    <a href="tenis.html">TÊNIS</a>
-    <a href="wwe.html">WWE - AEW</a>
-    <a href="multistream.html">Multi Stream</a>
+  <a href="index.html">Início</a>
+  <a href="futebol.html">Futebol</a>
+  <a href="f1.html">F1</a>
+  <a href="nfl.html">NFL</a>
+  <a href="ufc.html">UFC</a>
+  <a href="tenis.html">TÊNIS</a>
+  <a href="wwe.html">WWE - AEW</a>
+  <a href="multistream.html">Multi Stream</a>
 </div>
 
 <button class="back-btn" onclick="window.location.href='nba.html'">
-    ⬅ Voltar à agenda de jogos
+  ⬅ Voltar à agenda de jogos
 </button>
 
-<div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 900px;">
-    <iframe src="https://streamcenter.live/sports/basketball/4"
-        style="width: 100%; height: 100%; border: none;"
-        sandbox="allow-same-origin allow-scripts allow-forms"
-        allowfullscreen></iframe>
+<div class="nba-ticker">
+  <p id="jogosHoje">Carregando jogos de hoje...</p>
+</div>
 
-    <!-- Overlay para cobrir parte do iframe -->
-    <div style="
-        position: absolute;
-        top: 0; /* ou ajuste para a parte que quer cobrir */
-        left: 0;
-        width: 100%;
-        height: 148px; /* altura da área borrada */
-        backdrop-filter: blur(5px); /* efeito blur */
-        background-color: rgba(0,0,0,0.3); /* semitransparente */
-        pointer-events: none; /* permite clicar no iframe */
-    "></div>
+<div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 900px;">
+  <iframe src="https://streamcenter.live/sports/basketball/4"
+      style="width: 100%; height: 100%; border: none;"
+      sandbox="allow-same-origin allow-scripts allow-forms"
+      allowfullscreen></iframe>
+
+  <div style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 148px;
+      backdrop-filter: blur(5px);
+      background-color: rgba(0,0,0,0.3);
+      pointer-events: none;">
+  </div>
 </div>
 
 <div class="support-links">
@@ -165,6 +170,22 @@ body {
     <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
   </a>
 </div>
+
+<script>
+const agenda = {
+  1: "🏀 SEG 27/10 🏀 – Detroit Pistons x Cleveland Cavaliers 20:00 | Philadelphia 76ers x Orlando Magic 20:00 | Chicago Bulls x Atlanta Hawks 21:00 | Houston Rockets x Brooklyn Nets 21:00 | Pelicans x Boston Celtics 21:00 | San Antonio Spurs x Toronto Raptors 21:00 | Dallas Mavericks x Oklahoma City Thunder 21:30 | Utah Jazz x Phoenix Suns 22:00 | Minnesota Timberwolves x Denver Nuggets 22:30 | Golden State Warriors x Memphis Grizzlies 23:00 | Los Angeles Lakers x Portland Trail Blazers 23:30",
+  2: "🏀 TER 28/10 🏀 – Washington Wizards x Philadelphia 76ers 20:00 | Miami Heat x Charlotte Hornets 20:00 | Milwaukee Bucks x New York Knicks 21:00 | Oklahoma City Thunder x Sacramento Kings 21:00 | Golden State Warriors x Los Angeles Clippers 23:59",
+  3: "🏀 QUA 29/10 🏀 – Toronto Raptors x Houston Rockets 19:30 | Boston Celtics x Cleveland Cavaliers 20:00 | Detroit Pistons x Orlando Magics 20:00 | Brooklyn Nets x Atlanta Hawks 20:30 | Chicago Bulls x Sacramento Kings 21:00 | Dallas Mavericks x Indiana Pacers 21:30 | Denver Nuggets x New Orleans Pelicans 22:00 | Utah Jazz x Portland Trail Blazers 22:00 | Minnesota Timberwolves x Los Angeles Lakers 22:30 | Phoenix Suns x Memphis Grizzlies 23:00",
+  4: "🏀 QUI 30/10 🏀 – Charlotte Hornets x Orlando Magic 20:00 | Milwaukee Bucks x Golden State Warriors 21:00 | Oklahoma City Thunder x Washington Wizards 21:00 | San Antonio Spurs x Miami Heat 21:30",
+  5: "🏀 SEX 31/10 🏀 – Indiana Pacers x Atlanta Hawks 20:00 | Philadelphia 76ers x Boston Celtics 20:00 | Cleveland Cavaliers x Toronto Raptors 20:30 | Chicago Bulls x New York Knicks 21:00 | Memphis Grizzlies x Los Angeles Lakers 22:30 | Phoenix Suns x Utah Jazz 23:00 | Portland Trail Blazers x Denver Nuggets 23:00 | Los Angeles Clippers x Pelicans 23:30",
+  6: "🏀 SAB 01/11 🏀 – Milwaukee Bucks x Sacramento Kings 18:00 | Charlotte Hornets x Minnesota Timberwolves 19:00 | Indiana Pacers x Golden State Warriors 20:00 | Washington Wizzars x Orlando Magic 20:00 | Boston Celtics x Houston Rockets 21:00 | Detroit Pistons x Dallas Mavericks 23:00",
+  7: "🏀 DOM 02/11 🏀 – Oklahoma City Thunder x Pelicans 17:00 | Brooklyn Nets x Philadelphia 76ers 20:00 | Charlotte Hornets x Utah Jazz 20:00 | Cleveland Cavaliers x Atlanta Hawks 20:00 | Toronto Raptors x Memphis Grizzlies 20:00 | New York Knicks x Chicago Bulls 21:00 | Phoenix Suns x San Antonio Spurs 22:00 | Los Angeles Lakers x Miami Heat 23:30",
+};
+
+const hoje = new Date().getDay(); 
+const texto = agenda[hoje] || "🏀 Hoje não há jogos programados.";
+document.getElementById("jogosHoje").textContent = texto;
+</script>
 
 </body>
 </html>
