@@ -149,11 +149,12 @@ body {
     box-shadow: 0 0 15px #FF3300;
 }
 
-/* Texto do card */
 .game-card .game-time, .redzone-card .game-time {
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 16px;
+    color: #FFD700;
+    text-shadow: 0 0 6px #FFD700;
 }
 
 /* Texto AO VIVO */
@@ -169,7 +170,6 @@ body {
     25%, 75% { opacity: 0.3; }
 }
 
-/* Botão assistir */
 .watch-btn {
     padding: 10px 18px;
     font-weight: bold;
@@ -191,35 +191,32 @@ body {
     transform: translateY(-2px);
 }
 
-/* Botões de opções de stream dentro do iframe */
 #iframeContainer .watch-btn {
     margin: 8px;
-    display: inline-flex; /* mantém alinhado lado a lado e centraliza o texto */
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 
-    /* Aqui você controla manualmente: */
-    width: 155px;   /* 👈 ajuste livre */
-    height: 40px;   /* 👈 ajuste livre */
-    font-size: 14px; /* 👈 ajuste livre */
-    border-radius: px; /* 👈 ajuste livre */
+    
+    width: 155px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: px;
 
     border: 2px solid #ff3300;
     background-color: transparent;
     color: #ff3300;
-    white-space: nowrap; /* impede quebra de linha */
+    white-space: nowrap;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-/* Efeito hover opcional */
 #iframeContainer .watch-btn:hover {
     background-color: #ff3300;
     color: #000;
     box-shadow: 0 0 10px #ff3300;
 }
 
-/* Grid especial RedZone / NFL Network */
 .special-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -229,7 +226,6 @@ body {
     margin-bottom: 40px;
 }
 
-/* Mensagem sem jogos */
 #noGamesMessage {
     margin-top: 30px;
     font-size: 18px;
@@ -238,7 +234,6 @@ body {
     text-shadow: 0 0 4px #00FFFF, 0 0 8px #00FFFF;
 }
 
-/* Links de suporte */
 .support-links {
     display: flex;
     justify-content: center;
@@ -261,19 +256,6 @@ body {
     box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
 }
 
-/* Container que agrupa o vídeo e o chat */
-.stream-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 15px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-wrap: wrap; /* empilha no celular */
-}
-
-/* Iframe principal */
 .stream-video {
   flex: 2;
   min-width: 350px;
@@ -284,18 +266,6 @@ body {
   box-shadow: 0 0 10px #00FFFF88;
 }
 
-/* Chat lateral */
-.stream-chat {
-  flex: 1;
-  min-width: 300px;
-  height: 520px;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 0 10px #FF3300;
-  background: #000;
-}
-
-/* Responsividade: no celular, empilha */
 @media (max-width: 900px) {
   .stream-wrapper {
     flex-direction: column;
@@ -307,6 +277,44 @@ body {
     max-width: 1000px;
     height: 480px;
   }
+}
+
+.teams-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 0 8px #000033;
+}
+
+.team-name {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+
+.versus {
+    font-weight: bold;
+    color: #FF3300;
+    text-shadow: 0 0 8px #FF3300;
+    font-size: 18px;
 }
 </style>
 
@@ -338,10 +346,10 @@ body {
         <img src="https://static.www.nfl.com/image/private/t_editorial_landscape_12_desktop/league/tfki7njrm3y8jycbtkrx"
             alt="NFL Network Logo" style="width:200px; margin-bottom:15px; border-radius:15px;">
         <div class="game-time">NFL NETWORK</div>
-        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/prareprlcri3on2nos6upr5fujozotro','https://ava.karmakurama.com/?id=405')">ASSISTIR</button>
+        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/prareprlcri3on2nos6upr5fujozotro','https://bintv.pages.dev/?id=s6upr5fujozotro&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9wcmFyZXBybGNyaTNvbjJub3M2dXByNWZ1am96b3Rybw==')">ASSISTIR</button>
     </div>
     
-    <div class="redzone-card" id="redzone" data-start="2025-11-09T15:00:00-03:00" data-end="2025-11-09T20:00:00-03:00">
+    <div class="redzone-card" id="redzone" data-start="2025-11-16T15:00:00-03:00" data-end="2025-11-16T20:00:00-03:00">
     <img src="https://i.imgur.com/jhNuasd.png"
          alt="NFL RedZone Logo" style="width:200px; margin-bottom:15px; border-radius:15px;">
     <div class="game-time">DOMINGO - 15:00</div>
@@ -351,11 +359,314 @@ body {
 
 <!-- Grade de jogos -->
 <div class="games-grid">
-<div class="game-card" data-start="2025-11-13T22:15:00-03:00">
-        <img src="https://streamfree.to/thumbnails/football_513a8388-f124-41ac-a097-1855f8058d07_New_York_Jets_vs_New_England_P" alt="JETS">
-        <div class="game-time">QUINTA - 22:15</div>
-        <button class="watch-btn" onclick="openStream('https://streamfree.to/embed/football/bGr6vSAM_w4eEjKB7wXORA','https://streamcenter.pro/embed/ch30.php')">Assistir</button>
+<div class="game-card" data-start="2025-11-16T11:30:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/wsh.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Commanders</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/mia.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Dolphins</span>
+        </div>
     </div>
+
+    <div class="game-time">DOMINGO - 11:30</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T15:00:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/car.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Panthers</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/atl.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Falcons</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 15:00</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T15:00:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/buf.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Bills</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/tb.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Bucs</span>
+        </div>
+    </div>
+
+    <div class="game-time">QUINTA - 15:00</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T15:00:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/ten.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Titans</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/hou.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Texans</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 15:00</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T15:00:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/nyg.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Giants</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/gb.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Packers</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 15:00</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T15:00:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/min.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Vikings</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/chi.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Bears</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 15:00</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T15:00:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/pit.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Steelers</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/cin.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Bengals</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 15:00</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T15:00:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/jax.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Jaguars</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/lac.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Chargers</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 15:00</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T18:05:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/lar.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Rams</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/sea.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Seahawks</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 18:05</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T18:05:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/ari.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Cardinals</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/sf.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">49ers</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 18:05</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T18:25:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/den.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Broncos</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/kc.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Chiefs</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 18:25</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T18:25:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/cle.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Browns</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/bal.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Ravens</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 18:25</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-16T22:20:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/phi.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Eagles</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/det.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Lions</span>
+        </div>
+    </div>
+
+    <div class="game-time">DOMINGO - 22:20</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
+<div class="game-card" data-start="2025-11-17T22:15:00-03:00">
+    <div class="teams-row">
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/lv.png" alt="Time Casa" class="team-logo">
+            <span class="team-name">Raiders</span>
+        </div>
+
+        <span class="versus">X</span>
+
+        <div class="team">
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/dal.png" alt="Time Visitante" class="team-logo">
+            <span class="team-name">Cowboys</span>
+        </div>
+    </div>
+
+    <div class="game-time">SEGUNDA - 22:15</div>
+
+    <button class="watch-btn" onclick="openStream('','')">
+        Assistir
+    </button>
+</div>
+
 </div>
 
 <!-- Mensagem quando não houver jogos -->
