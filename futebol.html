@@ -397,7 +397,7 @@ body {
     <img src="https://a.espncdn.com/i/teamlogos/countries/500/kosovo.png" alt="Time 2" class="team-logo">
   </div>
   <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney11','https://sportzonline.live/channels/pt/sporttv5.php')">Assistir</button>
+  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney11','https://esportesembed.top/avai-x-remo-1')">Assistir</button>
   </div>
 
   <div class="game-card" data-start="2025-11-15T18:30:00-03:00" data-end="2025-11-15T20:35:00-03:00">
@@ -417,7 +417,7 @@ body {
     <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/2029.png" alt="Time 2" class="team-logo">
   </div>
   <div class="game-time">SÁBADO - 21:00</div>
-  <button class="watch-btn" onclick="openStream('https://embedcanais.com/sportv/','https://embedtv-5.icu/sportv')">Assistir</button>
+  <button class="watch-btn" onclick="openStream('https://embedcanais.com/premiereclubes/','https://embedtv-5.icu/sportv')">Assistir</button>
   </div>
 </div>
 
@@ -435,40 +435,49 @@ function filterGames() {
     const start = new Date(g.dataset.start);
     const end = new Date(g.dataset.end);
     const timeEl = g.querySelector('.game-time');
-    if (now > end) g.style.display = "none";
-    else {
-      g.style.display = "flex"; visible = true;
+    if (now > end) {
+      g.style.display = "none";
+    } else {
+      g.style.display = "flex";
+      visible = true;
       if (now >= start && now <= end) {
         timeEl.textContent = "AO VIVO";
         timeEl.classList.add("live-text");
-      } else timeEl.classList.remove("live-text");
+      } else {
+        timeEl.classList.remove("live-text");
+      }
     }
   });
-    const noGamesBtn = document.getElementById('noGamesContainer');
-const iframeContainer = document.getElementById('iframeContainer');
 
-if (!visible) {  // usa a variável correta
+  const noGamesBtn = document.getElementById('noGamesContainer');
+  const iframeContainer = document.getElementById('iframeContainer');
+
+  if (!visible) {
     noGamesBtn.style.display = 'block';
     iframeContainer.style.display = 'none';
-} else {
+  } else {
     noGamesBtn.style.display = 'none';
+  }
 }
-}
-setInterval(filterGames, 60000); filterGames();
+setInterval(filterGames, 60000);
+filterGames();
 
 function createPlayer(url) {
-
-  // Aviso especial
   const streamWarning = document.getElementById("streamWarning");
 
-  // Se for link streamtpmedia → ativa aviso
-  if (url.includes("streamtpmedia.com")) {
+  // 🔥 Domínios que precisam de exceção
+  const isUnsafeHost =
+    url.includes("streamtpmedia.com") ||
+    url.includes("esportesembed.top");
+
+  // Aviso especial
+  if (isUnsafeHost) {
     streamWarning.style.display = "block";
   } else {
     streamWarning.style.display = "none";
   }
 
-  // Player HLS
+  // Player HLS (.m3u8)
   if (url.endsWith('.m3u8')) {
     const video = document.createElement('video');
     video.controls = true;
@@ -479,7 +488,9 @@ function createPlayer(url) {
       const hls = new Hls();
       hls.loadSource(url);
       hls.attachMedia(video);
-    } else video.src = url;
+    } else {
+      video.src = url;
+    }
     return video;
   }
 
@@ -490,7 +501,7 @@ function createPlayer(url) {
   iframe.style.height = '500px';
   iframe.allowFullscreen = true;
 
-  if (url.includes("streamtpmedia.com")) {
+  if (isUnsafeHost) {
     iframe.removeAttribute("sandbox");
   } else {
     iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
@@ -498,7 +509,6 @@ function createPlayer(url) {
 
   return iframe;
 }
-
 
 function openStream(url1, url2) {
   const container = document.getElementById('iframeContainer');
@@ -508,7 +518,7 @@ function openStream(url1, url2) {
   
   // Esconder o "JOGOS DE HOJE"
   document.getElementById('topoTexto').style.display = 'none';
-  
+
   // Botão voltar
   const backBtn = document.createElement('button');
   backBtn.textContent = "⬅ Voltar";
@@ -518,9 +528,8 @@ function openStream(url1, url2) {
     container.innerHTML = '';
     document.querySelector('.games-grid').style.display = 'grid';
     document.getElementById('iframeMessage').style.display = 'none';
-    
-    // Mostrar o "JOGOS DE HOJE" novamente
     document.getElementById('topoTexto').style.display = 'block';
+    document.getElementById('streamWarning').style.display = 'none';
   };
   container.appendChild(backBtn);
 
