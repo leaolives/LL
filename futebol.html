@@ -272,6 +272,23 @@ body {
   ⚽ JOGOS DE HOJE ⚽
 </div>
 
+<div id="streamWarning" style="
+    display:none;
+    margin-top: 10px;
+    padding: 12px 18px;
+    background: #330000;
+    border: 2px solid #ff3300;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 0 10px #ff3300;
+    text-shadow: 0 0 5px #ff3300;
+    color: #ff3300;
+    max-width: 850px;
+">
+⚠️  Este conteúdo não é hospedado pelo nosso site. Para evitar anúncios indesejados, recomendamos usar o navegador Brave ou um AdBlock.
+</div>
+
 <div id="iframeContainer"></div>
 
 <div id="noGamesContainer" style="display:none; margin: 50px 0; text-align: center;">
@@ -330,7 +347,7 @@ body {
     <img src="https://a.espncdn.com/i/teamlogos/countries/500/aut.png" alt="Time 2" class="team-logo">
   </div>
   <div class="game-time">SÁBADO - 14:00</div>
-  <button class="watch-btn" onclick="openStream('https://sportzonline.live/channels/pt/sporttv3.php','https://sportzonline.live/channels/pt/sporttv3.php')">Assistir</button>
+  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney6','https://sportzonline.live/channels/pt/sporttv3.php')">Assistir</button>
   </div>
 
   <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
@@ -340,7 +357,7 @@ body {
     <img src="https://a.espncdn.com/i/teamlogos/countries/500/rom.png" alt="Time 2" class="team-logo">
   </div>
   <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://flixxlive.pro/live/supervariety3_english.php','https://flixxlive.pro/live/protv_romania.php')">Assistir</button>
+  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney13','https://sportzonline.live/channels/hd/hd8.php')">Assistir</button>
   </div>
 
   <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
@@ -360,7 +377,7 @@ body {
     <img src="https://a.espncdn.com/i/teamlogos/countries/500/blr.png" alt="Time 2" class="team-logo">
   </div>
   <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://bolaloca.my/player/2/43','https://sportzonline.live/channels/pt/sporttv2.php')">Assistir</button>
+  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney12','https://sportzonline.live/channels/pt/sporttv2.php')">Assistir</button>
   </div>
 
   <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
@@ -370,7 +387,7 @@ body {
     <img src="https://a.espncdn.com/i/teamlogos/countries/500/sco.png" alt="Time 2" class="team-logo">
   </div>
   <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://bolaloca.my/player/2/116','https://sportzonline.live/channels/pt/sporttv3.php')">Assistir</button>
+  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney14','https://sportzonline.live/channels/pt/sporttv3.php')">Assistir</button>
   </div>
 
   <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
@@ -380,7 +397,7 @@ body {
     <img src="https://a.espncdn.com/i/teamlogos/countries/500/kosovo.png" alt="Time 2" class="team-logo">
   </div>
   <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://bolaloca.my/player/2/117','https://sportzonline.live/channels/pt/sporttv5.php')">Assistir</button>
+  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney11','https://sportzonline.live/channels/pt/sporttv5.php')">Assistir</button>
   </div>
 
   <div class="game-card" data-start="2025-11-15T18:30:00-03:00" data-end="2025-11-15T20:35:00-03:00">
@@ -440,6 +457,18 @@ if (!visible) {  // usa a variável correta
 setInterval(filterGames, 60000); filterGames();
 
 function createPlayer(url) {
+
+  // Aviso especial
+  const streamWarning = document.getElementById("streamWarning");
+
+  // Se for link streamtpmedia → ativa aviso
+  if (url.includes("streamtpmedia.com")) {
+    streamWarning.style.display = "block";
+  } else {
+    streamWarning.style.display = "none";
+  }
+
+  // Player HLS
   if (url.endsWith('.m3u8')) {
     const video = document.createElement('video');
     video.controls = true;
@@ -452,16 +481,24 @@ function createPlayer(url) {
       hls.attachMedia(video);
     } else video.src = url;
     return video;
-  } else {
-    const iframe = document.createElement('iframe');
-    iframe.src = url;
-    iframe.allowFullscreen = true;
-    iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
-    iframe.style.width = '100%';
-    iframe.style.height = '500px';
-    return iframe;
   }
+
+  // Player iframe (com exceção)
+  const iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.style.width = '100%';
+  iframe.style.height = '500px';
+  iframe.allowFullscreen = true;
+
+  if (url.includes("streamtpmedia.com")) {
+    iframe.removeAttribute("sandbox");
+  } else {
+    iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
+  }
+
+  return iframe;
 }
+
 
 function openStream(url1, url2) {
   const container = document.getElementById('iframeContainer');
