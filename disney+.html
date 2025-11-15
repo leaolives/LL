@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futebol</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1LBQRDMS4');
+  </script>
+  <style>
+    /* Animação suave do background */
+    @keyframes bgAnimation {
+      0% { background-color: #0d0d1a; }
+      50% { background-color: #000033; }
+      100% { background-color: #0d0d1a; }
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, #0d0d1a, #000033);
+      animation: bgAnimation 15s infinite alternate;
+      transition: background 0.5s ease;
+    }
+
+    .menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.menu a {
+    padding: 12px 22px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00FFFF;
+    border: 2px solid #00FFFF;
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #000033, #000044);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 6px #00FFFF;
+}
+
+.menu a:hover {
+    box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF, 0 0 60px #00FFFF;
+    transform: translateY(-3px);
+}
+
+    h1 {
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .iframe-container {
+      width: 100%;
+      max-width: 1200px;
+      height: 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+.support-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* distância entre as imagens */
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-img {
+    width: 220px; /* ajuste conforme desejar */
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #FF3300;
+}
+
+.support-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+}
+
+.btn-voltar {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #00FFFF;
+  background: transparent;
+  border: 2px solid #00FFFF;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.btn-voltar:hover {
+  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF;
+  transform: translateY(-2px);
+}
+
+.aviso-letreiro {
+  max-width: 900px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #00FFFF;
+  background: rgba(0, 0, 30, 0.6);
+  border: 2px solid #00FFFF;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #00FFFF;
+  text-align: center;
+  line-height: 1.4;
+  backdrop-filter: blur(4px);
+}
+  </style>
+</head>
+<body>
+
+  <div class="menu">
+    <a href="index.html">Início</a>
+    <a href="futebol.html">Futebol</a>
+    <a href="f1.html">F1</a>
+    <a href="nba.html">NBA</a>
+    <a href="ufc.html">UFC</a>
+    <a href="tenis.html">TÊNIS</a>
+    <a href="wwe.html">WWE - AEW</a>
+    <a href="hbomax.html">HBO MAX</a>
+    <a href="multistream.html">Multi Stream</a>
+</div>
+
+  <div class="aviso-letreiro">
+  ⚠️ Este conteúdo não é hospedado pelo nosso site.
+  Para evitar anúncios indesejados, recomendamos usar o navegador <b>Brave</b> ou um <b>AdBlock</b>.
+</div>
+
+
+  <button class="btn-voltar" onclick="window.location.href='disney+.html'">
+  ⬅ Voltar
+</button>
+
+  <div class="iframe-container">
+    <iframe
+      src="https://embedflix.gold/disney/"
+      allow="encrypted-media"
+      allowfullscreen
+      frameborder="0"
+      scrolling="yes">
+    </iframe>
+  </div>
+
+  <div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+</body>
+</html>
