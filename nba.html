@@ -141,14 +141,24 @@ body {
   <a href="multistream.html">Multi Stream</a>
 </div>
 
-<button class="back-btn" onclick="window.location.href='nba.html'">
-  ⬅ Voltar à agenda de jogos
-</button>
-
 <div class="nba-ticker">
   <p id="jogosHoje">Carregando jogos de hoje...</p>
 </div>
 
+  <p style="
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #00FFFF;
+    text-shadow: 0 0 10px #00FFFF;
+">
+  ⬇️ Desça a página para ver os jogos de hoje ⬇️
+  </p>
+
+<button class="back-btn" onclick="window.location.href='nba.html'">
+  ⬅ Voltar
+</button>
+  
 <div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 900px;">
   <iframe id="nbaFrame" src="https://streamfree.to/"
       style="width: 100%; height: 100%; border: none;"
