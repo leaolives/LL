@@ -191,6 +191,13 @@ body {
     transform: translateY(-2px);
 }
 
+.watch-btn.active-option {
+    background-color: #FF3300;
+    color: #000;
+    box-shadow: 0 0 12px #FF3300, 0 0 22px #FF3300;
+    transform: translateY(-2px);
+}
+
 #iframeContainer .watch-btn {
     margin: 8px;
     display: inline-flex;
@@ -672,11 +679,11 @@ function filterGames() {
         const timeEl = game.querySelector('.game-time');
 
         if (now > end) {
-            game.style.display = "none"; // evento acabou
+            game.style.display = "none";
         } else {
-            hasVisible = true; // tem jogo válido
+            hasVisible = true;
             if (now >= start) {
-                timeEl.textContent = "AO VIVO"; // evento começou
+                timeEl.textContent = "AO VIVO";
                 timeEl.classList.add("live-text");
             } else {
                 timeEl.classList.remove("live-text");
@@ -714,19 +721,15 @@ checkRedZoneLive();
 
 function openStream(url1, url2) {
     const container = document.getElementById('iframeContainer');
-    const body = document.body;
 
-    // esconde todo o resto
     document.querySelector('.menu').style.display = 'none';
     document.querySelectorAll('.special-grid, .games-grid, #noGamesMessage')
         .forEach(el => el.style.display = 'none');
 
-    // mostra o iframe isolado
     container.style.display = 'flex';
     container.style.flexDirection = "column";
     container.innerHTML = '';
 
-    // cria o botão voltar
     const backBtn = document.createElement('button');
     backBtn.textContent = "⬅ Voltar";
     backBtn.className = "watch-btn";
@@ -734,14 +737,15 @@ function openStream(url1, url2) {
     backBtn.onclick = closeStream;
     container.appendChild(backBtn);
 
-    // cria o iframe
     const iframe = document.createElement('iframe');
     iframe.id = "mainIframe";
     iframe.src = url1;
     iframe.allowFullscreen = true;
 
-    if(url1.includes("embedstreams.top") || url1.includes("embedsports.me") || url1.includes("https://esportesembed.top") ||
-       url2.includes("embedstreams.top") || url2.includes("embedsports.me") || url2.includes("https://esportesembed.top")) {
+    if(
+        url1.includes("embedstreams.top") || url1.includes("embedsports.me") || url1.includes("https://esportesembed.top") ||
+        url2.includes("embedstreams.top") || url2.includes("embedsports.me") || url2.includes("https://esportesembed.top")
+    ) {
         window.open = function() { console.log("Popup bloqueado!"); return null; };
         const overlay = document.createElement('div');
         overlay.style.position = 'absolute';
@@ -760,7 +764,6 @@ function openStream(url1, url2) {
 
     container.appendChild(iframe);
 
-    // botões de opção
     const btnContainer = document.createElement('div');
     btnContainer.style.marginTop = "15px";
     btnContainer.style.display = "flex";
@@ -770,12 +773,28 @@ function openStream(url1, url2) {
     const btn1 = document.createElement('button');
     btn1.textContent = "Opção 1";
     btn1.className = "watch-btn";
-    btn1.onclick = () => { document.getElementById('mainIframe').src = url1; };
 
     const btn2 = document.createElement('button');
     btn2.textContent = "Opção 2";
     btn2.className = "watch-btn";
-    btn2.onclick = () => { document.getElementById('mainIframe').src = url2; };
+
+    function setActiveButton(active, other) {
+        active.classList.add('active-option');
+        other.classList.remove('active-option');
+    }
+
+    btn1.onclick = () => {
+        document.getElementById('mainIframe').src = url1;
+        setActiveButton(btn1, btn2);
+    };
+
+    btn2.onclick = () => {
+        document.getElementById('mainIframe').src = url2;
+        setActiveButton(btn2, btn1);
+    };
+
+    // Ao abrir, já começa na Opção 1 marcada
+    setActiveButton(btn1, btn2);
 
     btnContainer.appendChild(btn1);
     btnContainer.appendChild(btn2);
@@ -790,7 +809,6 @@ function closeStream() {
     container.style.display = 'none';
     container.innerHTML = '';
 
-    // restaura o restante da página
     document.querySelector('.menu').style.display = 'flex';
     document.querySelectorAll('.special-grid, .games-grid, .support-links')
         .forEach(el => el.style.display = '');
@@ -798,7 +816,5 @@ function closeStream() {
     document.getElementById('iframeMessage').style.display = 'none';
 }
 </script>
-
-
 </body>
 </html>
