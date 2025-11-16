@@ -63,7 +63,6 @@ body {
     max-width: 1200px;
 }
 
-/* PPV separado — compacto e centralizado */
 .ppv-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit);
@@ -132,6 +131,14 @@ body {
     box-shadow: 0 0 8px #FF3300, 0 0 16px #FF3300, 0 0 24px #FF3300;
     transform: translateY(-2px);
 }
+
+.watch-btn.active-option {
+    background-color: #FF3300;
+    color: #000;
+    box-shadow: 0 0 12px #FF3300, 0 0 22px #FF3300;
+    transform: translateY(-2px);
+}
+
 #iframeContainer {
     width: 100%;
     max-width: 1000px;
@@ -140,6 +147,7 @@ body {
     display: none;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 #iframeContainer iframe {
     width: 100%;
@@ -183,11 +191,30 @@ body {
     transform: scale(1.05);
     box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
 }
+
+.live-section {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 20px;
+}
+.live-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #FFD700;
+    text-shadow: 0 0 10px #FF3300, 0 0 20px #FF3300;
+}
+.live-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+}
 </style>
 </head>
 <body>
 
-<!-- MENU -->
 <div class="menu">
     <a href="index.html">Início</a>
     <a href="futebol.html">Futebol</a>
@@ -199,70 +226,60 @@ body {
     <a href="multistream.html">Multi Stream</a>
 </div>
 
+<div id="liveSection" class="live-section" style="display:none;">
+  <div class="live-title">⬇ AO VIVO ⬇</div>
+  <div id="liveEventsContainer" class="live-grid"></div>
+</div>
+
 <div id="iframeMessage" style="display:none; margin-top:15px; font-weight:bold; color:#FF3300; font-size:18px;">
     A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
 </div>
 <div id="iframeContainer"></div>
 
-<!-- PPV -->
-<h2 style="color:#FFD700;text-shadow:0 0 10px #FF3300;">⬇ EVENTOS ESPECIAIS / PPV ⬇</h2>
-<div class="ppv-grid">
-    <div class="ppv-card" data-time="2025-11-12T22:00:00" data-remove="true">
+<h2 id="ppvTitle" style="color:#FFD700;text-shadow:0 0 10px #FF3300;">⬇ EVENTOS ESPECIAIS / PPV ⬇</h2>
+<div id="ppvGrid" class="ppv-grid">
+    <div class="ppv-card" data-time="2025-11-16T10:00:00" data-remove="true">
         <img src="https://static.wixstatic.com/media/815952_a0e381d5f4c64f6bae5ed9f8128df87f~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_90/11-12-25-Greensboro-X2.jpg" alt="aew">
         <div class="event-time">QUARTA 22:00</div>
         <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/prlbr6thlvozlcehlbrib5cru2awoklc','https://justembeds.xyz/embed/prlbr6thlvozlcehlbrib5cru2awoklc')">Assistir</button>
     </div>
 </div>
 
-<!-- EVENTOS SEMANAIS -->
 <h2 style="color:#FF3300;text-shadow:0 0 10px #FF3300;">⬇ EVENTOS SEMANAIS ⬇</h2>
 <div class="events-grid">
-    <!-- RAW -->
-    <div class="event-card" data-time="2025-11-10T22:00:00">
+    <div class="event-card" data-time="2025-11-17T22:00:00">
         <img src="https://www.newscaststudio.com/wp-content/uploads/2024/12/raw-new-logo.jpg" alt="WWE Raw">
         <div class="event-title">Raw</div>
         <div class="event-time">Segunda 22:00</div>
-        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/wwe/raw/25-11-10','https://streamcenter.pro/embed/ch48.php')">Assistir</button>
+        <button class="watch-btn" onclick="openStream('https://streamcenter.pro/embed/ch48.php','https://streamcenter.pro/embed/ch48.php')">Assistir</button>
     </div>
 
-    <!-- Smackdown -->
-    <div class="event-card" data-time="2025-11-14T22:00:00">
+    <div class="event-card" data-time="2025-11-21T22:00:00">
         <img src="https://statico.profootballnetwork.com/wp-content/uploads/2025/06/12221114/what-expect-wwe-smackdown-june-06-13-25.jpg" alt="WWE Smackdown">
         <div class="event-title">Smackdown</div>
         <div class="event-time">Sexta 22:00</div>
-        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/probiniboc7ltizegevusplstaclmlbr','https://ava.karmakurama.com/?id=343')">Assistir</button>
+        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/probiniboc7ltizegevusplstaclmlbr','https://justembeds.xyz/embed/probiniboc7ltizegevusplstaclmlbr')">Assistir</button>
     </div>
 
-    <!-- Nxt -->
-    <div class="event-card" data-time="2025-11-11T22:00:00">
+    <div class="event-card" data-time="2025-11-18T22:00:00">
         <img src="https://media.sescoops.com/uploads/2024/12/wwe-nxt.jpg" alt="WWE NXT">
         <div class="event-title">NXT</div>
         <div class="event-time">Terça 22:00</div>
-        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/szbo55s91rn5itcxm7760dkw3r8yiexy','https://bintv.pages.dev/?id=7760dkw3r8yiexy&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9zemJvNTVzOTFybjVpdGN4bTc3NjBka3czcjh5aWV4eQ==')">Assistir</button>
+        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/szbo55s91rn5itcxm7760dkw3r8yiexy','https://justembeds.xyz/embed/szbo55s91rn5itcxm7760dkw3r8yiexy')">Assistir</button>
     </div>
 
-    <!-- Dynamite -->
     <div class="event-card" data-time="2025-11-19T22:00:00">
         <img src="https://static.wixstatic.com/media/815952_4d9aff75fc6147aca61c95f2e6e74589~mv2.jpg/v1/fill/w_1920,h_1080,al_c/815952_4d9aff75fc6147aca61c95f2e6e74589~mv2.jpg" alt="AEW Dynamite">
         <div class="event-title">AEW Dynamite</div>
         <div class="event-time">Quarta 22:00</div>
-        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/prlbr6thlvozlcehlbrib5cru2awoklc','https://bintv.pages.dev/?id=evusplstaclmlbr&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9wcm9iaW5pYm9jN2x0aXplZ2V2dXNwbHN0YWNsbWxicg==')">Assistir</button>
+        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/prlbr6thlvozlcehlbrib5cru2awoklc','https://bintv.pages.dev/?id=brib5cru2awoklc&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9wcmxicjZ0aGx2b3psY2VobGJyaWI1Y3J1MmF3b2tsYw==')">Assistir</button>
     </div>
     
-    <!-- Collision -->
-    <div class="event-card" data-time="2025-11-15T22:00:00">
+    <div class="event-card" data-time="2025-11-22T22:00:00">
         <img src="https://static.wixstatic.com/media/815952_6a8d61168d8c4480a8416ed11118f00a~mv2.jpg/v1/fill/w_1920,h_1080,al_c/815952_6a8d61168d8c4480a8416ed11118f00a~mv2.jpg" alt="AEW Collision">
         <div class="event-title">AEW Collision</div>
         <div class="event-time">Sábado 22:00</div>
-        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/qibemas7lswithlwodu4ozablj8zuno4','https://ava.karmakurama.com/?id=338')">Assistir</button>
-    </div>
-
-    <!-- TNA -->
-    <div class="event-card" data-time="2025-11-20T22:00:00">
-        <img src="https://i.ytimg.com/vi/zYwPd3CRF7k/maxresdefault.jpg" alt="TNA Impact">
-        <div class="event-title">TNA Impact</div>
-        <div class="event-time">Quinta 22:00</div>
-        <button class="watch-btn" onclick="openStream('https://ppv.to/embed/tna/impact/25-11-20','https://ppv.to/embed/tna/impact/25-11-20')">Assistir</button>
+        <button class="watch-btn" onclick="openStream('https://justembeds.xyz/embed/qibemas7lswithlwodu4ozablj8zuno4','https://bintv.pages.dev/?id=du4ozablj8zuno4&data=aHR0cHM6Ly9qdXN0ZW1iZWRzLnh5ei9lbWJlZC9xaWJlbWFzN2xzd2l0aGx3b2R1NG96YWJsajh6dW5vNA==')">Assistir</button>
     </div>
 </div>
 
@@ -277,11 +294,20 @@ function openStream(url1, url2 = null) {
     const container = document.getElementById('iframeContainer');
     const message = document.getElementById('iframeMessage');
     container.innerHTML = '';
+
     const iframe1 = document.createElement('iframe');
     iframe1.src = url1;
     iframe1.allowFullscreen = true;
     iframe1.sandbox = "allow-same-origin allow-scripts allow-forms";
     container.appendChild(iframe1);
+
+    let activeBtn = null;
+    function setActiveButton(btn) {
+        if (activeBtn) activeBtn.classList.remove('active-option');
+        activeBtn = btn;
+        if (activeBtn) activeBtn.classList.add('active-option');
+    }
+
     if (url2) {
         const iframe2 = document.createElement('iframe');
         iframe2.src = url2;
@@ -289,46 +315,154 @@ function openStream(url1, url2 = null) {
         iframe2.allowFullscreen = true;
         iframe2.sandbox = "allow-same-origin allow-scripts allow-forms";
         container.appendChild(iframe2);
+
         const btns = document.createElement('div');
         btns.style.display = 'flex';
         btns.style.gap = '10px';
         btns.style.justifyContent = 'center';
+        btns.style.marginTop = '10px';
+
         const b1 = document.createElement('button');
         const b2 = document.createElement('button');
         b1.textContent = "Stream 1 - Celular";
         b2.textContent = "Stream 2 - PC";
         b1.className = b2.className = 'watch-btn';
-        b1.onclick = () => {iframe1.style.display='block';iframe2.style.display='none';iframe1.src=url1;iframe2.src='';};
-        b2.onclick = () => {iframe2.style.display='block';iframe1.style.display='none';iframe2.src=url2;iframe1.src='';};
-        btns.appendChild(b1);btns.appendChild(b2);container.appendChild(btns);
+
+        b1.onclick = () => {
+            iframe1.style.display = 'block';
+            iframe2.style.display = 'none';
+            iframe1.src = url1;
+            iframe2.src = '';
+            setActiveButton(b1);
+        };
+        b2.onclick = () => {
+            iframe2.style.display = 'block';
+            iframe1.style.display = 'none';
+            iframe2.src = url2;
+            iframe1.src = '';
+            setActiveButton(b2);
+        };
+
+        btns.appendChild(b1);
+        btns.appendChild(b2);
+        container.appendChild(btns);
+
+        setActiveButton(b1);
     }
+
     container.style.display = 'flex';
     container.style.flexDirection = 'column';
     message.style.display = 'block';
     window.scrollTo({top: container.offsetTop - 50, behavior:'smooth'});
 }
+
 function checkEventsLive(){
-    const now=new Date();
-    document.querySelectorAll('.event-card').forEach(c=>{
-        const t=c.getAttribute('data-time');if(!t)return;
-        const eT=new Date(t);
-        const end=new Date(eT.getTime()+3*60*60000);
-        const el=c.querySelector('.event-time');
-        if(!el.hasAttribute('data-original'))el.setAttribute('data-original',el.textContent);
-        if(now>=eT && now<end){el.textContent="AO VIVO";el.classList.add("live-now-red");}
-        else{el.textContent=el.getAttribute('data-original');el.classList.remove("live-now-red");}
+    const now = new Date();
+    const liveSection = document.getElementById('liveSection');
+    const liveContainer = document.getElementById('liveEventsContainer');
+    const ppvGrid = document.getElementById('ppvGrid');
+    const ppvTitle = document.getElementById('ppvTitle');
+
+    let hasLive = false;
+    let hasFuturePpv = false;
+
+    if (liveContainer) {
+        liveContainer.innerHTML = '';
+    }
+
+    document.querySelectorAll('.event-card').forEach(c => {
+        const t = c.getAttribute('data-time'); 
+        if (!t) return;
+        const eT = new Date(t);
+        const end = new Date(eT.getTime() + 3 * 60 * 60000); // 3h
+
+        const el = c.querySelector('.event-time');
+        if (!el.hasAttribute('data-original')) {
+            el.setAttribute('data-original', el.textContent);
+        }
+
+        if (now >= eT && now < end) {
+            el.textContent = "AO VIVO";
+            el.classList.add("live-now-red");
+            hasLive = true;
+
+            if (liveContainer) {
+                const clone = c.cloneNode(true);
+                clone.style.display = "";
+                liveContainer.appendChild(clone);
+            }
+
+            c.style.display = "none";
+        } else {
+            el.textContent = el.getAttribute('data-original');
+            el.classList.remove("live-now-red");
+            c.style.display = "";
+        }
     });
-    document.querySelectorAll('.ppv-card').forEach(c=>{
-        const t=c.getAttribute('data-time');if(!t)return;
-        const eT=new Date(t);
-        const end=new Date(eT.getTime()+290*60000);
-        const el=c.querySelector('.event-time');
-        if(!el.hasAttribute('data-original'))el.setAttribute('data-original',el.textContent);
-        if(now>=eT && now<end){el.textContent="AO VIVO";el.classList.add("live-now-gold");}
-        else if(c.getAttribute('data-remove')==="true" && now>=end){c.remove();}
-        else{el.textContent=el.getAttribute('data-original');el.classList.remove("live-now-gold");}
+
+    document.querySelectorAll('.ppv-card').forEach(c => {
+        const t = c.getAttribute('data-time'); 
+        if (!t) return;
+        const eT = new Date(t);
+        const end = new Date(eT.getTime() + 290 * 60000); // ~4h50
+
+        const el = c.querySelector('.event-time');
+        if (!el.hasAttribute('data-original')) {
+            el.setAttribute('data-original', el.textContent);
+        }
+
+        if (now < eT) {
+            hasFuturePpv = true;
+        }
+
+        if (now >= eT && now < end) {
+            el.textContent = "AO VIVO";
+            el.classList.add("live-now-gold");
+            hasLive = true;
+
+            if (liveContainer) {
+                const clone = c.cloneNode(true);
+                clone.style.display = "";
+                liveContainer.appendChild(clone);
+            }
+
+            c.style.display = "none";
+        } else if (c.getAttribute('data-remove') === "true" && now >= end) {
+            c.remove();
+        } else if (now < eT) {
+            el.textContent = el.getAttribute('data-original');
+            el.classList.remove("live-now-gold");
+            c.style.display = "";
+        } else {
+            el.textContent = el.getAttribute('data-original');
+            el.classList.remove("live-now-gold");
+            c.style.display = "none";
+        }
     });
+
+    hasFuturePpv = false;
+    document.querySelectorAll('.ppv-card').forEach(c => {
+        const t = c.getAttribute('data-time');
+        if (!t) return;
+        const eT = new Date(t);
+        if (now < eT) hasFuturePpv = true;
+    });
+
+    if (ppvGrid && ppvTitle) {
+        if (hasFuturePpv) {
+            ppvGrid.style.display = "grid";
+            ppvTitle.style.display = "block";
+        } else {
+            ppvGrid.style.display = "none";
+            ppvTitle.style.display = "none";
+        }
+    }
+
+    if (liveSection) {
+        liveSection.style.display = hasLive ? 'block' : 'none';
+    }
 }
+
 checkEventsLive();
 setInterval(checkEventsLive,60000);
 </script>
