@@ -6,7 +6,6 @@
 <title>UFC</title>
 <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
 
-<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -15,7 +14,6 @@
   gtag('config', 'G-E1LBQRDMS4');
 </script>
 
-<!-- Clappr -->
 <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
 
 <style>
@@ -37,7 +35,6 @@ body {
   animation: bgGlow 20s infinite alternate;
 }
 
-/* Menu */
 .menu {
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +59,6 @@ body {
   transform: translateY(-3px);
 }
 
-/* Cards */
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -108,7 +104,6 @@ body {
 }
 @keyframes pulse { from {opacity:1;} to {opacity:0.5;} }
 
-/* Botão Assistir */
 .watch-btn {
   padding: 10px 18px;
   font-weight: bold;
@@ -127,7 +122,13 @@ body {
   transform: translateY(-2px);
 }
 
-/* IFRAME / PLAYER ISOLADO */
+.watch-btn.active-option {
+  background-color: #FF3300;
+  color: #000;
+  box-shadow: 0 0 12px #FF3300, 0 0 22px #FF3300;
+  transform: translateY(-2px);
+}
+
 #iframeContainer {
   width: 100%;
   max-width: 1000px;
@@ -143,7 +144,6 @@ body {
   background: #000022;
 }
 
-/* área onde vai o Clappr ou o iframe */
 #videoWrapper {
   width: 100%;
   height: 100%;
@@ -181,7 +181,6 @@ body {
   box-shadow: 0 0 10px #ff3300;
 }
 
-/* Mensagem quando não há eventos futuros */
 #noEventsMessage {
   margin-top: 30px;
   font-size: 18px;
@@ -196,7 +195,6 @@ body {
   to { opacity: 0.6; text-shadow: 0 0 3px #00FFFF; }
 }
 
-/* Discord */
 .support-links {
   display: flex;
   justify-content: center;
@@ -217,7 +215,6 @@ body {
   box-shadow: 0 0 40px #FF3300;
 }
 
-/* 🔹 Correção para telas pequenas */
 @media (max-width: 600px) {
   #iframeContainer .watch-btn {
     width: 100%;
@@ -233,7 +230,6 @@ body {
 </head>
 <body>
 
-<!-- MENU -->
 <div class="menu">
   <a href="index.html">Início</a>
   <a href="futebol.html">Futebol</a>
@@ -245,7 +241,6 @@ body {
   <a href="multistream.html">Multi Stream</a>
 </div>
 
-<!-- PLAYER ISOLADO -->
 <div id="iframeContainer">
   <div id="videoWrapper"></div>
 </div>
@@ -253,11 +248,10 @@ body {
   A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
 </div>
 
-<!-- EVENTOS -->
 <div class="events-grid" id="eventsGrid">
   <div class="event-card" data-time="2025-11-22T13:00:00" data-remove="true">
     <img src="https://s3-ap-southeast-1.amazonaws.com/ams-astro/production/images/KUFUK.jpg" alt="PPV">
-    <div class="event-title">UFC FIGHT NIGHT </div>
+    <div class="event-title">UFC FIGHT NIGHT</div>
     <div class="event-time">SÁBADO - 12:00</div>
     <button class="watch-btn" onclick="openStream(
       'https://justembeds.xyz/embed/9f0bad01fcaf20cac4be86d27e697ebe',
@@ -268,10 +262,8 @@ body {
   </div>
 </div>
 
-<!-- MENSAGEM QUANDO NÃO HÁ EVENTOS FUTUROS -->
 <div id="noEventsMessage">⚠️ Nenhum evento futuro disponível no momento. Volte mais tarde! ⚠️</div>
 
-<!-- DISCORD -->
 <div class="support-links">
   <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
     <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
@@ -295,7 +287,7 @@ function checkEventsLive() {
       timeElement.textContent = "AO VIVO";
       timeElement.classList.add("live-now");
     } else {
-      hasFutureEvent = true; // tem evento futuro
+      hasFutureEvent = true;
     }
 
     if (card.getAttribute('data-remove') === "true") {
@@ -306,14 +298,12 @@ function checkEventsLive() {
     }
   });
 
-  // Mostrar mensagem apenas se não houver nenhum evento futuro
   noEventsMsg.style.display = hasFutureEvent ? 'none' : 'block';
 }
 
 checkEventsLive();
 setInterval(checkEventsLive, 60000);
 
-/* === IFRAME / CLAPPR ISOLADO (4 opções) === */
 function openStream(url1, url2, url3, url4) {
   const container = document.getElementById('iframeContainer');
   const message = document.getElementById('iframeMessage');
@@ -323,20 +313,16 @@ function openStream(url1, url2, url3, url4) {
   const noEventsMsg = document.getElementById('noEventsMessage');
   const videoWrapper = document.getElementById('videoWrapper');
 
-  // Oculta seções desnecessárias
   menu.style.display = 'none';
   events.style.display = 'none';
   if (noEventsMsg) noEventsMsg.style.display = 'none';
 
-  // Mostra o container isolado
   container.style.display = 'flex';
   container.style.flexDirection = 'column';
 
-  // função para carregar qualquer fonte (HLS = Clappr, resto = iframe)
   function loadSource(url) {
     if (!url) return;
 
-    // limpa player anterior
     videoWrapper.innerHTML = '';
     if (clapprPlayer) {
       clapprPlayer.destroy();
@@ -374,12 +360,9 @@ function openStream(url1, url2, url3, url4) {
     }
   }
 
-  // limpa conteúdo do container (exceto o wrapper que já existe no HTML)
-  // aqui só garantimos que o wrapper está vazio
   videoWrapper.innerHTML = '';
-
-  // Botão voltar
   container.innerHTML = '';
+
   const backBtn = document.createElement('button');
   backBtn.textContent = '⬅ Voltar';
   backBtn.className = 'watch-btn';
@@ -401,10 +384,13 @@ function openStream(url1, url2, url3, url4) {
   container.appendChild(backBtn);
   container.appendChild(videoWrapper);
 
-  // carrega a primeira fonte
-  loadSource(url1);
+  let activeBtn = null;
+  function setActiveButton(btn) {
+    if (activeBtn) activeBtn.classList.remove('active-option');
+    activeBtn = btn;
+    if (activeBtn) activeBtn.classList.add('active-option');
+  }
 
-  // Botões de opções
   const btnContainer = document.createElement('div');
   btnContainer.style.marginTop = '15px';
   btnContainer.style.display = 'flex';
@@ -412,32 +398,37 @@ function openStream(url1, url2, url3, url4) {
   btnContainer.style.gap = '10px';
   btnContainer.style.justifyContent = 'center';
 
-  const addBtn = (text, url) => {
+  const addBtn = (text, url, isDefault = false) => {
     if (!url) return;
     const btn = document.createElement('button');
     btn.textContent = text;
     btn.className = 'watch-btn';
-    btn.onclick = () => loadSource(url);
+    btn.onclick = () => {
+      loadSource(url);
+      setActiveButton(btn);
+    };
     btnContainer.appendChild(btn);
+    if (isDefault) {
+      setActiveButton(btn);
+    }
   };
 
-  addBtn('Opção 1 - Celular', url1);
+  loadSource(url1);
+
+  addBtn('Opção 1 - Celular', url1, true);
   addBtn('Opção 2 - PC', url2);
   addBtn('Opção 3 - BR', url3);
   addBtn('Opção 4', url4);
 
   container.appendChild(btnContainer);
 
-  // Mostra mensagem dourada
   message.style.display = 'block';
 
-  // Exibe o support-links no final
   support.style.display = 'flex';
   support.style.marginTop = '30px';
   support.style.justifyContent = 'center';
   support.style.flexWrap = 'wrap';
 
-  // Move o bloco de suporte para o final da página (logo após o player)
   document.body.appendChild(support);
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
