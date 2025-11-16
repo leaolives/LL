@@ -51,11 +51,11 @@ body {
   border: 2px solid #00FFFF;
   border-radius: 20px;
   background: linear-gradient(#000033, #000055);
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .menu a:hover {
-  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 45px #00FFFF;
+  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF;
   transform: translateY(-2px);
 }
 
@@ -72,7 +72,7 @@ body {
   border-radius: 20px;
   background: linear-gradient(#330000, #550000);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .back-btn:hover {
@@ -80,30 +80,6 @@ body {
   transform: translateY(-2px);
 }
 
-.nba-ticker {
-  width: 100%;
-  overflow: hidden;
-  background: #000033;
-  color: #00FFFF;
-  border: 2px solid #00FFFF;
-  padding: 10px 0;
-  box-sizing: border-box;
-}
-
-.nba-ticker p {
-  display: inline-block;
-  white-space: nowrap;
-  padding-left: 100%;
-  animation: tickerAnim 35s linear infinite;
-  font-size: 1.1em;
-}
-
-@keyframes tickerAnim {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-/* Apoio */
 .support-links {
   display: flex;
   justify-content: center;
@@ -116,13 +92,40 @@ body {
 .support-img {
   width: 220px;
   border-radius: 15px;
-  transition: all 0.3s ease;
+  transition: 0.3s;
   box-shadow: 0 0 20px #FF3300;
 }
 
 .support-img:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+  box-shadow: 0 0 25px #FF3300;
+}
+
+.games-image-wrapper {
+  margin-top: 25px;
+  max-width: 550px;
+  width: 100%;
+}
+
+.games-image-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #00FFFF;
+  text-shadow: 0 0 10px #00FFFF;
+}
+
+.games-image-wrapper img {
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid #FF0000;
+  box-shadow:
+      0 0 10px #FF0000,
+      0 0 20px #FF0000,
+      0 0 35px #FF0000;
+  max-height: 750px;
+  object-fit: contain;
+  transition: 0.3s;
 }
 </style>
 </head>
@@ -141,26 +144,22 @@ body {
   <a href="multistream.html">Multi Stream</a>
 </div>
 
-<div class="nba-ticker">
-  <p id="jogosHoje">Carregando jogos de hoje...</p>
-</div>
-
-  <p style="
-    margin-top: 15px;
+<p style="
+    margin-top: 10px;
     font-size: 1.2em;
     font-weight: bold;
     color: #00FFFF;
     text-shadow: 0 0 10px #00FFFF;
 ">
-  ⬇️ Desça a página para ver os jogos ⬇️
-  </p>
+  Confira os horários dos jogos de hoje no final da página.
+</p>
 
 <button class="back-btn" onclick="window.location.href='nba.html'">
   ⬅ Voltar
 </button>
-  
-<div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 900px;">
-  <iframe id="nbaFrame" src="https://streamfree.to/"
+
+<div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 800px;">
+  <iframe id="nbaFrame" src="https://streamcenter.live/sports/basketball/4"
       style="width: 100%; height: 100%; border: none;"
       sandbox="allow-same-origin allow-scripts allow-forms"
       allowfullscreen></iframe>
@@ -177,53 +176,46 @@ body {
   </div>
 </div>
 
+<div id="gamesImageContainer" class="games-image-wrapper" style="display:none;">
+  <div class="games-image-title">
+  🖼 Jogos De Hoje - <span id="dataHoje"></span>
+</div>
+  <img id="gamesImage" src="" alt="Jogos de hoje">
+</div>
+
 <div class="support-links">
   <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
-    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+    <img src="https://i.imgur.com/31P8ZR3.png" class="support-img">
   </a>
 </div>
 
 <script>
-const agenda = {
-  1: "🏀 SEG 10/11 🏀 – Hornets x Lakers 21:00 | Pistons x Wizards 21:00 | Magic x Blazers 21:00 | Miami Heat x Cavaliers 21:30 | Bulls x Spurs 22:00 | Dallas Mavericks x Bucks 22:30 | Suns x Pelicans 23:00 | Jazz x Timberwolves 23:00 | Clippers x Hawks 00:30",
-  2: "🏀 TER 11/11 🏀 – Nets x Raptors 21:30 | Ny Knicks x Memphis Grizzlies 21:30 | OKC x GS Warriors 22:00 | 76ers x Celtics 22:00 | Jazz x Pacers 23:00 | Kings x Nuggets 01:00",
-  3: "🏀 QUA 12/11 🏀 – Hornets x Bucks 21:00 | Pistons x Bulls 21:00 | Ny Knicks x Magic 21:00 | Celtics x Memphis Grizzlies 21:30 | Miami Heat x Cavaliers 21:30 | Hockets x Wizards 22:00 | Pelicans x Blazers 22:00 | Spurs x GS Warriors 22:00 | Dallas Mavericks x Suns 22:30 | OKC x Lakers 23:30 | Kings x Hawks 23:59 | Clippers x Nuggets 00:30",
-  4: "🏀 QUI 13/11 🏀 – Cavaliers x Raptors 21:00 | Suns x Pacers 23:00 | Jazz x Hawks 23:00",
-  5: "🏀 SEX 14/11 🏀 – Ny Knicks x Miami Heat 21:00 | Magic x Nets 21:00 | Pistons x 76ers 21:30 | Hockets x Blazers 22:00 | Bucks x Hornets 22:00 | Timberwolves x Kings 22:00 | Pelicans x Lakers 22:00 | Dallas Mavericks x Clippers 22:30 | Spurs x GS Warriors 23:30",
-  6: "🏀 SAB 15/11 🏀 – Cavaliers x Memphis Grizzlies 19:00 | Hornets x OKC 21:00 | Pacers x Raptors 21:00 | Bucks x Lakers 22:00 | Timberwolves x Nuggets 22:00",
-  7: "🏀 DOM 16/11 🏀 – Celtics x Clippers 17:30 | Spurs x Kings 18:00 | Wizards x Nets 20:00 | Rockets x Magic 21:00 | Pelicans x GS Warriors 21:00 | Dallas Mavericks x Blazers 21:30 | Suns x Hawks 22:00 | Jazz x Bulls 22:00",
+const imagensJogos = {
+  1: "https://i.imgur.com/oSKPuXf.png",
+  2: "https://i.imgur.com/r4MAv6R.png",
+  3: "https://i.imgur.com/IsQEwuc.png",
+  4: "https://i.imgur.com/JMr6VlO.png",
+  5: "https://i.imgur.com/tKG2sTF.png",
+  6: "https://i.imgur.com/nHGV6V4.png",
+  0: "https://i.imgur.com/eNV2eUJ.png"
 };
 
-const hoje = new Date().getDay(); 
-const texto = agenda[hoje] || "🏀 Hoje não há jogos programados.";
-document.getElementById("jogosHoje").textContent = texto;
+const hoje = new Date().getDay();
+const imgContainer = document.getElementById('gamesImageContainer');
+const imgTag = document.getElementById('gamesImage');
+const imgSrc = imagensJogos[hoje];
 
-// Controle de scroll com base no carregamento do iframe
-window.addEventListener('load', () => {
-  const iframe = document.getElementById('nbaFrame');
-  const wrapper = document.getElementById('iframeWrapper');
-  if (!iframe || !wrapper) return;
+if (imgSrc) {
+  imgTag.src = imgSrc;
+  imgContainer.style.display = 'block';
+} else {
+  imgContainer.style.display = 'none';
+}
 
-  let firstLoad = true;
-
-  iframe.addEventListener('load', () => {
-    if (firstLoad) {
-      firstLoad = false;
-      // Primeiro carregamento: desce até o iframe
-      const y = wrapper.getBoundingClientRect().top + window.scrollY - 20;
-      window.scrollTo({
-        top: y,
-        behavior: 'smooth'
-      });
-    } else {
-      // Próximos carregamentos (quando o usuário clicar em algo no iframe): sobe
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
+const data = new Date();
+const opcoes = { day: '2-digit', month: '2-digit' };
+const dataFormatada = data.toLocaleDateString('pt-BR', opcoes);
+document.getElementById("dataHoje").textContent = dataFormatada;
 </script>
 
 </body>
