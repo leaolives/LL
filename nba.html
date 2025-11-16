@@ -150,7 +150,7 @@ body {
 </div>
 
 <div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 900px;">
-  <iframe src="https://streamfree.to/"
+  <iframe id="nbaFrame" src="https://streamfree.to/"
       style="width: 100%; height: 100%; border: none;"
       sandbox="allow-same-origin allow-scripts allow-forms"
       allowfullscreen></iframe>
@@ -187,6 +187,33 @@ const agenda = {
 const hoje = new Date().getDay(); 
 const texto = agenda[hoje] || "🏀 Hoje não há jogos programados.";
 document.getElementById("jogosHoje").textContent = texto;
+
+// Controle de scroll com base no carregamento do iframe
+window.addEventListener('load', () => {
+  const iframe = document.getElementById('nbaFrame');
+  const wrapper = document.getElementById('iframeWrapper');
+  if (!iframe || !wrapper) return;
+
+  let firstLoad = true;
+
+  iframe.addEventListener('load', () => {
+    if (firstLoad) {
+      firstLoad = false;
+      // Primeiro carregamento: desce até o iframe
+      const y = wrapper.getBoundingClientRect().top + window.scrollY - 20;
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+    } else {
+      // Próximos carregamentos (quando o usuário clicar em algo no iframe): sobe
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
 </script>
 
 </body>
