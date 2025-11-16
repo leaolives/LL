@@ -36,7 +36,6 @@ body {
   transition: background 0.5s ease;
 }
 
-/* MENU */
 .menu {
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +61,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* IFRAME CONTAINER */
 #iframeContainer {
   width: 100%;
   max-width: 850px;
@@ -82,7 +80,6 @@ body {
   box-shadow: 0 0 10px #FFD700;
 }
 
-/* MENSAGEM */
 #iframeMessage {
   margin-top: 5px;
   font-weight: bold;
@@ -90,7 +87,6 @@ body {
   font-size: 18px;
 }
 
-/* BOTÕES */
 .watch-btn {
   padding: 10px 16px;
   font-weight: bold;
@@ -111,40 +107,41 @@ body {
 }
 
 #iframeContainer .watch-btn {
-    margin: 8px;
-    display: inline-flex; /* mantém alinhado lado a lado e centraliza o texto */
-    justify-content: center;
-    align-items: center;
-
-    /* Aqui você controla manualmente: */
-    width: 155px;   /* 👈 ajuste livre */
-    height: 40px;   /* 👈 ajuste livre */
-    font-size: 14px; /* 👈 ajuste livre */
-    border-radius: px; /* 👈 ajuste livre */
-
-    border: 2px solid #ff3300;
-    background-color: transparent;
-    color: #ff3300;
-    white-space: nowrap; /* impede quebra de linha */
-    cursor: pointer;
-    transition: all 0.3s ease;
+  margin: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 155px;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 18px;
+  border: 2px solid #ff3300;
+  background-color: transparent;
+  color: #ff3300;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Efeito hover opcional */
 #iframeContainer .watch-btn:hover {
-    background-color: #ff3300;
-    color: #000;
-    box-shadow: 0 0 10px #ff3300;
+  background-color: #ff3300;
+  color: #000;
+  box-shadow: 0 0 10px #ff3300;
 }
 
-/* BOTÃO VOLTAR */
+.watch-btn.active-option {
+  background-color: #FF3300;
+  color: #000;
+  box-shadow: 0 0 12px #FF3300, 0 0 22px #FF3300;
+  transform: translateY(-2px);
+}
+
 .back-btn {
   margin-bottom: 15px;
   width: 110px;
   font-size: 14px;
 }
 
-/* GRADE */
 .games-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -172,7 +169,7 @@ body {
 
 .game-time {
   font-weight: bold;
-  margin-bottom: 8px; /* afasta o texto do botão */
+  margin-bottom: 8px;
   color: #ffffff;
   font-size: 16px;
 }
@@ -190,44 +187,44 @@ body {
 }
 
 .no-games-btn {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #FF3300;
-    background: linear-gradient(#330000, #660000);
-    border: 2px solid #FF3300;
-    border-radius: 25px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FF3300;
+  background: linear-gradient(#330000, #660000);
+  border: 2px solid #FF3300;
+  border-radius: 25px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .no-games-btn:hover {
-    box-shadow: 0 0 10px #FF3300, 0 0 20px #FF3300;
-    transform: translateY(-2px);
+  box-shadow: 0 0 10px #FF3300, 0 0 20px #FF3300;
+  transform: translateY(-2px);
 }
 
 .support-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* distância entre as imagens */
-    margin-top: 40px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
 }
 
 .support-img {
-    width: 220px; /* ajuste conforme desejar */
-    height: auto;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px #FF3300;
+  width: 220px;
+  height: auto;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px #FF3300;
 }
 
 .support-img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
+  transform: scale(1.05);
+  box-shadow: 0 0 14px #FF3300, 0 0 25px #FF3300;
 }
 
 .teams-row {
@@ -238,10 +235,14 @@ body {
   margin-bottom: 10px;
 }
 
-.team-logo{
-  width:100px;height:100px;object-fit:contain;
+.team-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
   background: rgba(0,0,0,0.25);
-  border-radius:12px; padding:0; box-shadow:0 0 8px #000033;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 0 8px #000033;
 }
 
 .vs-text {
@@ -250,7 +251,6 @@ body {
   text-shadow: 0 0 8px #FF3300;
   font-size: 18px;
 }
-
 </style>
 </head>
 <body>
@@ -290,7 +290,7 @@ body {
 <div id="iframeContainer"></div>
 
 <div id="noGamesContainer" style="display:none; margin: 50px 0; text-align: center;">
-    <a href="futebol2.html" class="no-games-btn">👉 Clique aqui para ver os jogos 👈</a>
+  <a href="futebol2.html" class="no-games-btn">👉 Clique aqui para ver os jogos 👈</a>
 </div>
 
 <div id="iframeMessage" style="display:none;">
@@ -299,124 +299,15 @@ body {
 
 <div class="games-grid">
   <div class="game-card" data-start="2025-11-15T11:00:00-03:00" data-end="2025-11-15T13:10:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/kaz.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/bel.png" alt="Time 2" class="team-logo">
+    <div class="teams-row">
+      <img src="https://a.espncdn.com/i/teamlogos/countries/500/kaz.png" alt="Time 1" class="team-logo">
+      <span class="vs-text">x</span>
+      <img src="https://a.espncdn.com/i/teamlogos/countries/500/bel.png" alt="Time 2" class="team-logo">
+    </div>
+    <div class="game-time">SÁBADO - 11:00</div>
+    <button class="watch-btn" onclick="openStream('https://embedcanais.com/espn/','https://embedtv-5.icu/espn')">Assistir</button>
   </div>
-  <div class="game-time">SÁBADO - 11:00</div>
-  <button class="watch-btn" onclick="openStream('https://embedcanais.com/espn/','https://embedtv-5.icu/espn')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T13:00:00-03:00" data-end="2025-11-15T15:10:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/205.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/654.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 13:00</div>
-  <button class="watch-btn" onclick="openStream('https://embedcanais.com/sportv/','https://embedtv-5.icu/globosp')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T14:00:00-03:00" data-end="2025-11-15T16:10:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/geo.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/esp.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 14:00</div>
-  <button class="watch-btn" onclick="openStream('https://flixxlive.pro/live/skysport7_english.php','https://embedtv-5.icu/pt_sportv1')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T14:00:00-03:00" data-end="2025-11-15T16:10:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/tur.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/bul.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 14:00</div>
-  <button class="watch-btn" onclick="openStream('https://embedcanais.com/espn/','https://embedtv-5.icu/espn')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T14:00:00-03:00" data-end="2025-11-15T16:00:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/cyp.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/aut.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 14:00</div>
-  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney6','https://sportzonline.live/channels/pt/sporttv3.php')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/bih.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/rom.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney13','https://sportzonline.live/channels/hd/hd8.php')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/sui.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/swe.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://embedcanais.com/sportv/','https://sportzonline.live/channels/bra/br1.php')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/den.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/blr.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney12','https://sportzonline.live/channels/pt/sporttv2.php')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/gre.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/sco.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney14','https://sportzonline.live/channels/pt/sporttv3.php')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T16:45:00-03:00" data-end="2025-11-15T18:45:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/svn.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/countries/500/kosovo.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 16:45</div>
-  <button class="watch-btn" onclick="openStream('https://streamtpmedia.com/global1.php?stream=disney11','https://esportesembed.top/avai-x-remo-1')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T18:30:00-03:00" data-end="2025-11-15T20:35:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/7635.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/819.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 18:30</div>
-  <button class="watch-btn" onclick="openStream('https://embedcanais.com/amazonprimevideo/','https://embedflix.gold/tv/player.php?id=prime-video-1')">Assistir</button>
-  </div>
-
-  <div class="game-card" data-start="2025-11-15T21:00:00-03:00" data-end="2025-11-15T23:10:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/2674.png" alt="Time 1" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/2029.png" alt="Time 2" class="team-logo">
-  </div>
-  <div class="game-time">SÁBADO - 21:00</div>
-  <button class="watch-btn" onclick="openStream('https://embedcanais.com/premiereclubes/','https://embedtv-5.icu/sportv')">Assistir</button>
-  </div>
+  
 </div>
 
 <div class="support-links">
@@ -462,20 +353,16 @@ filterGames();
 
 function createPlayer(url) {
   const streamWarning = document.getElementById("streamWarning");
-
-  // 🔥 Domínios que precisam de exceção
   const isUnsafeHost =
     url.includes("streamtpmedia.com") ||
     url.includes("esportesembed.top");
 
-  // Aviso especial
   if (isUnsafeHost) {
     streamWarning.style.display = "block";
   } else {
     streamWarning.style.display = "none";
   }
 
-  // Player HLS (.m3u8)
   if (url.endsWith('.m3u8')) {
     const video = document.createElement('video');
     video.controls = true;
@@ -492,7 +379,6 @@ function createPlayer(url) {
     return video;
   }
 
-  // Player iframe (com exceção)
   const iframe = document.createElement('iframe');
   iframe.src = url;
   iframe.style.width = '100%';
@@ -513,11 +399,8 @@ function openStream(url1, url2) {
   container.innerHTML = '';
   container.style.display = 'flex';
   container.style.flexDirection = 'column';
-  
-  // Esconder o "JOGOS DE HOJE"
   document.getElementById('topoTexto').style.display = 'none';
 
-  // Botão voltar
   const backBtn = document.createElement('button');
   backBtn.textContent = "⬅ Voltar";
   backBtn.className = "watch-btn back-btn";
@@ -531,12 +414,17 @@ function openStream(url1, url2) {
   };
   container.appendChild(backBtn);
 
-  // Player inicial
   const player = createPlayer(url1);
   player.id = "mainPlayer";
   container.appendChild(player);
 
-  // Botões opções
+  let activeBtn = null;
+  function setActiveButton(btn) {
+    if (activeBtn) activeBtn.classList.remove('active-option');
+    activeBtn = btn;
+    if (activeBtn) activeBtn.classList.add('active-option');
+  }
+
   const btnContainer = document.createElement('div');
   btnContainer.style.marginTop = "15px";
   btnContainer.style.display = "flex";
@@ -544,26 +432,30 @@ function openStream(url1, url2) {
   btnContainer.style.gap = "10px";
 
   const btn1 = document.createElement('button');
-  btn1.textContent = "Opção 1 - Celular";
+  btn1.textContent = "Opção 1";
   btn1.className = "watch-btn";
   btn1.onclick = () => {
     const newP = createPlayer(url1);
     newP.id = "mainPlayer";
     container.replaceChild(newP, document.getElementById("mainPlayer"));
+    setActiveButton(btn1);
   };
 
   const btn2 = document.createElement('button');
-  btn2.textContent = "Opção 2 - PC";
+  btn2.textContent = "Opção 2";
   btn2.className = "watch-btn";
   btn2.onclick = () => {
     const newP = createPlayer(url2);
     newP.id = "mainPlayer";
     container.replaceChild(newP, document.getElementById("mainPlayer"));
+    setActiveButton(btn2);
   };
 
   btnContainer.appendChild(btn1);
   btnContainer.appendChild(btn2);
   container.appendChild(btnContainer);
+
+  setActiveButton(btn1);
 
   document.querySelector('.games-grid').style.display = 'none';
   document.getElementById('iframeMessage').style.display = 'block';
