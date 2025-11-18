@@ -155,7 +155,7 @@ body {
 
 <div class="time-notice">
     ⚠️ Os horários dos jogos seguem o fuso do site externo.<br>
-    Eles estão <strong>4 horas à frente do horário BR</strong>.<br>
+    Eles estão <strong>3 horas à frente do horário BR</strong>.<br>
     ⏰ Hora atual em Brasília: <span id="br-time"></span><br>
     ⏰ Hora do site externo: <span id="site-time"></span>
 </div>
@@ -188,7 +188,7 @@ function updateTimes() {
     document.getElementById("br-time").textContent = `${brHours}:${brMinutes}:${brSeconds}`;
 
     // Hora do site externo (+4 horas)
-    const siteTime = new Date(brasiliaTime.getTime() + 4 * 60 * 60 * 1000); // adiciona 4h em ms
+    const siteTime = new Date(brasiliaTime.getTime() + 3 * 60 * 60 * 1000); // adiciona 3h em ms
     const siteHours = String(siteTime.getHours()).padStart(2, "0");
     const siteMinutes = String(siteTime.getMinutes()).padStart(2, "0");
     const siteSeconds = String(siteTime.getSeconds()).padStart(2, "0");
