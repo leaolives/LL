@@ -80,6 +80,35 @@ body {
   transform: translateY(-2px);
 }
 
+.font-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: .3s;
+}
+
+.font1 {
+  background: linear-gradient(#000033,#000055);
+  border: 2px solid #00FFFF;
+  color: #00FFFF;
+}
+
+.font1:hover {
+  box-shadow: 0 0 15px #00FFFF, 0 0 25px #00FFFF;
+}
+
+.font2 {
+  background: linear-gradient(#330000,#550000);
+  border: 2px solid #FF3300;
+  color: #FF3300;
+}
+
+.font2:hover {
+  box-shadow: 0 0 15px #FF3300, 0 0 25px #FF3300;
+}
+
 .support-links {
   display: flex;
   justify-content: center;
@@ -152,11 +181,16 @@ body {
   Confira os horários dos jogos de hoje no final da página.
 </p>
 
-<button class="back-btn" onclick="window.location.href='nba.html'">
-  ⬅ Voltar
-</button>
+<div style="margin-top: 15px; display: flex; gap: 15px;">
+  <button onclick="mudarFonte(1)" class="font-btn font1">🟦 Opção 1 (Padrão)</button>
+  <button onclick="mudarFonte(2)" class="font-btn font1">🟥 Opção 2 (Alternativa)</button>
+</div>
 
-<div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 800px;">
+<div style="margin-top: 15px;">
+  <button class="back-btn" onclick="voltarMantendoFonte()">⬅ Voltar</button>
+</div>
+
+<div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 800px; margin-top: 20px;">
   <iframe id="nbaFrame" src="https://streamcenter.live/sports/basketball/4"
       style="width: 100%; height: 100%; border: none;"
       sandbox="allow-same-origin allow-scripts allow-forms"
@@ -175,9 +209,7 @@ body {
 </div>
 
 <div id="gamesImageContainer" class="games-image-wrapper" style="display:none;">
-  <div class="games-image-title">
-  🖼 Jogos De Hoje - <span id="dataHoje"></span>
-</div>
+  <div class="games-image-title"> 🖼 Jogos De Hoje - <span id="dataHoje"></span> </div>
   <img id="gamesImage" src="" alt="Jogos de hoje">
 </div>
 
@@ -188,14 +220,29 @@ body {
 </div>
 
 <script>
+function mudarFonte(opcao) {
+    const iframe = document.getElementById("nbaFrame");
+
+    if (opcao === 1) {
+        iframe.src = "https://streamcenter.live/sports/basketball/4";
+    } 
+    else if (opcao === 2) {
+        iframe.src = "https://roxiestreams.live/nba";
+    }
+
+    setTimeout(() => {
+        window.scrollTo({ top: iframe.offsetTop - 30, behavior: "smooth" });
+    }, 300);
+}
+
 const imagensJogos = {
-  1: "https://i.imgur.com/oSKPuXf.png",
-  2: "https://i.imgur.com/r4MAv6R.png",
-  3: "https://i.imgur.com/IsQEwuc.png",
-  4: "https://i.imgur.com/JMr6VlO.png",
+  1: "https://i.imgur.com/93YQnuN.png",
+  2: "https://i.imgur.com/ehpec8d.png",
+  3: "https://i.imgur.com/WAoiW7u.png",
+  4: "https://i.imgur.com/lRHv1KX.png",
   5: "https://i.imgur.com/tKG2sTF.png",
   6: "https://i.imgur.com/nHGV6V4.png",
-  0: "https://i.imgur.com/eNV2eUJ.png"
+  0: "https://i.imgur.com/Shm3ISs.png"
 };
 
 const hoje = new Date().getDay();
@@ -206,14 +253,33 @@ const imgSrc = imagensJogos[hoje];
 if (imgSrc) {
   imgTag.src = imgSrc;
   imgContainer.style.display = 'block';
-} else {
-  imgContainer.style.display = 'none';
 }
 
 const data = new Date();
 const opcoes = { day: '2-digit', month: '2-digit' };
-const dataFormatada = data.toLocaleDateString('pt-BR', opcoes);
-document.getElementById("dataHoje").textContent = dataFormatada;
+document.getElementById("dataHoje").textContent = data.toLocaleDateString('pt-BR', opcoes);
+
+let fonteAtual = 1;
+
+function mudarFonte(opcao) {
+    const iframe = document.getElementById("nbaFrame");
+
+    fonteAtual = opcao;
+
+    if (opcao === 1) {
+        iframe.src = "https://streamcenter.live/sports/basketball/4";
+    } else if (opcao === 2) {
+        iframe.src = "https://roxiestreams.live/nba";
+    }
+
+    setTimeout(() => {
+        window.scrollTo({ top: iframe.offsetTop - 30, behavior: "smooth" });
+    }, 300);
+}
+
+function voltarMantendoFonte() {
+    mudarFonte(fonteAtual);
+}
 </script>
 
 </body>
