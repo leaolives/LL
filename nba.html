@@ -109,6 +109,11 @@ body {
   box-shadow: 0 0 15px #FF3300, 0 0 25px #FF3300;
 }
 
+.active-btn {
+  box-shadow: 0 0 18px currentColor, 0 0 35px currentColor;
+  transform: scale(1.05);
+}
+
 .support-links {
   display: flex;
   justify-content: center;
@@ -181,9 +186,9 @@ body {
   Confira os horários dos jogos de hoje no final da página.
 </p>
 
-<div style="margin-top: 15px; display: flex; gap: 15px;">
-  <button onclick="mudarFonte(1)" class="font-btn font1">🟦 Opção 1 (Padrão)</button>
-  <button onclick="mudarFonte(2)" class="font-btn font1">🟥 Opção 2 (Alternativa)</button>
+<div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+  <button id="btnFonte1" onclick="mudarFonte(1)" class="font-btn font1">🟦 Opção 1 (Padrão)</button>
+  <button id="btnFonte2" onclick="mudarFonte(2)" class="font-btn font1">🟥 Opção 2 (Alternativa)</button>
 </div>
 
 <div style="margin-top: 15px;">
@@ -220,19 +225,33 @@ body {
 </div>
 
 <script>
+let fonteAtual = 1;
+
 function mudarFonte(opcao) {
     const iframe = document.getElementById("nbaFrame");
+    const btn1 = document.getElementById("btnFonte1");
+    const btn2 = document.getElementById("btnFonte2");
+
+    fonteAtual = opcao;
+
+    btn1.classList.remove("active-btn");
+    btn2.classList.remove("active-btn");
 
     if (opcao === 1) {
         iframe.src = "https://streamcenter.live/sports/basketball/4";
-    } 
-    else if (opcao === 2) {
+        btn1.classList.add("active-btn");
+    } else if (opcao === 2) {
         iframe.src = "https://roxiestreams.live/nba";
+        btn2.classList.add("active-btn");
     }
 
     setTimeout(() => {
         window.scrollTo({ top: iframe.offsetTop - 30, behavior: "smooth" });
     }, 300);
+}
+
+function voltarMantendoFonte() {
+    mudarFonte(fonteAtual);
 }
 
 const imagensJogos = {
@@ -259,27 +278,7 @@ const data = new Date();
 const opcoes = { day: '2-digit', month: '2-digit' };
 document.getElementById("dataHoje").textContent = data.toLocaleDateString('pt-BR', opcoes);
 
-let fonteAtual = 1;
-
-function mudarFonte(opcao) {
-    const iframe = document.getElementById("nbaFrame");
-
-    fonteAtual = opcao;
-
-    if (opcao === 1) {
-        iframe.src = "https://streamcenter.live/sports/basketball/4";
-    } else if (opcao === 2) {
-        iframe.src = "https://roxiestreams.live/nba";
-    }
-
-    setTimeout(() => {
-        window.scrollTo({ top: iframe.offsetTop - 30, behavior: "smooth" });
-    }, 300);
-}
-
-function voltarMantendoFonte() {
-    mudarFonte(fonteAtual);
-}
+document.getElementById("btnFonte1").classList.add("active-btn");
 </script>
 
 </body>
