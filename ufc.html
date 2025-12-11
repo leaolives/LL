@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UFC</title>
 <link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,14 +13,13 @@
   gtag('config', 'G-E1LBQRDMS4');
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-
 <style>
-@keyframes bgGlow {
-  0% { background: radial-gradient(circle at top left, #0d0d1a, #000033); }
-  50% { background: radial-gradient(circle at bottom right, #000033, #0d0d1a); }
-  100% { background: radial-gradient(circle at top left, #0d0d1a, #000033); }
+@keyframes bgAnimation {
+  0% { background-color: #0d0d1a; }
+  50% { background-color: #000033; }
+  100% { background-color: #0d0d1a; }
 }
+
 body {
   font-family: Arial, sans-serif;
   color: white;
@@ -32,169 +30,138 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  animation: bgGlow 20s infinite alternate;
+  background: linear-gradient(135deg, #0d0d1a, #000033);
+  animation: bgAnimation 15s infinite alternate;
 }
 
+/* 🔹 MENU DESKTOP / PADRÃO */
 .menu {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 30px;
 }
+
 .menu a {
-  padding: 12px 24px;
+  padding: 10px 20px;
   text-decoration: none;
   font-weight: bold;
   text-transform: uppercase;
   color: #00FFFF;
   border: 2px solid #00FFFF;
-  border-radius: 30px;
-  background: linear-gradient(to bottom, #000033, #000055);
-  transition: all 0.3s ease;
-  box-shadow: 0 0 6px #00FFFF88;
-}
-.menu a:hover {
-  box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
-  transform: translateY(-3px);
-}
-
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 1000px;
-}
-.event-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(#000033, #000055);
-  border: 2px solid #FF3300;
-  border-radius: 15px;
-  padding: 10px;
-  transition: all 0.3s ease;
-}
-.event-card:hover {
-  box-shadow: 0 0 20px #FF3300;
-  transform: translateY(-3px);
-}
-.event-card img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.event-title {
-  font-weight: bold;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  text-shadow: 0 0 4px #FF3300;
-}
-.event-time {
-  font-weight: bold;
-  color: #00FFFF;
-  margin-bottom: 14px;
-}
-.live-now {
-  color: #FF3300;
-  font-weight: bold;
-  text-shadow: 0 0 10px #FF3300;
-  animation: pulse 1s infinite alternate;
-}
-@keyframes pulse { from {opacity:1;} to {opacity:0.5;} }
-
-.watch-btn {
-  padding: 10px 18px;
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: #330000;
-  color: #FF3300;
-  border: 2px solid #FF3300;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 160px;
-  text-align: center;
-}
-.watch-btn:hover {
-  box-shadow: 0 0 15px #FF3300;
-  transform: translateY(-2px);
-}
-
-.watch-btn.active-option {
-  background-color: #FF3300;
-  color: #000;
-  box-shadow: 0 0 12px #FF3300, 0 0 22px #FF3300;
-  transform: translateY(-2px);
-}
-
-#iframeContainer {
-  width: 100%;
-  max-width: 1000px;
-  height: 600px;
-  margin: 0 auto 10px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 0 10px #FFD700;
-  background: #000022;
+  background: linear-gradient(#000033, #000055);
+  transition: 0.3s;
 }
 
-#videoWrapper {
-  width: 100%;
-  height: 100%;
+.menu a:hover {
+  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF;
+  transform: translateY(-2px);
 }
 
-#iframeContainer iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-#iframeMessage {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #FFD700;
-  font-size: 18px;
-}
-#iframeContainer .watch-btn {
-  margin: 8px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 155px;
-  height: 40px;
-  font-size: 14px;
-  border: 2px solid #ff3300;
-  background-color: transparent;
-  color: #ff3300;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-#iframeContainer .watch-btn:hover {
-  background-color: #ff3300;
-  color: #000;
-  box-shadow: 0 0 10px #ff3300;
-}
-
-#noEventsMessage {
-  margin-top: 30px;
-  font-size: 18px;
-  font-weight: bold;
+/* 🔹 BOTÃO MENU MOBILE (3 LINHAS) */
+.menu-toggle {
+  display: none; /* só aparece no mobile via media query */
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 2px solid #00FFFF;
+  background: linear-gradient(#000033, #000055);
   color: #00FFFF;
-  text-shadow: 0 0 4px #00FFFF, 0 0 8px #00FFFF;
-  display: none;
-  animation: blinkNeon 2s infinite alternate;
-}
-@keyframes blinkNeon {
-  from { opacity: 1; text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; }
-  to { opacity: 0.6; text-shadow: 0 0 3px #00FFFF; }
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #00FFFF;
+  position: relative;
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: #00FFFF;
+  left: 0;
+}
+
+.menu-toggle span::before {
+  top: -6px;
+}
+
+.menu-toggle span::after {
+  top: 6px;
+}
+
+/* 🔹 BOTÃO VOLTAR E FONTES */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #FF3300;
+  border: 2px solid #FF3300;
+  border-radius: 20px;
+  background: linear-gradient(#330000, #550000);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  box-shadow: 0 0 15px #FF3300, 0 0 30px #FF3300;
+  transform: translateY(-2px);
+}
+
+.font-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: .3s;
+}
+
+.font1 {
+  background: linear-gradient(#000033,#000055);
+  border: 2px solid #00FFFF;
+  color: #00FFFF;
+}
+
+.font1:hover {
+  box-shadow: 0 0 15px #00FFFF, 0 0 25px #00FFFF;
+}
+
+.font2 {
+  background: linear-gradient(#330000,#550000);
+  border: 2px solid #FF3300;
+  color: #FF3300;
+}
+
+.font2:hover {
+  box-shadow: 0 0 15px #FF3300, 0 0 25px #FF3300;
+}
+
+.active-btn {
+  box-shadow: 0 0 18px currentColor, 0 0 35px currentColor;
+  transform: scale(1.05);
+}
+
+/* 🔹 LINKS DE APOIO */
 .support-links {
   display: flex;
   justify-content: center;
@@ -203,33 +170,64 @@ body {
   margin-top: 40px;
   flex-wrap: wrap;
 }
+
 .support-img {
   width: 220px;
-  height: auto;
   border-radius: 15px;
-  transition: all 0.3s ease;
+  transition: 0.3s;
   box-shadow: 0 0 20px #FF3300;
 }
+
 .support-img:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 40px #FF3300;
+  box-shadow: 0 0 25px #FF3300;
 }
 
-@media (max-width: 600px) {
-  #iframeContainer .watch-btn {
-    width: 100%;
-    max-width: 250px;
-    font-size: 13px;
-    padding: 10px;
+/* 🔹 RESPONSIVIDADE: MOBILE */
+@media (max-width: 768px) {
+  body {
+    padding-top: 70px; /* espaço pro botão do menu */
   }
-  #iframeContainer div {
-    flex-wrap: wrap;
+
+  /* Esconde menu padrão e vira dropdown */
+  .menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    right: 10px;
+    flex-direction: column;
+    background: rgba(0,0,40,0.95);
+    padding: 15px;
+    border-radius: 15px;
+    z-index: 999;
+    box-shadow: 0 0 20px #00FFFF;
+  }
+
+  .menu.show {
+    display: flex;
+  }
+
+  .menu a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu-toggle {
+    display: flex;
   }
 }
 </style>
 </head>
 <body>
 
+<!-- 🔹 BOTÃO HAMBÚRGUER (APARECE SÓ NO MOBILE) -->
+<button id="menuToggle" class="menu-toggle">
+  <span></span>
+  Menu
+</button>
+
+<!-- 🔹 MENU PRINCIPAL -->
 <div class="menu">
   <a href="index.html">Início</a>
   <a href="futebol.html">Futebol</a>
@@ -241,198 +239,79 @@ body {
   <a href="multistream.html">Multi Stream</a>
 </div>
 
-<div id="iframeContainer">
-  <div id="videoWrapper"></div>
-</div>
-<div id="iframeMessage" style="display:none;">
-  A TRANSMISSÃO SE INICIA MINUTOS ANTES DO EVENTO COMEÇAR
+<div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+  <button id="btnFonte1" onclick="mudarFonte(1)" class="font-btn font1">🟦 Opção 1 (Padrão)</button>
+  <button id="btnFonte2" onclick="mudarFonte(2)" class="font-btn font1">🟥 Opção 2 (Alternativa)</button>
 </div>
 
-<div class="events-grid" id="eventsGrid">
-  <div class="event-card" data-time="2025-12-07T00:00:00" data-remove="true">
-    <img src="https://i.ytimg.com/vi/uLdkNZcm3gA/maxresdefault.jpg" alt="PPV">
-    <div class="event-title">UFC 323</div>
-    <div class="event-time">SÁBADO - 22:00</div>
-    <button class="watch-btn" onclick="openStream(
-      'https://playembed.top/embed/ufc-323',
-      'https://justembeds.xyz/embed/61956de20c1550ab4cd4c2b2b511643f',
-      'https://embedflix.gold/tv/player.php?id=ufc-fight-pass',
-      'https://sportzonline.top/channels/bra/br4.php'
-    )">Assistir</button>
+<div style="margin-top: 15px;">
+  <button class="back-btn" onclick="voltarMantendoFonte()">⬅ Voltar</button>
+</div>
+
+<!-- 🔵 IFRAME PRINCIPAL -->
+<div id="iframeWrapper" style="position: relative; width: 100%; max-width: 1200px; height: 800px; margin-top: 20px;">
+  <iframe id="nbaFrame" src="https://mmastreams.me/ufc-streams"
+      style="width: 100%; height: 100%; border: none;"
+      sandbox="allow-same-origin allow-scripts allow-forms"
+      allowfullscreen></iframe>
+
+  <div style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 148px;
+      backdrop-filter: blur(5px);
+      background-color: rgba(0,0,0,0.3);
+      pointer-events: none;">
   </div>
 </div>
 
-<div id="noEventsMessage">⚠️ Nenhum evento futuro disponível no momento. Volte mais tarde! ⚠️</div>
-
 <div class="support-links">
   <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
-    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+    <img src="https://i.imgur.com/31P8ZR3.png" class="support-img">
   </a>
 </div>
 
 <script>
-let clapprPlayer = null;
+let fonteAtual = 1;
 
-function checkEventsLive() {
-  const now = new Date();
-  const cards = document.querySelectorAll('.event-card');
-  const noEventsMsg = document.getElementById('noEventsMessage');
-  let hasFutureEvent = false;
+function mudarFonte(opcao) {
+    const iframe = document.getElementById("nbaFrame");
+    const btn1 = document.getElementById("btnFonte1");
+    const btn2 = document.getElementById("btnFonte2");
 
-  cards.forEach(card => {
-    const eventTime = new Date(card.getAttribute('data-time'));
-    const timeElement = card.querySelector('.event-time');
+    fonteAtual = opcao;
 
-    if (now >= eventTime) {
-      timeElement.textContent = "AO VIVO";
-      timeElement.classList.add("live-now");
-    } else {
-      hasFutureEvent = true;
+    btn1.classList.remove("active-btn");
+    btn2.classList.remove("active-btn");
+
+    if (opcao === 1) {
+        iframe.src = "https://mmastreams.me/ufc-streams";
+        btn1.classList.add("active-btn");
+    } else if (opcao === 2) {
+        iframe.src = "https://www.vipleague.pm/fighting-sports-stream";
+        btn2.classList.add("active-btn");
     }
 
-    if (card.getAttribute('data-remove') === "true") {
-      const removeAfter = new Date(eventTime.getTime() + (7 * 60 + 50) * 60000);
-      if (now >= removeAfter) {
-        card.remove();
-      }
-    }
-  });
-
-  noEventsMsg.style.display = hasFutureEvent ? 'none' : 'block';
+    setTimeout(() => {
+        window.scrollTo({ top: iframe.offsetTop - 30, behavior: "smooth" });
+    }, 300);
 }
 
-checkEventsLive();
-setInterval(checkEventsLive, 60000);
-
-function openStream(url1, url2, url3, url4) {
-  const container = document.getElementById('iframeContainer');
-  const message = document.getElementById('iframeMessage');
-  const menu = document.querySelector('.menu');
-  const events = document.querySelector('.events-grid');
-  const support = document.querySelector('.support-links');
-  const noEventsMsg = document.getElementById('noEventsMessage');
-  const videoWrapper = document.getElementById('videoWrapper');
-
-  menu.style.display = 'none';
-  events.style.display = 'none';
-  if (noEventsMsg) noEventsMsg.style.display = 'none';
-
-  container.style.display = 'flex';
-  container.style.flexDirection = 'column';
-
-  function loadSource(url) {
-    if (!url) return;
-
-    videoWrapper.innerHTML = '';
-    if (clapprPlayer) {
-      clapprPlayer.destroy();
-      clapprPlayer = null;
-    }
-
-    const isHls = url.includes('.m3u8');
-
-    if (isHls) {
-      const clapDiv = document.createElement('div');
-      clapDiv.id = 'clapprPlayer';
-      clapDiv.style.width = '100%';
-      clapDiv.style.height = '100%';
-      videoWrapper.appendChild(clapDiv);
-
-      clapprPlayer = new Clappr.Player({
-        source: url,
-        parentId: '#clapprPlayer',
-        autoPlay: true,
-        mute: false,
-        height: '100%',
-        width: '100%',
-        playback: { playInline: true },
-        mimeType: 'application/x-mpegURL'
-      });
-    } else {
-      const iframe = document.createElement('iframe');
-      iframe.id = 'mainIframe';
-      iframe.src = url;
-      iframe.allowFullscreen = true;
-      iframe.sandbox = "allow-same-origin allow-scripts allow-forms";
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-      videoWrapper.appendChild(iframe);
-    }
-  }
-
-  videoWrapper.innerHTML = '';
-  container.innerHTML = '';
-
-  const backBtn = document.createElement('button');
-  backBtn.textContent = '⬅ Voltar';
-  backBtn.className = 'watch-btn';
-  backBtn.style.marginBottom = '15px';
-  backBtn.onclick = () => {
-    container.style.display = 'none';
-    message.style.display = 'none';
-    menu.style.display = 'flex';
-    events.style.display = 'grid';
-    support.style.display = 'flex';
-    if (clapprPlayer) {
-      clapprPlayer.destroy();
-      clapprPlayer = null;
-    }
-    container.innerHTML = '';
-    container.appendChild(videoWrapper);
-    checkEventsLive();
-  };
-  container.appendChild(backBtn);
-  container.appendChild(videoWrapper);
-
-  let activeBtn = null;
-  function setActiveButton(btn) {
-    if (activeBtn) activeBtn.classList.remove('active-option');
-    activeBtn = btn;
-    if (activeBtn) activeBtn.classList.add('active-option');
-  }
-
-  const btnContainer = document.createElement('div');
-  btnContainer.style.marginTop = '15px';
-  btnContainer.style.display = 'flex';
-  btnContainer.style.flexWrap = 'wrap';
-  btnContainer.style.gap = '10px';
-  btnContainer.style.justifyContent = 'center';
-
-  const addBtn = (text, url, isDefault = false) => {
-    if (!url) return;
-    const btn = document.createElement('button');
-    btn.textContent = text;
-    btn.className = 'watch-btn';
-    btn.onclick = () => {
-      loadSource(url);
-      setActiveButton(btn);
-    };
-    btnContainer.appendChild(btn);
-    if (isDefault) {
-      setActiveButton(btn);
-    }
-  };
-
-  loadSource(url1);
-
-  addBtn('Opção 1 - Celular', url1, true);
-  addBtn('Opção 2 - PC', url2);
-  addBtn('Opção 3 - BR', url3);
-  addBtn('Opção 4', url4);
-
-  container.appendChild(btnContainer);
-
-  message.style.display = 'block';
-
-  support.style.display = 'flex';
-  support.style.marginTop = '30px';
-  support.style.justifyContent = 'center';
-  support.style.flexWrap = 'wrap';
-
-  document.body.appendChild(support);
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function voltarMantendoFonte() {
+    mudarFonte(fonteAtual);
 }
+
+document.getElementById("btnFonte1").classList.add("active-btn");
+
+/* 🔹 LÓGICA DO MENU MOBILE */
+const menuToggle = document.getElementById("menuToggle");
+const menu = document.querySelector(".menu");
+
+menuToggle.addEventListener("click", () => {
+  menu.classList.toggle("show");
+});
 </script>
 
 </body>
