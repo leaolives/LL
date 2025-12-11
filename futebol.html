@@ -26,6 +26,7 @@ body {
   color: white;
   margin: 0;
   padding: 20px;
+  padding-top: 70px; /* espaço pro botão do menu */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -36,30 +37,155 @@ body {
   transition: background 0.5s ease;
 }
 
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 30px;
-}
+/* MENU HAMBÚRGUER + OVERLAY */
 
-.menu a {
-  padding: 10px 20px;
-  text-decoration: none;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #00FFFF;
-  border: 2px solid #00FFFF;
+.menu-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+  padding: 10px 14px;
   border-radius: 20px;
+  border: 2px solid #00FFFF;
   background: linear-gradient(#000033, #000055);
-  transition: all 0.3s ease;
+  color: #00FFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.menu a:hover {
-  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF;
-  transform: translateY(-2px);
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #00FFFF;
+  position: relative;
 }
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: #00FFFF;
+  left: 0;
+}
+
+.menu-toggle span::before {
+  top: -6px;
+}
+
+.menu-toggle span::after {
+  top: 6px;
+}
+
+.menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: radial-gradient(circle at top, rgba(0, 255, 255, 0.15), transparent 55%),
+              rgba(0, 0, 25, 0.96);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.menu.show {
+  display: flex;
+}
+
+.menu-content {
+  width: 100%;
+  max-width: 900px;
+  background: linear-gradient(145deg, #020221, #050537);
+  border-radius: 22px;
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+  padding: 20px 20px 24px;
+  position: relative;
+}
+
+.menu-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #00FFFF;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.menu-close:hover {
+  background: rgba(0, 255, 255, 0.12);
+}
+
+.menu-header-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 12px;
+  text-align: left;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.menu-item {
+  text-decoration: none;
+  background: rgba(0, 20, 40, 0.7);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  padding: 12px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: 0.22s;
+}
+
+.menu-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.4);
+  border-color: #00FFFF;
+}
+
+.menu-logo-wrapper {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.menu-logo-wrapper img {
+  max-height: 60px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0,255,255,0.35));
+}
+
+.menu-label {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  color: #E6F9FF;
+}
+
+/* FIM MENU */
+
+/* RESTO DO LAYOUT ORIGINAL */
 
 #iframeContainer {
   width: 100%;
@@ -251,19 +377,100 @@ body {
   text-shadow: 0 0 8px #FF3300;
   font-size: 18px;
 }
+
+@media (max-width: 600px) {
+  .menu-content {
+    padding: 16px 14px 18px;
+  }
+}
 </style>
 </head>
 <body>
 
-<div class="menu">
-  <a href="index.html">Início</a>
-  <a href="nfl.html">NFL</a>
-  <a href="f1.html">F1</a>
-  <a href="nba.html">NBA</a>
-  <a href="ufc.html">UFC</a>
-  <a href="tenis.html">TÊNIS</a>
-  <a href="wwe.html">WWE - AEW</a>
-  <a href="multistream.html">Multi Stream</a>
+<button id="menuToggle" class="menu-toggle">
+  <span></span>
+  Menu
+</button>
+
+<div class="menu" id="menuOverlay">
+  <div class="menu-content">
+    <button class="menu-close" id="menuClose" aria-label="Fechar menu">✕</button>
+    <h2 class="menu-header-title">Escolha o esporte</h2>
+
+    <div class="menu-grid">
+
+      <a href="index.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://i.imgur.com/YMaai6y.png" alt="Início">
+        </div>
+        <span class="menu-label">Início</span>
+      </a>
+
+      <a href="futebol.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://images.vexels.com/media/users/3/320306/isolated/preview/01adb8fcdea1009c64532efad2fa3c10-logotipo-simbolico-do-futebol-da-copa-do-mundo.png" alt="Futebol">
+        </div>
+        <span class="menu-label">Futebol</span>
+      </a>
+
+      <a href="f1.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png" alt="F1">
+        </div>
+        <span class="menu-label">F1</span>
+      </a>
+
+      <a href="nba.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://cdn.freebiesupply.com/images/large/2x/nba-logo-transparent.png" alt="NBA">
+        </div>
+        <span class="menu-label">NBA</span>
+      </a>
+
+      <a href="nfl.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://logodownload.org/wp-content/uploads/2018/06/nfl-logo.png" alt="NFL">
+        </div>
+        <span class="menu-label">NFL</span>
+      </a>
+
+      <a href="ufc.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/2560px-UFC_Logo.svg.png" alt="UFC">
+        </div>
+        <span class="menu-label">UFC</span>
+      </a>
+
+      <a href="tenis.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://static.vecteezy.com/system/resources/previews/028/210/875/non_2x/sport-equipment-blue-tennis-racket-and-yellow-tennis-ball-sports-equipment-isolated-on-white-background-file-png.png" alt="Tênis">
+        </div>
+        <span class="menu-label">Tênis</span>
+      </a>
+
+      <a href="wwe.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/WWE_Logo.svg/2243px-WWE_Logo.svg.png" alt="WWE / AEW">
+        </div>
+        <span class="menu-label">WWE / AEW</span>
+      </a>
+
+      <a href="multistream.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://i.imgur.com/45lKOXE.png" alt="Multi Stream">
+        </div>
+        <span class="menu-label">Multi Stream</span>
+      </a>
+
+      <a href="mais-esportes.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <span style="font-size:40px;font-weight:bold;color:#00FFFF;">+</span>
+        </div>
+        <span class="menu-label">Mais</span>
+      </a>
+
+    </div>
+  </div>
 </div>
 
 <div id="topoTexto" style="margin-bottom:10px; font-size:20px; font-weight:bold; color:#FF3300;">
@@ -309,94 +516,6 @@ body {
   <button class="watch-btn" onclick="openStream('https://teste.tudohdapi.shop/Premiere4/tracks-v1a1/mono.m3u8','https://embedcanais.com/premiere4/')">Assistir</button>
 </div>
 
-<!-- Botafogo x Fortaleza -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500-dark/6086.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/6272.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://teste.tudohdapi.shop/Premiere5/tracks-v1a1/mono.m3u8','https://embedcanais.com/premiere5/')">Assistir</button>
-</div>
-
-<!-- Ceará x Palmeiras -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/9969.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/18514.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://teste.tudohdapi.shop/Premiere2/tracks-v1a1/mono.m3u8','https://embedcanais.com/premiere2/')">Assistir</button>
-</div>
-
-<!-- Corinthians x Juventude -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500-dark/874.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/6270.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://teste.tudohdapi.shop/Premiere3/tracks-v1a1/mono.m3u8','https://embedcanais.com/premiere3/')">Assistir</button>
-</div>
-
-<!-- Fluminense x Bahia -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500-dark/3445.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/9967.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://teste.tudohdapi.shop/Sportv1/tracks-v1a1/mono.m3u8','https://dlnmh9ip6v2cz.cloudfonte.net/sportv.m3u8')">Assistir</button>
-</div>
-
-<!-- Internacional x RB Bragantino -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/1936.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/6079.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://embedtv-5.icu/premiere7','https://embedtv-5.icu/premiere7')">Assistir</button>
-</div>
-
-<!-- Santos x Cruzeiro -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/2674.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/2022.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://teste.tudohdapi.shop/Premiere6/tracks-v1a1/mono.m3u8','https://dlnmh9ip6v2cz.cloudfonte.net/pre6.m3u8')">Assistir</button>
-</div>
-
-<!-- Sport x Grêmio -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/7635.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/6273.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://embedtv-5.icu/premiere8','https://embedcanais.com/premiere8/')">Assistir</button>
-</div>
-
-<!-- Vitória x São Paulo -->
-<div class="game-card" data-start="2025-12-07T16:00:00-03:00" data-end="2025-12-07T18:20:00-03:00">
-  <div class="teams-row">
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/3457.png" class="team-logo">
-    <span class="vs-text">x</span>
-    <img src="https://a.espncdn.com/i/teamlogos/soccer/500/2026.png" class="team-logo">
-  </div>
-  <div class="game-time">DOMINGO - 16:00</div>
-  <button class="watch-btn" onclick="openStream('https://teste.tudohdapi.shop/Premiere/tracks-v1a1/mono.m3u8','https://embedcanais.com/premiereclubes/')">Assistir</button>
-</div>
-
 </div>
 
 <div class="support-links">
@@ -419,7 +538,7 @@ function filterGames() {
       g.style.display = "flex";
       visible = true;
       if (now >= start && now <= end) {
-        timeEl.textContent = "AO VIVO";3
+        timeEl.textContent = "AO VIVO";
         timeEl.classList.add("live-text");
       } else {
         timeEl.classList.remove("live-text");
@@ -550,6 +669,24 @@ function openStream(url1, url2) {
   document.getElementById('iframeMessage').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+const menuToggle = document.getElementById("menuToggle");
+const menuOverlay = document.getElementById("menuOverlay");
+const menuClose = document.getElementById("menuClose");
+
+menuToggle.addEventListener("click", () => {
+  menuOverlay.classList.toggle("show");
+});
+
+menuClose.addEventListener("click", () => {
+  menuOverlay.classList.remove("show");
+});
+
+document.querySelectorAll(".menu-item").forEach(link => {
+  link.addEventListener("click", () => {
+    menuOverlay.classList.remove("show");
+  });
+});
 </script>
 </body>
 </html>
