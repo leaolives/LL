@@ -250,76 +250,15 @@ body {
 
 <body>
 
-<button id="menuToggle" class="menu-toggle">
-  <span></span>
-  Menu
-</button>
-
-<div class="menu" id="menuOverlay">
-  <div class="menu-content">
-    <button class="menu-close" id="menuClose" aria-label="Fechar menu">✕</button>
-    <h2 class="menu-header-title">Escolha o esporte</h2>
-
-    <div class="menu-grid">
-      <a href="index.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://i.imgur.com/YMaai6y.png" alt="Início">
-        </div>
-        <span class="menu-label">Início</span>
-      </a>
-
-      <a href="futebol.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://images.vexels.com/media/users/3/320306/isolated/preview/01adb8fcdea1009c64532efad2fa3c10-logotipo-simbolico-do-futebol-da-copa-do-mundo.png" alt="Futebol">
-        </div>
-        <span class="menu-label">Futebol</span>
-      </a>
-
-      <a href="f1.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png" alt="F1">
-        </div>
-        <span class="menu-label">F1</span>
-      </a>
-
-      <a href="nba.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://cdn.freebiesupply.com/images/large/2x/nba-logo-transparent.png" alt="NBA">
-        </div>
-        <span class="menu-label">NBA</span>
-      </a>
-
-      <a href="nfl.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://logodownload.org/wp-content/uploads/2018/06/nfl-logo.png" alt="NFL">
-        </div>
-        <span class="menu-label">NFL</span>
-      </a>
-
-      <a href="ufc.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/2560px-UFC_Logo.svg.png" alt="UFC">
-        </div>
-        <span class="menu-label">UFC</span>
-      </a>
-
-      <a href="tenis.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://static.vecteezy.com/system/resources/previews/028/210/875/non_2x/sport-equipment-blue-tennis-racket-and-yellow-tennis-ball-sports-equipment-isolated-on-white-background-file-png.png" alt="Tênis">
-        </div>
-        <span class="menu-label">Tênis</span>
-      </a>
-
-      <a href="wwe.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/WWE_Logo.svg/2243px-WWE_Logo.svg.png" alt="WWE / AEW">
-        </div>
-        <span class="menu-label">WWE / AEW</span>
-      </a>
-
-      <a href="multistream.html" class="menu-item">
-        <div class="menu-logo-wrapper">
-          <img src="https://i.imgur.com/45lKOXE.png" alt="Multi Stream">
+<div class="menu">
+  <a href="index.html">Início</a>
+  <a href="nfl.html">NFL</a>
+  <a href="f1.html">F1</a>
+  <a href="nba.html">NBA</a>
+  <a href="ufc.html">UFC</a>
+  <a href="tenis.html">TÊNIS</a>
+  <a href="wwe.html">WWE - AEW</a>
+  <a href="multistream.html">Multi Stream</a>
         </div>
         <span class="menu-label">Multi Stream</span>
       </a>
@@ -347,7 +286,8 @@ body {
 <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
   <button id="btnFonte1" onclick="mudarFonte(1)" class="font-btn font1">🟦 Opção 1</button>
   <button id="btnFonte2" onclick="mudarFonte(2)" class="font-btn font1">🟥 Opção 2</button>
-  <button id="btnFonte3" onclick="mudarFonte(3)" class="font-btn font1">🟩 Opção 3 (Fut Internacional)</button>
+  <button id="btnFonte3" onclick="mudarFonte(3)" class="font-btn font1">🟪 Opção 3</button>
+  <button id="btnFonte4" onclick="mudarFonte(4)" class="font-btn font1">🟩 Opção 4 (Fut Internacional)</button>
 </div>
 
 <div style="margin-top: 15px;">
@@ -423,6 +363,10 @@ function mudarFonte(opcao) {
     iframe.src = "https://socceronline.me/football-streams";
     btn2.classList.add("active-btn");
   } else if (opcao === 3) {
+    iframe.setAttribute("sandbox", "allow-same-origin allow-scripts allow-forms");
+    iframe.src = "https://livetv.sx/pt/allupcomingsports/1/";
+    btn3.classList.add("active-btn");
+    } else if (opcao === 4) {
     iframe.setAttribute("sandbox", "allow-same-origin allow-scripts allow-forms");
     iframe.src = "https://roxiestreams.live/soccer";
     btn3.classList.add("active-btn");
