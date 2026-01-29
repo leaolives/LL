@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANAIS</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/YMaai6y.png">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E1LBQRDMS4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E1LBQRDMS4');
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+
+<style>
+@keyframes bgGlow {
+  0% { background: radial-gradient(circle at top left, #0d0d1a, #000033); }
+  50% { background: radial-gradient(circle at bottom right, #000033, #0d0d1a); }
+  100% { background: radial-gradient(circle at top left, #0d0d1a, #000033); }
+}
+body {
+  font-family: Arial, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  animation: bgGlow 20s infinite alternate;
+}
+
+.menu-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 2px solid #00FFFF;
+  background: linear-gradient(#000033, #000055);
+  color: #00FFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #00FFFF;
+  position: relative;
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: #00FFFF;
+  left: 0;
+}
+
+.menu-toggle span::before {
+  top: -6px;
+}
+
+.menu-toggle span::after {
+  top: 6px;
+}
+
+.menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: radial-gradient(circle at top, rgba(0, 255, 255, 0.15), transparent 55%),
+              rgba(0, 0, 25, 0.96);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.menu.show {
+  display: flex;
+}
+
+.menu-content {
+  width: 100%;
+  max-width: 900px;
+  background: linear-gradient(145deg, #020221, #050537);
+  border-radius: 22px;
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+  padding: 20px 20px 24px;
+  position: relative;
+}
+
+.menu-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #00FFFF;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.menu-close:hover {
+  background: rgba(0, 255, 255, 0.12);
+}
+
+.menu-header-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 12px;
+  text-align: left;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.menu-item {
+  text-decoration: none;
+  background: rgba(0, 20, 40, 0.7);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  padding: 12px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: 0.22s;
+}
+
+.menu-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.4);
+  border-color: #00FFFF;
+}
+
+.menu-logo-wrapper {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.menu-logo-wrapper img {
+  max-height: 60px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0,255,255,0.35));
+}
+
+.menu-label {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  color: #E6F9FF;
+}
+
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.channel-card {
+  background: linear-gradient(#000033, #000055);
+  border: 2px solid #00FFFF;
+  border-radius: 18px;
+  padding: 14px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: 0.25s;
+}
+
+.channel-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 0 22px rgba(0,255,255,0.6);
+}
+
+/* Área fixa para logo (todas iguais) */
+.channel-logo-wrapper {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.channel-logo-wrapper img {
+  max-height: 70px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0,255,255,0.4));
+}
+@keyframes pulse { from {opacity:1;} to {opacity:0.5;} }
+
+.watch-btn {
+  padding: 10px 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #330000;
+  color: #FF3300;
+  border: 2px solid #FF3300;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 160px;
+  text-align: center;
+}
+.watch-btn:hover {
+  box-shadow: 0 0 15px #FF3300;
+  transform: translateY(-2px);
+}
+
+.watch-btn.active-option {
+  background-color: #FF3300;
+  color: #000;
+  box-shadow: 0 0 12px #FF3300, 0 0 22px #FF3300;
+  transform: translateY(-2px);
+}
+
+#iframeContainer {
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  margin: 0 auto 10px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #FFD700;
+  background: #000022;
+}
+
+#videoWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#iframeContainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+#iframeMessage {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #FFD700;
+  font-size: 18px;
+}
+#iframeContainer .watch-btn {
+  margin: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 155px;
+  height: 40px;
+  font-size: 14px;
+  border: 2px solid #ff3300;
+  background-color: transparent;
+  color: #ff3300;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#iframeContainer .watch-btn:hover {
+  background-color: #ff3300;
+  color: #000;
+  box-shadow: 0 0 10px #ff3300;
+}
+
+@keyframes blinkNeon {
+  from { opacity: 1; text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; }
+  to { opacity: 0.6; text-shadow: 0 0 3px #00FFFF; }
+}
+
+.support-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.support-img {
+  width: 220px;
+  height: auto;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px #FF3300;
+}
+.support-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px #FF3300;
+}
+
+@media (max-width: 600px) {
+  #iframeContainer .watch-btn {
+    width: 100%;
+    max-width: 250px;
+    font-size: 13px;
+    padding: 10px;
+  }
+  #iframeContainer div {
+    flex-wrap: wrap;
+  }
+}
+.aviso-letreiro {
+      max-width: 900px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #00FFFF;
+      background: rgba(0, 0, 30, 0.6);
+      border: 2px solid #00FFFF;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #00FFFF;
+      text-align: center;
+      line-height: 1.4;
+      backdrop-filter: blur(4px);
+    }
+
+.channel-name {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fffb07;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 14px rgba(255, 60, 0, 0.8);
+  transition: 0.25s;
+}
+
+.channel-card:hover .channel-name {
+  text-shadow:
+    0 0 10px #fffb07;
+}
+</style>
+</head>
+<body>
+
+<button id="menuToggle" class="menu-toggle">
+  <span></span>
+  Menu
+</button>
+
+<div class="menu" id="menuOverlay">
+  <div class="menu-content">
+    <button class="menu-close" id="menuClose" aria-label="Fechar menu">✕</button>
+    <h2 class="menu-header-title">Escolha o esporte</h2>
+
+    <div class="menu-grid">
+
+      <a href="index.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://i.imgur.com/YMaai6y.png" alt="Início">
+        </div>
+        <span class="menu-label">Início</span>
+      </a>
+
+      <a href="futebol.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://images.vexels.com/media/users/3/320306/isolated/preview/01adb8fcdea1009c64532efad2fa3c10-logotipo-simbolico-do-futebol-da-copa-do-mundo.png" alt="Futebol">
+        </div>
+        <span class="menu-label">Futebol</span>
+      </a>
+
+      <a href="f1.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png" alt="F1">
+        </div>
+        <span class="menu-label">F1</span>
+      </a>
+
+      <a href="nba.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://cdn.freebiesupply.com/images/large/2x/nba-logo-transparent.png" alt="NBA">
+        </div>
+        <span class="menu-label">NBA</span>
+      </a>
+
+      <a href="nfl.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://logodownload.org/wp-content/uploads/2018/06/nfl-logo.png" alt="NFL">
+        </div>
+        <span class="menu-label">NFL</span>
+      </a>
+
+      <a href="ufc.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/2560px-UFC_Logo.svg.png" alt="UFC">
+        </div>
+        <span class="menu-label">UFC</span>
+      </a>
+
+      <a href="tenis.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://static.vecteezy.com/system/resources/previews/028/210/875/non_2x/sport-equipment-blue-tennis-racket-and-yellow-tennis-ball-sports-equipment-isolated-on-white-background-file-png.png" alt="Tênis">
+        </div>
+        <span class="menu-label">Tênis</span>
+      </a>
+
+      <a href="wwe.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/WWE_Logo.svg/2243px-WWE_Logo.svg.png" alt="WWE / AEW">
+        </div>
+        <span class="menu-label">WWE / AEW</span>
+      </a>
+
+      <a href="multistream.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <img src="https://i.imgur.com/45lKOXE.png" alt="Multi Stream">
+        </div>
+        <span class="menu-label">Multi Stream</span>
+      </a>
+
+      <a href="mais-esportes.html" class="menu-item">
+        <div class="menu-logo-wrapper">
+          <span style="font-size:40px;font-weight:bold;color:#00FFFF;">+</span>
+        </div>
+        <span class="menu-label">Mais</span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<div id="iframeContainer">
+  <div id="videoWrapper"></div>
+</div>
+<div class="aviso-letreiro">
+  ⚠️ Este conteúdo não é hospedado pelo nosso site.
+  Para evitar anúncios indesejados, recomendamos usar o navegador <b>Brave</b> ou um <b>AdBlock</b>.
+</div>
+
+<div class="channels-grid" id="eventsGrid">
+
+  <div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">SPORTV</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=sportv',
+    'https://teste.tudohdapi.shop/Sportv1/tracks-v1a1/mono.m3u8',
+    'https://embedtvonline.com/sportv/',
+    'https://rdcanais.top/sportvalternativo'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">SPORTV 2</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=sportv2',
+    'https://embedtvonline.com/sportv2/',
+    'https://embedtvonline.com/sportv2/',
+    'https://rdcanais.top/sportv2alternativo'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">SPORTV 3</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=sportv3',
+    'https://embedtvonline.com/sportv3/',
+    'https://embedtvonline.com/sportv3/',
+    'https://rdcanais.top/sportv3alternativo'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">ESPN</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=espn',
+    'https://embedflix.cv/tv/player.php?id=espn',
+    'https://embedtvonline.com/espn/',
+    'https://rdcanais.top/espn'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">ESPN 2</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=espn2',
+    'https://teste.tudohdapi.shop/ESPN2/tracks-v1a1/mono.m3u8',
+    'https://embedtvonline.com/espn2/',
+    'https://rdcanais.top/espn2'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">ESPN 3</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=espn3',
+    'https://www2.embedtv.best/espn3',
+    'https://embedtvonline.com/espn3/',
+    'https://www2.embedtv.best/espn3'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">ESPN 4</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=espn4',
+    'https://teste.tudohdapi.shop/ESPN4/tracks-v1a1/mono.m3u8',
+    'https://embedtvonline.com/espn4/',
+    'https://www2.embedtv.best/espn4'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 1</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=premiere',
+    'https://embedtvonline.com/premiereclubes/',
+    'https://www2.embedtv.best/premiere',
+    'https://la14hd.com/vivo/canales.php?stream=premiere1'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 2</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=premiere-2',
+    'https://embedtvonline.com/premiere2/',
+    'https://www2.embedtv.best/premiere2',
+    'https://la14hd.com/vivo/canales.php?stream=premiere2'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 3</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=premiere-3',
+    'https://embedtvonline.com/premiere3/',
+    'https://www2.embedtv.best/premiere3',
+    'https://la14hd.com/vivo/canales.php?stream=premiere3'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 4</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=premiere-4',
+    'https://embedtvonline.com/premiere4/',
+    'https://www2.embedtv.best/premiere4',
+    'https://embedflix.cv/tv/player.php?id=premiere-4'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 5</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=premiere-5',
+    'https://embedtvonline.com/premiere5/',
+    'https://www2.embedtv.best/premiere5',
+    'https://embedflix.cv/tv/player.php?id=premiere-5'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 6</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=premiere-6',
+    'https://embedtvonline.com/premiere6/',
+    'https://www2.embedtv.best/premiere6',
+    'https://embedflix.cv/tv/player.php?id=premiere-6'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 7</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=premiere-7',
+    'https://embedtvonline.com/premiere7/',
+    'https://www2.embedtv.best/premiere7',
+    'https://embedflix.cv/tv/player.php?id=premiere-7'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PREMIERE 8</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://www2.embedtv.best/premiere8',
+    'https://rdcanais.top/premiere8',
+    'https://rdcanais.top/premiere8alternativo',
+    'https://www2.embedtv.best/premiere8'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">TNT</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=tnt',
+    'https://embedtvonline.com/tnt/',
+    'https://rdcanais.top/tnt',
+    'https://embedflix.cv/tv/player.php?id=tnt'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">SPACE</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=space',
+    'https://embedtvonline.com/space/',
+    'https://rdcanais.top/space',
+    'https://embedflix.cv/tv/player.php?id=space'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">BAND SPORTS</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=band-sports',
+    'https://embedtvonline.com/bandsports/',
+    'https://www2.embedtv.best/bandsports',
+    'https://www2.embedtv.best/bandsports'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">COMBATE</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedtvonline.com/combate/',
+    'https://embedflix.cv/tv/player.php?id=combate',
+    'https://www2.embedtv.best/combate',
+    'https://www2.embedtv.best/combate'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PRIME VIDEO 1</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=prime-video-1',
+    'https://embedtvonline.com/amazonprimevideo/',
+    'https://www2.embedtv.best/primevideo',
+    'https://rdcanais.top/primevideo'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PRIME VIDEO 2</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=prime-video-2',
+    'https://www2.embedtv.best/primevideo2',
+    'https://www2.embedtv.best/primevideo',
+    'https://rdcanais.top/primevideo'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">PARAMOUNT</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://embedflix.cv/tv/player.php?id=paramount-1',
+    'https://www2.embedtv.best/paramountplus',
+    'https://embedtvonline.com/paramountplus/',
+    'https://rdcanais.top/paramountplus'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">MAX</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://rdcanais.top/max',
+    'https://www2.embedtv.best/max1',
+    'https://embedtvonline.com/max/',
+    'https://rdcanais.top/max'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">MAX 2</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://rdcanais.top/max2',
+    'https://www2.embedtv.best/max2',
+    'https://www2.embedtv.best/max2',
+    'https://rdcanais.top/max2'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">MAX 3</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://rdcanais.top/max3',
+    'https://www2.embedtv.best/max3',
+    'https://www2.embedtv.best/max3',
+    'https://rdcanais.top/max3'
+  )">Assistir</button>
+</div>
+
+<div class="channel-card">
+  <div class="channel-logo-wrapper">
+    <span class="channel-name">MAX 4</span>
+  </div>
+  <button class="watch-btn" onclick="openStream(
+    'https://rdcanais.top/max4',
+    'https://rdcanais.top/max4',
+    'https://rdcanais.top/max4',
+    'https://rdcanais.top/max3'
+  )">Assistir</button>
+</div>
+
+</div>
+
+<div class="support-links">
+  <a href="https://discord.gg/NZF8hDnmvx" target="_blank">
+    <img src="https://i.imgur.com/31P8ZR3.png" alt="Entre no nosso Discord" class="support-img">
+  </a>
+</div>
+
+<script>
+const menuToggle = document.getElementById('menuToggle');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+
+menuToggle.addEventListener('click', () => {
+  menuOverlay.classList.add('show');
+});
+
+menuClose.addEventListener('click', () => {
+  menuOverlay.classList.remove('show');
+});
+
+// Fecha ao clicar fora do conteúdo
+menuOverlay.addEventListener('click', (e) => {
+  if (e.target === menuOverlay) {
+    menuOverlay.classList.remove('show');
+  }
+});
+
+let clapprPlayer = null;
+
+function openStream(url1, url2, url3, url4) {
+  const container = document.getElementById('iframeContainer');
+  const events = document.getElementById('eventsGrid');
+  const support = document.querySelector('.support-links');
+  const videoWrapper = document.getElementById('videoWrapper');
+
+
+  // 🔥 NUNCA use style.display no menu
+  menuOverlay.classList.remove('show');
+
+  events.style.display = 'none';
+  support.style.display = 'none';
+
+  container.style.display = 'flex';
+  container.style.flexDirection = 'column';
+
+  function loadSource(url) {
+    if (!url) return;
+
+    videoWrapper.innerHTML = '';
+
+    if (clapprPlayer) {
+      clapprPlayer.destroy();
+      clapprPlayer = null;
+    }
+
+    const isHls = url.includes('.m3u8');
+
+    if (isHls) {
+      const clapDiv = document.createElement('div');
+      clapDiv.id = 'clapprPlayer';
+      clapDiv.style.width = '100%';
+      clapDiv.style.height = '100%';
+      videoWrapper.appendChild(clapDiv);
+
+      clapprPlayer = new Clappr.Player({
+        source: url,
+        parentId: '#clapprPlayer',
+        autoPlay: true,
+        mute: false,
+        height: '100%',
+        width: '100%',
+        playback: { playInline: true },
+        mimeType: 'application/x-mpegURL'
+      });
+    } else {
+      const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.allowFullscreen = true;
+
+    const noSandboxDomains = [
+    'rdcanais.top',
+    'sporturbo.com'
+];
+
+    const disableSandbox = noSandboxDomains.some(domain => url.includes(domain));
+
+    if (!disableSandbox) {
+    iframe.sandbox = 'allow-same-origin allow-scripts allow-forms';
+}
+
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    videoWrapper.appendChild(iframe);
+
+    }
+  }
+
+  videoWrapper.innerHTML = '';
+  container.innerHTML = '';
+
+  const backBtn = document.createElement('button');
+  backBtn.textContent = '⬅ Voltar';
+  backBtn.className = 'watch-btn';
+  backBtn.style.marginBottom = '15px';
+
+  backBtn.onclick = () => {
+    container.style.display = 'none';
+
+    menuOverlay.classList.remove('show');
+    events.style.display = 'grid';
+    support.style.display = 'flex';
+
+    if (clapprPlayer) {
+      clapprPlayer.destroy();
+      clapprPlayer = null;
+    }
+
+    container.innerHTML = '';
+    container.appendChild(videoWrapper);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  container.appendChild(backBtn);
+  container.appendChild(videoWrapper);
+
+  let activeBtn = null;
+  function setActiveButton(btn) {
+    if (activeBtn) activeBtn.classList.remove('active-option');
+    activeBtn = btn;
+    btn.classList.add('active-option');
+  }
+
+  const btnContainer = document.createElement('div');
+  btnContainer.style.marginTop = '15px';
+  btnContainer.style.display = 'flex';
+  btnContainer.style.flexWrap = 'wrap';
+  btnContainer.style.gap = '10px';
+  btnContainer.style.justifyContent = 'center';
+
+  const addBtn = (text, url, active = false) => {
+    if (!url) return;
+    const btn = document.createElement('button');
+    btn.textContent = text;
+    btn.className = 'watch-btn';
+    btn.onclick = () => {
+      loadSource(url);
+      setActiveButton(btn);
+    };
+    btnContainer.appendChild(btn);
+    if (active) setActiveButton(btn);
+  };
+
+  loadSource(url1);
+
+  addBtn('Opção 1', url1, true);
+  addBtn('Opção 2', url2);
+  addBtn('Opção 3', url3);
+  addBtn('Opção 4', url4);
+
+  container.appendChild(btnContainer);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+
+</body>
+</html>
