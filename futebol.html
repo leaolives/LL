@@ -245,6 +245,27 @@ body {
 @media (max-width: 600px) {
   .menu-content { padding: 16px 14px 18px; }
 }
+
+.channels-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 22px;
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
+  background: linear-gradient(#000033, #000055);
+  text-decoration: none;
+  box-shadow: 0 0 12px rgba(0,255,255,0.6);
+  transition: 0.3s;
+}
+
+.channels-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 18px #00FFFF, 0 0 30px #00FFFF;
+}
 </style>
 </head>
 
@@ -334,15 +355,11 @@ body {
   </div>
 </div>
 
-<p style="
-    margin-top: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #00FFFF;
-    text-shadow: 0 0 10px #00FFFF;
-">
-  Confira os horários dos jogos de hoje no final da página.
-</p>
+<div style="margin-top: 15px; display: flex; justify-content: center;">
+  <a href="canais.html" class="channels-btn">
+    📺 CANAIS ESPORTIVOS
+  </a>
+</div>
 
 <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
   <button id="btnFonte1" onclick="mudarFonte(1)" class="font-btn font1">🟦 Opção 1</button>
